@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:name="ChessConditionSetup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/black_overlay"
+    android:focusableInTouchMode="true"
+    android:onClick="pictureSetup"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
+    <Button
+        android:id="@+id/ButtonTimeSetup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:onClick="timeSetup"
+        android:text="@string/timesetup" />
+
+    <Button
+        android:id="@+id/ButtonStartGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ButtonTimeSetup"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="79dp"
+        android:onClick="startGame"
+        android:text="@string/startgame" />
+
+    <Button
+        android:id="@+id/ButtonPictureSetup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ButtonTimeSetup"
+        android:layout_alignLeft="@+id/ButtonTimeSetup"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="78dp"
+        android:onClick="pictureSetup"
+        android:text="@string/picturesetup" />
+
+</RelativeLayout>

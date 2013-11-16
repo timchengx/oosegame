@@ -4,8 +4,10 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <uses-feature android:name="android.hardware.camera" />
+
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="14"
         android:targetSdkVersion="18" />
 
     <application
@@ -21,6 +23,30 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oose.game.ChessMainMenu"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/chess"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name="com.oose.game.PictureSetup"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/picturesetup"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name="com.oose.game.TimeSetup"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/timesetup"
+            android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name="com.oose.game.ChessConditionSetup"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/chessconditionsetup"
+            android:theme="@style/FullscreenTheme" >
         </activity>
     </application>
 
