@@ -9,7 +9,6 @@ public class StartMenu extends Activity {
 
 	private final int chineseChess = 0;
 	private final int darkChess = 1;
-	private final int errorCode = -1;
 	private final String chessType = "ChessType";
 	
     @Override
@@ -21,8 +20,9 @@ public class StartMenu extends Activity {
     	Intent intent = new Intent(this, ChessMainMenu.class);
     	if(view.getId() == R.id.ButtonStartChineseChess)
     		intent.putExtra(chessType, chineseChess);
-    	else
+    	else		//ButtonStartDarkChess
     		intent.putExtra(chessType, darkChess);
     	startActivity(intent);
+    	onStop();
     }
 }

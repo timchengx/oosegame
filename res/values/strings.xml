@@ -18,5 +18,6 @@
     <string name="player2">玩家2</string>
     <string name="fromfile">從圖庫</string>
     <string name="takepicture">立即拍攝</string>
+    <string name="choosepicture">選擇照片</string>
 
 </resources>

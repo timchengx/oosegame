@@ -25,7 +25,8 @@ public class ChessMainMenu extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.chess_main_menu);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		currentChess = intent.getIntExtra("ChessType", errorCode);
+		
+		currentChess = intent.getIntExtra(chessType, errorCode);
 		if(currentChess == chineseChess)
 			getActionBar().setTitle(R.string.chinesechess);
 		else
@@ -34,6 +35,7 @@ public class ChessMainMenu extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		//switch(item.getItemId()) {
 		//case android.R.id.home:
+
 			finish();
 		//}
 		return true;
@@ -50,5 +52,6 @@ public class ChessMainMenu extends Activity {
 		else {
 			//LoadGame
 		}
+		onStop();
 	}
 }

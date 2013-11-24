@@ -22,20 +22,13 @@
         tools:ignore="ContentDescription" />
 
     <Button
-        android:id="@+id/ButtonPlayer2TakePicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/editTextPlayer2"
-        android:layout_below="@+id/imagePlayer2"
-        android:text="@string/takepicture" />
-
-    <Button
         android:id="@+id/ButtonPlayer2SetPictureFromFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ButtonPlayer2TakePicture"
         android:layout_alignRight="@+id/ButtonPlayer2TakePicture"
         android:layout_alignTop="@+id/imagePlayer2"
+        android:onClick="pickPicture"
         android:text="@string/fromfile" />
 
     <EditText
@@ -48,21 +41,13 @@
         android:text="@string/player2" />
 
     <Button
-        android:id="@+id/ButtonPlayer1TakePicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/editTextPlayer2"
-        android:layout_alignRight="@+id/editTextPlayer2"
-        android:layout_marginBottom="16dp"
-        android:text="@string/takepicture" />
-
-    <Button
         android:id="@+id/ButtonPlayer1SetPictureFromFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/ButtonPlayer1TakePicture"
         android:layout_alignLeft="@+id/ButtonPlayer1TakePicture"
         android:layout_alignRight="@+id/ButtonPlayer1TakePicture"
+        android:onClick="pickPicture"
         android:text="@string/fromfile" />
 
     <ImageView
@@ -85,5 +70,24 @@
 
         <requestFocus />
     </EditText>
+
+    <Button
+        android:id="@+id/ButtonPlayer1TakePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editTextPlayer2"
+        android:layout_alignRight="@+id/editTextPlayer2"
+        android:layout_marginBottom="15dp"
+        android:onClick="takePicture"
+        android:text="@string/takepicture" />
+
+    <Button
+        android:id="@+id/ButtonPlayer2TakePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/editTextPlayer2"
+        android:layout_below="@+id/ButtonPlayer2SetPictureFromFile"
+        android:onClick="takePicture"
+        android:text="@string/takepicture" />
 
 </RelativeLayout>
