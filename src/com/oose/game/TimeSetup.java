@@ -27,7 +27,7 @@ public class TimeSetup extends Activity {
 		timer = (NumberPicker) findViewById(R.id.countdownPicker);
 		timer.setMinValue(30);
 		timer.setMaxValue(90);
-		timer.setValue(intent.getIntExtra(KEYINDEX.TIMELIMIT_VALUE, 30));
+		timer.setValue(intent.getIntExtra(KEYINDEX.TIMELIMIT_INT, 30));
 		buttonSwitch = (RadioGroup) findViewById(R.id.RadioButtonGroupTimeSwitch);
 		if(intent.getBooleanExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, true))
 			((RadioButton) findViewById(R.id.RadioButtonTimeOn)).setChecked(true);
@@ -38,7 +38,7 @@ public class TimeSetup extends Activity {
 		switch(item.getItemId()) {
 		case android.R.id.home:
 		Intent intent = new Intent();
-		intent.putExtra(KEYINDEX.TIMELIMIT_VALUE, timer.getValue());
+		intent.putExtra(KEYINDEX.TIMELIMIT_INT, timer.getValue());
 		int onOff = buttonSwitch.getCheckedRadioButtonId();
 		
 		switch(onOff) {

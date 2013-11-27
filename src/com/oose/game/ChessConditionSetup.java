@@ -8,39 +8,24 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- * 
- * @see SystemUiHider
- */
 public class ChessConditionSetup extends Activity {
-	private final int pictureResultCode = 0;
-	private final int timeResultCode = 1;
-	private final int chineseChess = 0;
-	private final int darkChess = 1;
-	private final int errorCode = -1;
-	private final String hasPictureData = "hPD";
-	private final String chessType = "ChessType";
-	private final String pOneNameText = "p1name";
-	private final String pTwoNameText = "p2name";
-	private final String pOneBitmap = "p1pic";
-	private final String pTwoBitmap = "p2pic";
-	private final String timeLimit = "tl";
-	private final String limitSwitch = "ls";
-	private int timeValue;
-	private boolean timeLimitSwitch;
-	private PictureData pictureSave = null;
+	
 	private int currentChess;
+	
+	private int timeValue;
+	private boolean timeLimit;
+	
+	private PictureData pictureSave;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent intent = getIntent();
 		super.onCreate(savedInstanceState);
-
+		pictureSave = null;
 		setContentView(R.layout.chess_condition_setup);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		currentChess = intent.getIntExtra(chessType, errorCode);
+		currentChess = intent.getIntExtra(KEYINDEX.CHESSTYPE_INT, KEYINDEX.ERROR);
 	}
 	public boolean onOptionsItemSelected(MenuItem item) {
 		//switch(item.getItemId()) {
@@ -52,40 +37,40 @@ public class ChessConditionSetup extends Activity {
 	public void pictureSetup(View view) {
 		Intent intent = new Intent(this, PictureSetup.class);
 		if(pictureSave == null)
-			intent.putExtra(hasPictureData, false);
+			intent.putExtra(KEYINDEX.INTENT_HAS_ICON_BOOLEAN, false);
 		else {
-			intent.putExtra(hasPictureData, true);
-			intent.putExtra(pOneNameText, pictureSave.getPlayerOneName());
-			intent.putExtra(pTwoNameText, pictureSave.getPlayerTwoName());
-			intent.putExtra(pOneBitmap, pictureSave.getPlayerOnePicture());
-			intent.putExtra(pTwoBitmap, pictureSave.getPlayerTwoPicture());
+			intent.putExtra(KEYINDEX.INTENT_HAS_ICON_BOOLEAN, true);
+			intent.putExtra(KEYINDEX.PLAYER1NAME_STRING, pictureSave.getPlayerOneName());
+			intent.putExtra(KEYINDEX.PLAYER2NAME_STRING, pictureSave.getPlayerTwoName());
+			intent.putExtra(KEYINDEX.PLAYER1ICON_BITMAP, pictureSave.getPlayerOnePicture());
+			intent.putExtra(KEYINDEX.PLAYER2ICON_BITMAP, pictureSave.getPlayerTwoPicture());
 		}
-		startActivityForResult(intent, pictureResultCode);
+		startActivityForResult(intent, KEYINDEX.PICTURERESULTCODE);
 	}
 	public void timeSetup(View view) {
 		Intent intent = new Intent(this, TimeSetup.class);
-		intent.putExtra(limitSwitch, timeLimitSwitch);
-		intent.putExtra(timeLimit, timeValue);
-		startActivityForResult(intent, timeResultCode);
+		intent.putExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, timeLimit);
+		intent.putExtra(KEYINDEX.TIMELIMIT_INT, timeValue);
+		startActivityForResult(intent, KEYINDEX.TIMERESULTCODE);
 	}
 	public void startGame(View view) {
-		if(currentChess == chineseChess);
-		else;
+		if(currentChess == KEYINDEX.CHINESECHESS);
+		else;	//KEYINDEX.DARKCHESS
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch(requestCode) {
-		case pictureResultCode:
+		case KEYINDEX.PICTURERESULTCODE:
 			if(pictureSave == null)
 				pictureSave = new PictureData();
-			pictureSave.setPlayerOneName(data.getStringExtra(pOneNameText));
-			pictureSave.setPlayerTwoName(data.getStringExtra(pTwoNameText));
-			pictureSave.setPlayerOnePicture((Bitmap)data.getParcelableExtra(pOneBitmap));
-			pictureSave.setPlayerTwoPicture((Bitmap)data.getParcelableExtra(pTwoBitmap));
+			pictureSave.setPlayerOneName(data.getStringExtra(KEYINDEX.PLAYER1NAME_STRING));
+			pictureSave.setPlayerTwoName(data.getStringExtra(KEYINDEX.PLAYER2NAME_STRING));
+			pictureSave.setPlayerOnePicture((Bitmap)data.getParcelableExtra(KEYINDEX.PLAYER1ICON_BITMAP));
+			pictureSave.setPlayerTwoPicture((Bitmap)data.getParcelableExtra(KEYINDEX.PLAYER2ICON_BITMAP));
 			break;
-		case timeResultCode:
-			timeValue = data.getIntExtra(timeLimit, 30);
-			timeLimitSwitch = data.getBooleanExtra(limitSwitch, true);
+		case KEYINDEX.TIMERESULTCODE:
+			timeValue = data.getIntExtra(KEYINDEX.TIMELIMIT_INT, KEYINDEX.DEFAULTIMELIMIT);
+			timeLimit = data.getBooleanExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, true);
 			break;
 		default:
 			break;
