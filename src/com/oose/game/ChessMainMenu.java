@@ -13,12 +13,10 @@ import android.view.View;
  * @see SystemUiHider
  */
 public class ChessMainMenu extends Activity {
-	private final int chineseChess = 0;
-	private final int darkChess = 1;
-	private final int errorCode = -1;
-	private final String chessType = "ChessType";
+
 
 	private int currentChess;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent intent = getIntent();
@@ -26,10 +24,10 @@ public class ChessMainMenu extends Activity {
 		setContentView(R.layout.chess_main_menu);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		currentChess = intent.getIntExtra(chessType, errorCode);
-		if(currentChess == chineseChess)
+		currentChess = intent.getIntExtra(KEYINDEX.CHESSTYPE_INT, KEYINDEX.ERROR);
+		if(currentChess == KEYINDEX.CHINESECHESS)
 			getActionBar().setTitle(R.string.chinesechess);
-		else
+		else	//KEYINDEX.DARKCHESS
 			getActionBar().setTitle(R.string.darkchess);
 	}
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -46,7 +44,7 @@ public class ChessMainMenu extends Activity {
 	public void selectGame(View view) {
 		if(view.getId() == R.id.ButtonNewGame) {
 			Intent intent = new Intent(this, ChessConditionSetup.class);
-			intent.putExtra(chessType, currentChess);
+			intent.putExtra(KEYINDEX.CHESSTYPE_INT, currentChess);
 			startActivity(intent);
 		}
 		else {

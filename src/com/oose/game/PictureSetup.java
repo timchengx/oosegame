@@ -21,21 +21,14 @@ import android.widget.ImageView;
  * @see SystemUiHider
  */
 public class PictureSetup extends Activity {
-	private final int cameraRequestCode = 100;
-	private final int fromFileRequestCode = 200;
+	
 	private int requestID;
-	private final int error = -1;
-	//private final String 
+	
 	ImageView playerOneImageView;
 	ImageView playerTwoImageView;
 	EditText playerOneNameView;
 	EditText playerTwoNameView;
 	
-	private final String pOneNameText = "p1name";
-	private final String pTwoNameText = "p2name";
-	private final String pOneBitmap = "p1pic";
-	private final String pTwoBitmap = "p2pic";
-	private final String hasPictureData = "hPD";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +42,11 @@ public class PictureSetup extends Activity {
 		playerOneImageView.setDrawingCacheEnabled(true);
 		playerTwoImageView.setDrawingCacheEnabled(true);
 		Intent pictureDataIntent = getIntent();
-		if(pictureDataIntent.getBooleanExtra(hasPictureData, false)) {
-			playerOneNameView.setText(pictureDataIntent.getStringExtra(pOneNameText));
-			playerTwoNameView.setText(pictureDataIntent.getStringExtra(pTwoNameText));
-			playerOneImageView.setImageBitmap((Bitmap)pictureDataIntent.getParcelableExtra(pOneBitmap));
-			playerTwoImageView.setImageBitmap((Bitmap)pictureDataIntent.getParcelableExtra(pTwoBitmap));
+		if(pictureDataIntent.getBooleanExtra(KEYINDEX.INTENT_HAS_ICON_BOOLEAN, false)) {
+			playerOneNameView.setText(pictureDataIntent.getStringExtra(KEYINDEX.PLAYER1NAME_STRING));
+			playerTwoNameView.setText(pictureDataIntent.getStringExtra(KEYINDEX.PLAYER2NAME_STRING));
+			playerOneImageView.setImageBitmap((Bitmap)pictureDataIntent.getParcelableExtra(KEYINDEX.PLAYER1ICON_BITMAP));
+			playerTwoImageView.setImageBitmap((Bitmap)pictureDataIntent.getParcelableExtra(KEYINDEX.PLAYER2ICON_BITMAP));
 		}
 	}
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -63,36 +56,37 @@ public class PictureSetup extends Activity {
 		//Bundle bundle = new Bundle();
 		//bundle.putSerializable(pSaveIntentID, pictureSave);
 		//intent.putExtra(bundle);
-		intent.putExtra(pOneNameText, playerOneNameView.getText().toString());
-		intent.putExtra(pTwoNameText, playerTwoNameView.getText().toString());
-		intent.putExtra(pOneBitmap, playerOneImageView.getDrawingCache());
-		intent.putExtra(pTwoBitmap, playerTwoImageView.getDrawingCache());
+		intent.putExtra(KEYINDEX.PLAYER1NAME_STRING, playerOneNameView.getText().toString());
+		intent.putExtra(KEYINDEX.PLAYER2NAME_STRING, playerTwoNameView.getText().toString());
+		intent.putExtra(KEYINDEX.PLAYER1ICON_BITMAP, playerOneImageView.getDrawingCache());
+		intent.putExtra(KEYINDEX.PLAYER2ICON_BITMAP, playerTwoImageView.getDrawingCache());
 		setResult(RESULT_OK, intent);
 		this.finish();
 		//}
 		return true;
 	}
 	public void pickPicture(View view) {
-		Intent imageFilter =new Intent();
+		Intent imageFilter = new Intent();
 		imageFilter.setType("image/*");
 		imageFilter.setAction(Intent.ACTION_GET_CONTENT);
 		Intent intent = Intent.createChooser(imageFilter, getResources().getString(R.string.choosepicture));
 		requestID = view.getId();
-		startActivityForResult(intent, fromFileRequestCode);
+		startActivityForResult(intent, KEYINDEX.CAMERAREQUESTCODE);
 	}
 	public void takePicture(View view) {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		requestID = view.getId();
-	    startActivityForResult(intent, cameraRequestCode);
+	    startActivityForResult(intent, KEYINDEX.CAMERAREQUESTCODE);
 	}
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Bitmap pictureImage = null;
 		switch(requestCode) {
-		case cameraRequestCode:
+		case KEYINDEX.CAMERAREQUESTCODE:
 			Bundle pictureData = data.getExtras();
-			pictureImage = (Bitmap) pictureData.get("data");
+			if(pictureData != null)
+				pictureImage = (Bitmap) pictureData.get("data");
 			
-		case fromFileRequestCode:
+		case KEYINDEX.FROMFILEREQUESTCODE:
 			Uri pictureUri = data.getData();
 			try {
 				pictureImage = BitmapFactory.decodeStream(getContentResolver().openInputStream(pictureUri));
@@ -105,11 +99,13 @@ public class PictureSetup extends Activity {
 		default:
 			break;
 		}
-		pictureImage = Bitmap.createScaledBitmap(pictureImage, 100, 100, false);
-		if(requestID == R.id.ButtonPlayer1TakePicture || 
-				requestID == R.id.ButtonPlayer1SetPictureFromFile)
-			playerOneImageView.setImageBitmap(pictureImage);
-		else		// ButtonPlayer2TakePicture 
-			playerTwoImageView.setImageBitmap(pictureImage);
+		if(pictureImage != null) {
+			pictureImage = Bitmap.createScaledBitmap(pictureImage, 100, 100, false);
+			if(requestID == R.id.ButtonPlayer1TakePicture || 
+					requestID == R.id.ButtonPlayer1SetPictureFromFile)
+				playerOneImageView.setImageBitmap(pictureImage);
+			else		// ButtonPlayer2TakePicture 
+				playerTwoImageView.setImageBitmap(pictureImage);
+		}
 	}
 }

@@ -16,8 +16,6 @@ import android.widget.RadioGroup;
  * @see SystemUiHider
  */
 public class TimeSetup extends Activity {
-	private final String timelimit = "tl";
-	private final String limitSwitch = "ls";
 	NumberPicker timer;
 	RadioGroup buttonSwitch;
 	@Override
@@ -29,9 +27,9 @@ public class TimeSetup extends Activity {
 		timer = (NumberPicker) findViewById(R.id.countdownPicker);
 		timer.setMinValue(30);
 		timer.setMaxValue(90);
-		timer.setValue(intent.getIntExtra(timelimit, 30));
+		timer.setValue(intent.getIntExtra(KEYINDEX.TIMELIMIT_VALUE, 30));
 		buttonSwitch = (RadioGroup) findViewById(R.id.RadioButtonGroupTimeSwitch);
-		if(intent.getBooleanExtra(limitSwitch, true))
+		if(intent.getBooleanExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, true))
 			((RadioButton) findViewById(R.id.RadioButtonTimeOn)).setChecked(true);
 		else
 			((RadioButton) findViewById(R.id.RadioButtonTimeOff)).setChecked(true);
@@ -40,18 +38,18 @@ public class TimeSetup extends Activity {
 		switch(item.getItemId()) {
 		case android.R.id.home:
 		Intent intent = new Intent();
-		intent.putExtra(timelimit, timer.getValue());
+		intent.putExtra(KEYINDEX.TIMELIMIT_VALUE, timer.getValue());
 		int onOff = buttonSwitch.getCheckedRadioButtonId();
 		
 		switch(onOff) {
 		case R.id.RadioButtonTimeOn:
-			intent.putExtra(limitSwitch, true);
+			intent.putExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, true);
 			break;
 		case R.id.RadioButtonTimeOff:
-			intent.putExtra(limitSwitch, false);
+			intent.putExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, false);
 			break;
 		default:
-			intent.putExtra(limitSwitch, true);
+			intent.putExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, true);
 			break;
 		}
 		

@@ -6,10 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 
 public class StartMenu extends Activity {
-
-	private final int chineseChess = 0;
-	private final int darkChess = 1;
-	private final String chessType = "ChessType";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +15,9 @@ public class StartMenu extends Activity {
     public void newChess(View view) {
     	Intent intent = new Intent(this, ChessMainMenu.class);
     	if(view.getId() == R.id.ButtonStartChineseChess)
-    		intent.putExtra(chessType, chineseChess);
+    		intent.putExtra(KEYINDEX.CHESSTYPE_INT, KEYINDEX.CHINESECHESS);
     	else		//ButtonStartDarkChess
-    		intent.putExtra(chessType, darkChess);
+    		intent.putExtra(KEYINDEX.CHESSTYPE_INT, KEYINDEX.DARKCHESS);
     	startActivity(intent);
     	onStop();
     }
