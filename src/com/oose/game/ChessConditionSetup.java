@@ -23,6 +23,8 @@ public class ChessConditionSetup extends Activity {
 		Intent intent = getIntent();
 		super.onCreate(savedInstanceState);
 		pictureSave = null;
+		timeValue = KEYINDEX.DEFAULTIMELIMIT;
+		timeLimit = KEYINDEX.DEFAULTTIMELIMITSWITCH;
 		setContentView(R.layout.chess_condition_setup);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		currentChess = intent.getIntExtra(KEYINDEX.CHESSTYPE_INT, KEYINDEX.ERROR);
@@ -54,8 +56,12 @@ public class ChessConditionSetup extends Activity {
 		startActivityForResult(intent, KEYINDEX.TIMERESULTCODE);
 	}
 	public void startGame(View view) {
-		if(currentChess == KEYINDEX.CHINESECHESS);
-		else;	//KEYINDEX.DARKCHESS
+		if(currentChess == KEYINDEX.CHINESECHESS) {
+			startActivity(new Intent(this, ChineseChessGame.class));
+		
+		finish();
+		onStop();}
+		else; //KEYINDEX.DARKCHESS
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

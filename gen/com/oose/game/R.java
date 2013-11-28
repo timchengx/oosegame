@@ -32,35 +32,54 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int black_cannon=0x7f020000;
+        public static final int black_car=0x7f020001;
+        public static final int black_elephant=0x7f020002;
+        public static final int black_general=0x7f020003;
+        public static final int black_horse=0x7f020004;
+        public static final int black_shi=0x7f020005;
+        public static final int black_soldier=0x7f020006;
+        public static final int chinesechessboard=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int red_cannon=0x7f020009;
+        public static final int red_car=0x7f02000a;
+        public static final int red_elephant=0x7f02000b;
+        public static final int red_general=0x7f02000c;
+        public static final int red_horse=0x7f02000d;
+        public static final int red_shi=0x7f02000e;
+        public static final int red_soldier=0x7f02000f;
     }
     public static final class id {
         public static final int ButtonLoadGame=0x7f080004;
         public static final int ButtonNewGame=0x7f080003;
         public static final int ButtonPictureSetup=0x7f080002;
-        public static final int ButtonPlayer1SetPictureFromFile=0x7f080009;
-        public static final int ButtonPlayer1TakePicture=0x7f08000a;
-        public static final int ButtonPlayer2SetPictureFromFile=0x7f080007;
-        public static final int ButtonPlayer2TakePicture=0x7f080008;
-        public static final int ButtonStartChineseChess=0x7f08000d;
-        public static final int ButtonStartDarkChess=0x7f08000e;
+        public static final int ButtonPlayer1SetPictureFromFile=0x7f08000c;
+        public static final int ButtonPlayer1TakePicture=0x7f08000d;
+        public static final int ButtonPlayer2SetPictureFromFile=0x7f08000a;
+        public static final int ButtonPlayer2TakePicture=0x7f08000b;
+        public static final int ButtonStartChineseChess=0x7f080010;
+        public static final int ButtonStartDarkChess=0x7f080011;
         public static final int ButtonStartGame=0x7f080001;
         public static final int ButtonTimeSetup=0x7f080000;
-        public static final int RadioButtonGroupTimeSwitch=0x7f080010;
-        public static final int RadioButtonTimeOff=0x7f080012;
-        public static final int RadioButtonTimeOn=0x7f080011;
-        public static final int countdownPicker=0x7f08000f;
-        public static final int editTextPlayer1=0x7f08000c;
-        public static final int editTextPlayer2=0x7f080006;
-        public static final int imagePlayer1=0x7f08000b;
-        public static final int imagePlayer2=0x7f080005;
+        public static final int RadioButtonGroupTimeSwitch=0x7f080013;
+        public static final int RadioButtonTimeOff=0x7f080015;
+        public static final int RadioButtonTimeOn=0x7f080014;
+        public static final int countdownPicker=0x7f080012;
+        public static final int dummy_button=0x7f080007;
+        public static final int editTextPlayer1=0x7f08000f;
+        public static final int editTextPlayer2=0x7f080009;
+        public static final int fullscreen_content=0x7f080005;
+        public static final int fullscreen_content_controls=0x7f080006;
+        public static final int imagePlayer1=0x7f08000e;
+        public static final int imagePlayer2=0x7f080008;
     }
     public static final class layout {
         public static final int chess_condition_setup=0x7f030000;
         public static final int chess_main_menu=0x7f030001;
-        public static final int picture_setup=0x7f030002;
-        public static final int start_menu=0x7f030003;
-        public static final int time_setup=0x7f030004;
+        public static final int chinese_chess_game=0x7f030002;
+        public static final int picture_setup=0x7f030003;
+        public static final int start_menu=0x7f030004;
+        public static final int time_setup=0x7f030005;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
@@ -68,8 +87,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int chess=0x7f060006;
         public static final int chessconditionsetup=0x7f06000b;
         public static final int chinesechess=0x7f060002;
+        public static final int chinesechessgame=0x7f060012;
         public static final int choosepicture=0x7f060011;
         public static final int darkchess=0x7f060003;
+        public static final int dummy_button=0x7f060013;
+        public static final int dummy_content=0x7f060014;
         public static final int fromfile=0x7f06000f;
         public static final int loadgame=0x7f060005;
         public static final int newgame=0x7f060004;

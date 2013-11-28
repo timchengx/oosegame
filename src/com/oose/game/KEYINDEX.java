@@ -17,4 +17,5 @@ public class KEYINDEX {
 	public final static int CAMERAREQUESTCODE = 2100;
 	public final static int FROMFILEREQUESTCODE = 2200;
 	public final static int DEFAULTIMELIMIT = 30;
+	public final static boolean DEFAULTTIMELIMITSWITCH = true;
 }
