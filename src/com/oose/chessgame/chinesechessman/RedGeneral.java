@@ -6,19 +6,16 @@ import com.oose.chessgame.ChessMan;
 import com.oose.game.OOSEGame;
 import com.oose.game.R;
 
-public class RedCannon extends ChessMan {
-	private int currentX;
-	private int currentY;
-	public RedCannon(int x, int y, int belong) {
+public class RedGeneral extends ChessMan{
+
+	public RedGeneral(int x, int y, int belong) {
 		super(x, y, belong);
-		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.red_cannon);
+		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.red_general);
 	}
 	@Override
 	public boolean moveValid(int x, int y) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	public int getBelong() {
-		return belongTo;
-	}
+
 }

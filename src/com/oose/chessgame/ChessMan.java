@@ -10,11 +10,20 @@ public abstract class ChessMan {
 	protected int currentX;
 	protected int currentY;
 	abstract public boolean moveValid(int x, int y);
+	public ChessMan(int x, int y, int belong) {
+		this.currentX = x;
+		this.currentY = y;
+		this.belongTo = belong;
+	}
 	public int getX() {
 		return currentX;
 	}
 	public int getY() {
 		return currentY;
+	}
+	public void setXY(int x, int y) {
+		this.currentX = x;
+		this.currentY = y;
 	}
 	public Bitmap getIcon() {
 		return icon;

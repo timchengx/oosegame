@@ -1,41 +1,75 @@
 package com.oose.chessgame;
 
 import android.graphics.Canvas;
+import android.util.Log;
 
 public class ChineseChessGame extends ChessGame {
 	//protected ChineseChessBoard board;
+	private ChessMan selected;
+	private boolean isSelected;
 	public ChineseChessGame() {
 		board = new ChineseChessBoard();
 		status = new ChineseChessGameState();
+		coord = new ChineseChessCoordinate();
+		isSelected = false;
 	}
 	@Override
 	public void save() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void refreshBoard(Canvas c) {
-		// TODO Auto-generated method stub
 		if(board.getBackground() != null)
 			c.drawBitmap(board.getBackground(), 0, 0, null);
-		//c.drawBitmap(BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.chinesechessboard), 0, 0, null);
-		//for(ChessMan b : board) {
-			//if(b == null) continue;
-			//c.drawBitmap(b.icon, 100,68, null);
-		//}
+		for(ChessMan b : board) {
+			if(b == null) continue;
+			coord.convertToScreen(b.getX(), b.getY());
+			//Log.d("kerker", coord.getX()+" "+coord.getY());
+			c.drawBitmap(b.icon, coord.getX(), coord.getY(), null);
+		}
 	}
 
 	@Override
 	public void select(int x, int y) {
-		// TODO Auto-generated method stub
-
+		coord.convertToBoard(x, y);
+		Log.d("timcheng", coord.getX()+" "+ coord.getY());
+		if(!isSelected) {
+			selected = board.getChess(coord.getX(), coord.getY());
+			Log.d("timcheng", board.getChess(x, y).toString());
+			if(selected != null) {
+				isSelected = true;
+				Log.d("timcheng", "selectok!");
+			}
+		}
+		else {
+			if(board.hasChess(coord.getX(), coord.getY()))
+				eat(coord.getX(), coord.getY());
+			else {
+				move(coord.getX(), coord.getY());
+			}
+		}
 	}
 
 	@Override
 	protected void move(int x, int y) {
-		// TODO Auto-generated method stub
-
+		if(x < 10 && x > 0 && y < 9 && y > 0) {
+			board.setBoard(x, y, selected);
+			selected.setXY(x, y);
+			Log.d("timcheng", "moveok!");
+		}
+		else
+			Log.d("timcheng", "nomove!");
+		isSelected = false;
+		selected = null;
+	}
+	@Override
+	protected void eat(int x, int y) {
+		Log.d("timcheng", "eat.");
+		Log.d("timcheng", board.getChess(x, y).toString());
+		board.setBoard(x, y, selected);
+		selected.setXY(x, y);
+		isSelected = false;
+		selected = null;
 	}
 
 }
