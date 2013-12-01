@@ -28,4 +28,7 @@ public abstract class ChessMan {
 	public Bitmap getIcon() {
 		return icon;
 	}
+	public int getBelong() {
+		return belongTo;
+	}
 } 

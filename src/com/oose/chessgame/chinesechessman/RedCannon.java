@@ -7,8 +7,6 @@ import com.oose.game.OOSEGame;
 import com.oose.game.R;
 
 public class RedCannon extends ChessMan {
-	private int currentX;
-	private int currentY;
 	public RedCannon(int x, int y, int belong) {
 		super(x, y, belong);
 		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.red_cannon);
@@ -17,8 +15,5 @@ public class RedCannon extends ChessMan {
 	public boolean moveValid(int x, int y) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-	public int getBelong() {
-		return belongTo;
 	}
 }
