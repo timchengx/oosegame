@@ -9,7 +9,7 @@ import android.os.Bundle;
  * 
  * @see SystemUiHider
  */
-public class ChineseChessGame extends Activity {
+public class ChineseChessMain extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

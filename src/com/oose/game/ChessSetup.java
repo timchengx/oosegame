@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-public class ChessConditionSetup extends Activity {
+public class ChessSetup extends Activity {
 	
 	private int currentChess;
 	
@@ -57,7 +57,7 @@ public class ChessConditionSetup extends Activity {
 	}
 	public void startGame(View view) {
 		if(currentChess == KEYINDEX.CHINESECHESS) {
-			startActivity(new Intent(this, ChineseChessGame.class));
+			startActivity(new Intent(this, ChineseChessMain.class));
 		
 		finish();
 		onStop();}

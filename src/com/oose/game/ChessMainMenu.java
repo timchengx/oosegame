@@ -43,7 +43,7 @@ public class ChessMainMenu extends Activity {
 	
 	public void selectGame(View view) {
 		if(view.getId() == R.id.ButtonNewGame) {
-			Intent intent = new Intent(this, ChessConditionSetup.class);
+			Intent intent = new Intent(this, ChessSetup.class);
 			intent.putExtra(KEYINDEX.CHESSTYPE_INT, currentChess);
 			startActivity(intent);
 		}

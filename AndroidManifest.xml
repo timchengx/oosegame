@@ -14,7 +14,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
+        android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" android:name="OOSEGame">
         <activity
             android:name="com.oose.game.StartMenu"
             android:label="@string/app_name" >
@@ -43,13 +43,13 @@
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
-            android:name="com.oose.game.ChessConditionSetup"
+            android:name="com.oose.game.ChessSetup"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/chessconditionsetup"
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
-            android:name="com.oose.game.ChineseChessGame"
+            android:name="com.oose.game.ChineseChessMain"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/chinesechessgame"
             android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
