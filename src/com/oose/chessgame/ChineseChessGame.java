@@ -34,16 +34,22 @@ public class ChineseChessGame extends ChessGame {
 		coord.convertToBoard(x, y);
 		Log.d("timcheng", coord.getX()+" "+ coord.getY());
 		if(!isSelected) {
-			selected = board.getChess(coord.getX(), coord.getY());
-			Log.d("timcheng", board.getChess(x, y).toString());
-			if(selected != null) {
+			if(board.hasChess(coord.getX(), coord.getY())) {
+				this.selected = board.getChess(coord.getX(), coord.getY());
 				isSelected = true;
 				Log.d("timcheng", "selectok!");
 			}
 		}
 		else {
-			if(board.hasChess(coord.getX(), coord.getY()))
-				eat(coord.getX(), coord.getY());
+			if(board.hasChess(coord.getX(), coord.getY())) {
+				if(board.getChess(x, y) == this.selected) {
+					Log.d("timcheng","same chess.");
+					isSelected = false;
+					selected = null;
+				}
+				else
+					eat(coord.getX(), coord.getY());
+			}
 			else {
 				move(coord.getX(), coord.getY());
 			}
@@ -53,6 +59,7 @@ public class ChineseChessGame extends ChessGame {
 	@Override
 	protected void move(int x, int y) {
 		if(x < 10 && x > 0 && y < 9 && y > 0) {
+			board.removeChess(selected.getX(),selected.getY());
 			board.setBoard(x, y, selected);
 			selected.setXY(x, y);
 			Log.d("timcheng", "moveok!");
@@ -65,7 +72,8 @@ public class ChineseChessGame extends ChessGame {
 	@Override
 	protected void eat(int x, int y) {
 		Log.d("timcheng", "eat.");
-		Log.d("timcheng", board.getChess(x, y).toString());
+		//Log.d("timcheng", board.getChess(x, y).toString());
+		board.removeChess(selected.getX(),selected.getY());
 		board.setBoard(x, y, selected);
 		selected.setXY(x, y);
 		isSelected = false;

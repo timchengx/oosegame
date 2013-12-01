@@ -33,13 +33,11 @@ public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callb
 	public boolean onTouchEvent(MotionEvent event) {
 	
 		
-		if(event.getAction() == MotionEvent.ACTION_UP){
-			Canvas c = holder.lockCanvas();
+		if(event.getAction() == MotionEvent.ACTION_DOWN)
 			chineseChess.select((int)event.getX(), (int)event.getY());
-			chineseChess.refreshBoard(c);
-			holder.unlockCanvasAndPost(c);
-		}
-		
+		Canvas c = holder.lockCanvas();
+		chineseChess.refreshBoard(c);
+		holder.unlockCanvasAndPost(c);
 		return true;
 	}
 

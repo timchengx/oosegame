@@ -14,4 +14,5 @@ public abstract class ChessBoard implements Iterable<ChessMan> {
 	abstract public ChessMan getChess(int x, int y);
 	abstract public boolean hasChess(int x, int y);
 	abstract public void setBoard(int x, int y, ChessMan c);
+	abstract public void removeChess(int x, int y);
 }
