@@ -5,8 +5,9 @@ import android.util.Log;
 
 public class ChineseChessGame extends ChessGame {
 	//protected ChineseChessBoard board;
-	private ChessMan selected;
+	private ChessMan selectedChess;
 	private boolean isSelected;
+
 	public ChineseChessGame() {
 		board = new ChineseChessBoard();
 		status = new ChineseChessGameState();
@@ -19,65 +20,88 @@ public class ChineseChessGame extends ChessGame {
 
 	@Override
 	public void refreshBoard(Canvas c) {
-		if(board.getBackground() != null)
-			c.drawBitmap(board.getBackground(), 0, 0, null);
+		if(board.getBackGround() != null)
+			c.drawBitmap(board.getBackGround(), 0, 0, null);
 		for(ChessMan b : board) {
 			if(b == null) continue;
 			coord.convertToScreen(b.getX(), b.getY());
-			//Log.d("kerker", coord.getX()+" "+coord.getY());
 			c.drawBitmap(b.icon, coord.getX(), coord.getY(), null);
 		}
 	}
 
 	@Override
-	public void select(int x, int y) {
+	public int select(int x, int y) {
 		coord.convertToBoard(x, y);
+		Log.d("timcheng",new String("select enter Who's turn "+status.whosTurn()));
 		Log.d("timcheng", coord.getX()+" "+ coord.getY());
 		if(!isSelected) {
 			if(board.hasChess(coord.getX(), coord.getY())) {
-				this.selected = board.getChess(coord.getX(), coord.getY());
-				isSelected = true;
-				Log.d("timcheng", "selectok!");
-			}
-		}
-		else {
-			if(board.hasChess(coord.getX(), coord.getY())) {
-				if(board.getChess(coord.getX(), coord.getY()) == selected) {
-					Log.d("timcheng","same chess.");
-					isSelected = false;
-					selected = null;
+				this.selectedChess = board.getChess(coord.getX(), coord.getY());
+				if(selectedChess.getBelong() == status.whosTurn()) {
+					Log.d("timcheng", "hasSelectChess!");
+					isSelected = true;
 				}
 				else
-					eat(coord.getX(), coord.getY());
+					selectedChess = null;
+				
 			}
-			else {
-				move(coord.getX(), coord.getY());
+			return NONEED_REDRAW;
+		}
+		else {
+			int resultCode = OPERATION_UNKNOWN;
+			if(board.hasChess(coord.getX(), coord.getY())) {
+				if(board.getChess(coord.getX(), coord.getY()) == selectedChess) {
+					isSelected = false;
+					selectedChess = null;
+					Log.d("timcheng","same chess.");
+				} else
+					resultCode = eat(coord.getX(), coord.getY());
+			} else {
+				resultCode = move(coord.getX(), coord.getY());
+			}
+			Log.d("timcheng", new String("before change Who's turn "+status.whosTurn()));
+			if(resultCode == OPERATION_OK) {
+				status.changeTurn();
+				return NEED_REDRAW;
 			}
 		}
+		return NONEED_REDRAW;
 	}
-
+	
 	@Override
-	protected void move(int x, int y) {
-		if(x < 10 && x > 0 && y < 9 && y > 0) {
-			board.removeChess(selected.getX(),selected.getY());
-			board.setBoard(x, y, selected);
-			selected.setXY(x, y);
-			Log.d("timcheng", "moveok!");
-		}
-		else
-			Log.d("timcheng", "nomove!");
-		isSelected = false;
-		selected = null;
-	}
-	@Override
-	protected void eat(int x, int y) {
+	protected int eat(int x, int y) {
+		int result = OPERATION_UNKNOWN;
 		Log.d("timcheng", "eat.");
-		//Log.d("timcheng", board.getChess(x, y).toString());
-		board.removeChess(selected.getX(),selected.getY());
-		board.setBoard(x, y, selected);
-		selected.setXY(x, y);
+		if(selectedChess.belongTo != board.getChess(x, y).getBelong() && selectedChess.eatValid(x, y)) {
+			board.removeChess(selectedChess.getX(),selectedChess.getY());
+			board.setBoard(x, y, selectedChess);
+			selectedChess.setXY(x, y);
+			result = OPERATION_OK;
+		} else {
+			Log.d("timcheng", "want to eat your own buddy?");
+			result = OPERATION_FAIL;
+		}
 		isSelected = false;
-		selected = null;
+		selectedChess = null;
+		return result;
 	}
 
+	@Override
+	protected int move(int x, int y) {
+		int result = OPERATION_UNKNOWN;
+		if(x < 10 && x >= 0 && y < 9 && y >= 0 && selectedChess.moveValid(x, y)) {
+			board.removeChess(selectedChess.getX(),selectedChess.getY());
+			board.setBoard(x, y, selectedChess);
+			selectedChess.setXY(x, y);
+			Log.d("timcheng", "moveok!");
+			result = OPERATION_OK;
+		} else {
+			Log.d("timcheng", "no move");
+			result = OPERATION_FAIL;
+		}
+		isSelected = false;
+		selectedChess = null;
+		return result;
+	}
+	
 }

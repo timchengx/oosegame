@@ -11,4 +11,10 @@ public abstract class GameState {
 	public int whosTurn() {
 		return whoMoving;
 	}
+	public void changeTurn() {
+		if(whoMoving == playerOne)
+			whoMoving = GameState.playerTwo;
+		else
+			whoMoving = GameState.playerOne;
+	}
 }
