@@ -42,7 +42,7 @@ public class ChineseChessGame extends ChessGame {
 		}
 		else {
 			if(board.hasChess(coord.getX(), coord.getY())) {
-				if(board.getChess(x, y) == this.selected) {
+				if(board.getChess(coord.getX(), coord.getY()) == selected) {
 					Log.d("timcheng","same chess.");
 					isSelected = false;
 					selected = null;
