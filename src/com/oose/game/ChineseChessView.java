@@ -1,11 +1,13 @@
 package com.oose.game;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.TextView;
 
 import com.oose.chessgame.ChessGame;
 import com.oose.chessgame.ChineseChessGame;
@@ -14,12 +16,16 @@ public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callb
 	SurfaceHolder holder;
 	Resources r;
 	ChessGame chineseChess;
+	TextView playerOneName;
 	public ChineseChessView(Context context) {
 		super(context);
 		r = getResources();
+		
 		chineseChess = new ChineseChessGame();
 		holder = getHolder();
 		holder.addCallback(this);
+		playerOneName = new TextView(context);
+		//playerOneName.setText(intent.getStringExtra(KEYINDEX.PLAYER1NAME_STRING));
 	}
 
 	@Override

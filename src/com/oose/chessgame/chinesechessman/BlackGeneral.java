@@ -15,13 +15,18 @@ public class BlackGeneral extends ChessMan{
 	}
 	@Override
 	public boolean moveValid(int x, int y) {
-		// TODO Auto-generated method stub
-		return true;
+		//Log.d("timcheng",new String("kerker "+board.getBoardXSize()+ " "+ board.getBoardYSize()));
+		if(((0<=x && x<=2) || (7<=x && x<=9)) && (3<=y && y<=5)) { //鎖定九宮格 
+			if(Math.abs(x-currentX) + Math.abs(y-currentY) == 1 ) {
+					return true;
+			}
+		}
+		return false;
 	}
 	@Override
 	public boolean eatValid(int x, int y) {
 		// TODO Auto-generated method stub
-		return true;
+		return moveValid(x,y);;
 	}
 
 }

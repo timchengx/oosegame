@@ -15,13 +15,17 @@ public class BlackElephant extends ChessMan{
 	}
 	@Override
 	public boolean moveValid(int x, int y) {
-		// TODO Auto-generated method stub
-		return true;
+		if (5 <= x && x <= 9 && 0 <= y && y <= 8)
+			if (Math.abs((currentX - x)) == 2 && Math.abs((currentY - y)) == 2)
+				if (!board.hasChess((x + currentX) / 2, (y + currentY) / 2))
+					return true;
+
+		return false;
 	}
+
 	@Override
 	public boolean eatValid(int x, int y) {
-		// TODO Auto-generated method stub
-		return true;
+		return moveValid(x, y);
 	}
 
 }

@@ -13,15 +13,27 @@ public class BlackSoldier extends ChessMan{
 		super(x, y, belong, board);
 		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.black_soldier);
 	}
-	@Override
-	public boolean moveValid(int x, int y) {
-		// TODO Auto-generated method stub
-		return true;
+	public boolean moveValid(int x, int y) { 
+		if(currentX == x && currentX <= 4) {
+			if(Math.abs(currentY-y) == 1 ) { 
+				return true;
+			}
+		}
+		else if (currentY == y){  
+			if(currentX > x) {
+				if((currentX - 1) == x) {
+				 return true;
+				}
+			}
+		}
+		return false;
 	}
-	@Override
 	public boolean eatValid(int x, int y) {
-		// TODO Auto-generated method stub
-		return true;
+		if(moveValid(x, y) == true){
+			return true;			
+		}else{
+			return false;
+		}
 	}
 
 }
