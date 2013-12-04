@@ -1,7 +1,6 @@
 package com.oose.game;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
@@ -37,10 +36,8 @@ public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callb
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-	
 		
 		if(event.getAction() == MotionEvent.ACTION_DOWN) {
-			
 			int result = chineseChess.select((int)event.getX(), (int)event.getY());
 			if(result == ChessGame.NEED_REDRAW) {
 				Canvas c = holder.lockCanvas();

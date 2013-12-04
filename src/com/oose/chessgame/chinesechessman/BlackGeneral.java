@@ -7,7 +7,7 @@ import com.oose.chessgame.ChineseChessBoard;
 import com.oose.game.OOSEGame;
 import com.oose.game.R;
 
-public class BlackGeneral extends ChessMan{
+public class BlackGeneral extends ChessMan {
 
 	public BlackGeneral(int x, int y, int belong, ChineseChessBoard board) {
 		super(x, y, belong, board);
@@ -25,8 +25,7 @@ public class BlackGeneral extends ChessMan{
 	}
 	@Override
 	public boolean eatValid(int x, int y) {
-		// TODO Auto-generated method stub
-		return moveValid(x,y);;
+		return moveValid(x,y);
 	}
 
 }

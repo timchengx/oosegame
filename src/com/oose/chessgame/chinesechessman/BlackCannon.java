@@ -25,12 +25,11 @@ public class BlackCannon extends ChessMan {
 					}
 				}
 			} else {
-				for (int nowY = currentY + 1; nowY > y; nowY--) {
+				for (int nowY = currentY - 1; nowY > y; nowY--) {
 					if (nowY >= board.getBoardYSize())
 						continue;
 					// this != getChess, boundry check
-					if (this != board.getChess(x, nowY)
-							&& board.hasChess(x, nowY)) {
+					if (board.hasChess(x, nowY)) {
 						return false;
 					}
 				}
@@ -44,11 +43,10 @@ public class BlackCannon extends ChessMan {
 					}
 				}
 			} else {
-				for (int nowX = currentX + 1; nowX > x; nowX--) {
+				for (int nowX = currentX - 1; nowX > x; nowX--) {
 					if (nowX >= board.getBoardXSize())
 						continue;
-					if (this != board.getChess(nowX, y)
-							&& board.hasChess(nowX, y)) {
+					if (board.hasChess(nowX, y)) {
 						return false;
 					}
 				}
@@ -75,12 +73,11 @@ public class BlackCannon extends ChessMan {
 					}
 				}
 			} else {
-				for (int nowY = currentY + 1; nowY > y; nowY--) {
+				for (int nowY = currentY - 1; nowY > y; nowY--) {
 					if (nowY >= board.getBoardYSize())
 						continue;
 					// this != getChess, boundry check
-					if (this != board.getChess(x, nowY)
-							&& board.hasChess(x, nowY)) {
+					if (board.hasChess(x, nowY)) {
 						if (hasOneChess) {
 							return false;
 						} else {
@@ -89,7 +86,9 @@ public class BlackCannon extends ChessMan {
 					}
 				}
 			}
-			return true;
+			if (hasOneChess) {
+				return true;
+			}
 		} else if (currentY == y) {
 			if (currentX < x) {
 				for (int nowX = currentX + 1; nowX < x; nowX++) {
@@ -102,11 +101,10 @@ public class BlackCannon extends ChessMan {
 					}
 				}
 			} else {
-				for (int nowX = currentX + 1; nowX > x; nowX--) {
+				for (int nowX = currentX - 1; nowX > x; nowX--) {
 					if (nowX >= board.getBoardXSize())
 						continue;
-					if (this != board.getChess(nowX, y)
-							&& board.hasChess(nowX, y)) {
+					if (board.hasChess(nowX, y)) {
 						if (hasOneChess) {
 							return false;
 						} else {
@@ -115,7 +113,9 @@ public class BlackCannon extends ChessMan {
 					}
 				}
 			}
-			return true;
+			if (hasOneChess) {
+				return true;
+			}
 		}
 		return false;
 	}

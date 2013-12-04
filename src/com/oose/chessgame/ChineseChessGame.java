@@ -59,9 +59,9 @@ public class ChineseChessGame extends ChessGame {
 			} else {
 				resultCode = move(coord.getX(), coord.getY());
 			}
-			Log.d("timcheng", new String("before change Who's turn "+status.whosTurn()));
 			if(resultCode == OPERATION_OK) {
 				status.changeTurn();
+				Log.d("timcheng", "change to " +status.whosTurn());
 				return NEED_REDRAW;
 			}
 		}
@@ -73,7 +73,7 @@ public class ChineseChessGame extends ChessGame {
 		int result = OPERATION_UNKNOWN;
 		Log.d("timcheng", "eat.");
 		if(selectedChess.belongTo != board.getChess(x, y).getBelong() && selectedChess.eatValid(x, y)) {
-			board.removeChess(selectedChess.getX(),selectedChess.getY());
+			board.removeChess(selectedChess.getX(), selectedChess.getY());
 			board.setBoard(x, y, selectedChess);
 			selectedChess.setXY(x, y);
 			result = OPERATION_OK;

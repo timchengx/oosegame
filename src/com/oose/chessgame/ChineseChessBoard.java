@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import android.graphics.BitmapFactory;
 
-import com.oose.chessgame.ChessBoard.ChessIterator;
 import com.oose.chessgame.chinesechessman.BlackCannon;
 import com.oose.chessgame.chinesechessman.BlackCar;
 import com.oose.chessgame.chinesechessman.BlackElephant;
@@ -99,6 +98,7 @@ public class ChineseChessBoard extends ChessBoard{
 		public void remove() {}
 		
 	}
+	@Override
 	public ChessMan getChess(int x, int y) {
 		if(x < 10 && x >= 0 && y < 9 && y >= 0)
 			return nowBoard[x][y];
