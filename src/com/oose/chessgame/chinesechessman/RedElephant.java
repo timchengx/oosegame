@@ -11,10 +11,13 @@ public class RedElephant extends ChessMan{
 
 	public RedElephant(int x, int y, int belong, ChineseChessBoard board) {
 		super(x, y, belong, board, 5);
-		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.red_elephant);
+		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),
+				R.drawable.dark);
+	
 	}
 	@Override
 	public boolean moveValid(int x, int y) {
+		if (this.isVisible() && board.getChess(x, y).isVisible()) 
 		if (Math.abs(x - currentX) + Math.abs(y - currentY) == 1) {
 			return true;
 		}
@@ -29,5 +32,9 @@ public class RedElephant extends ChessMan{
 		}
 		return false;
 	}
-
+	public void open() {
+		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),
+				R.drawable.red_elephant);
+		this.visible = true;
+	}
 }

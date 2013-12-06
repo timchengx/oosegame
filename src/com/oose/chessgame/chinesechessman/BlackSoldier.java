@@ -11,9 +11,12 @@ public class BlackSoldier extends ChessMan{
 
 	public BlackSoldier(int x, int y, int belong, ChineseChessBoard board) {
 		super(x, y, belong, board, 1);
-		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.black_soldier);
+		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),
+				R.drawable.dark);
+	
 	}
 	public boolean moveValid(int x, int y) { 
+		if (this.isVisible() && board.getChess(x, y).isVisible()) 
 		if (Math.abs(x - currentX) + Math.abs(y - currentY) == 1) {
 			return true;
 		}
@@ -27,5 +30,9 @@ public class BlackSoldier extends ChessMan{
 		}
 		return false;
 	}
-
+	public void open() {
+		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),
+				R.drawable.black_soldier);
+		this.visible = true;
+	}
 }

@@ -11,20 +11,34 @@ public class BlackGeneral extends ChessMan {
 
 	public BlackGeneral(int x, int y, int belong, ChineseChessBoard board) {
 		super(x, y, belong, board, 7);
-		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.black_general);
+		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),
+				R.drawable.dark);
+
 	}
+
 	@Override
 	public boolean moveValid(int x, int y) {
-		if (Math.abs(x - currentX) + Math.abs(y - currentY) == 1) {
-			return true;
+		if (this.isVisible() && board.getChess(x, y).isVisible()) 
+			if (Math.abs(x - currentX) + Math.abs(y - currentY) == 1) {
+				return true;
+			}
+		return false;
+	}
+
+	@Override
+	public boolean eatValid(int x, int y) {
+		if (moveValid(x, y)) {
+			if (board.getChess(x, y).getLevel() == 1)
+				return false;
+			else
+				return true;
 		}
 		return false;
 	}
-	@Override
-	public boolean eatValid(int x, int y) {
-		if (board.getChess(x, y).getLevel() == 1)
-			return false;
-		return moveValid(x, y);
-	}
 
+	public void open() {
+		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),
+				R.drawable.black_general);
+		this.visible = true;
+	}
 }

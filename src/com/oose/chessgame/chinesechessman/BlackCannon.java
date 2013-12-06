@@ -12,11 +12,13 @@ public class BlackCannon extends ChessMan {
 	public BlackCannon(int x, int y, int belong, ChineseChessBoard board) {
 		super(x, y, belong, board, 2);
 		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),
-				R.drawable.black_cannon);
+				R.drawable.dark);
+
 	}
 
 	@Override
 	public boolean moveValid(int x, int y) {
+		if (this.isVisible() && board.getChess(x, y).isVisible()) 
 		if (Math.abs(x - currentX) + Math.abs(y - currentY) == 1) {
 			return true;
 		}
@@ -25,7 +27,7 @@ public class BlackCannon extends ChessMan {
 
 	@Override
 	public boolean eatValid(int x, int y) {
-		// TODO Auto-generated method stub
+		if (!(this.isVisible() && board.getChess(x, y).isVisible())) {return false;}
 		boolean hasOneChess = false;
 		if (currentX == x) {
 			if (currentY < y) {
@@ -87,4 +89,9 @@ public class BlackCannon extends ChessMan {
 		return false;
 	}
 
+	public void open() {
+		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),
+				R.drawable.black_cannon);
+		this.visible = true;
+	}
 }

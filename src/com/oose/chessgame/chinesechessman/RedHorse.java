@@ -7,14 +7,18 @@ import com.oose.chessgame.ChineseChessBoard;
 import com.oose.game.OOSEGame;
 import com.oose.game.R;
 
-public class RedHorse extends ChessMan{
+public class RedHorse extends ChessMan {
 
 	public RedHorse(int x, int y, int belong, ChineseChessBoard board) {
 		super(x, y, belong, board, 3);
-		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.red_horse);
+		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),
+				R.drawable.dark);
+
 	}
+
 	@Override
 	public boolean moveValid(int x, int y) {
+		if (this.isVisible() && board.getChess(x, y).isVisible()) 
 		if (Math.abs(x - currentX) + Math.abs(y - currentY) == 1) {
 			return true;
 		}
@@ -30,4 +34,9 @@ public class RedHorse extends ChessMan{
 		return false;
 	}
 
+	public void open() {
+		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),
+				R.drawable.red_horse);
+		this.visible = true;
+	}
 }

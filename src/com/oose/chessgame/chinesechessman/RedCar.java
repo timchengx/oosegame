@@ -11,9 +11,12 @@ public class RedCar extends ChessMan{
 
 	public RedCar(int x, int y, int belong, ChineseChessBoard board) {
 		super(x, y, belong, board, 4);
-		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.red_car);
+		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),
+				R.drawable.dark);
+		
 	}
 	public boolean moveValid(int x, int y) {
+		if (this.isVisible() && board.getChess(x, y).isVisible()) 
 		if (Math.abs(x - currentX) + Math.abs(y - currentY) == 1) {
 			return true;
 		}
@@ -26,6 +29,10 @@ public class RedCar extends ChessMan{
 		}
 		return false;
 	}
-
+	public void open() {
+		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),
+				R.drawable.red_car);
+		this.visible = true;
+	}
 
 }

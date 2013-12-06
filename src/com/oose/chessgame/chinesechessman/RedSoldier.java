@@ -12,10 +12,12 @@ public class RedSoldier extends ChessMan {
 	public RedSoldier(int x, int y, int belong, ChineseChessBoard board) {
 		super(x, y, belong, board, 1);
 		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),
-				R.drawable.red_soldier);
+				R.drawable.dark);
+
 	}
 
 	public boolean moveValid(int x, int y) {
+		if (this.isVisible() && board.getChess(x, y).isVisible()) 
 		if (Math.abs(x - currentX) + Math.abs(y - currentY) == 1) {
 			return true;
 		}
@@ -30,5 +32,9 @@ public class RedSoldier extends ChessMan {
 		}
 		return false;
 	}
-
+	public void open() {
+		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),
+				R.drawable.red_soldier);
+		this.visible = true;
+	}
 }
