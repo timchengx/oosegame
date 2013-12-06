@@ -89,7 +89,7 @@ public class ChineseChessGame extends ChessGame {
 	@Override
 	protected int move(int x, int y) {
 		int result = OPERATION_UNKNOWN;
-		if(x < 10 && x >= 0 && y < 9 && y >= 0 && selectedChess.moveValid(x, y)) {
+		if(x < 4 && x >= 0 && y < 8 && y >= 0 && selectedChess.moveValid(x, y)) {
 			board.removeChess(selectedChess.getX(),selectedChess.getY());
 			board.setBoard(x, y, selectedChess);
 			selectedChess.setXY(x, y);

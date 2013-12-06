@@ -23,8 +23,8 @@ import com.oose.game.R;
 
 public class ChineseChessBoard extends ChessBoard{
 	public ChineseChessBoard() {
-		super(10, 9, BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.chinesechessboard));
-		this.nowBoard = new ChessMan[10][9];
+		super(4, 8, BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.chinesechessboard));
+		this.nowBoard = new ChessMan[4][8];
 		this.previousBoard = null;
 		this.previousPreviousBoard = null;
 		
@@ -67,8 +67,8 @@ public class ChineseChessBoard extends ChessBoard{
 		return new ChessIterator();
 	}
 	private class ChessIterator implements Iterator<ChessMan>{
-		private final int totalX = 10;
-		private final int totalY = 9;
+		private final int totalX = 4;
+		private final int totalY = 8;
 		private int X = 0;
 		private int Y = 0;
 		@Override
@@ -89,7 +89,7 @@ public class ChineseChessBoard extends ChessBoard{
 		public ChessMan next() {
 			//Log.d("kerker", X +" "+ Y);
 			ChessMan currentChess = nowBoard[X][Y];
-			if(X < 10)
+			if(X < 4)
 				X++;
 			return currentChess;
 		}
@@ -100,14 +100,14 @@ public class ChineseChessBoard extends ChessBoard{
 	}
 	@Override
 	public ChessMan getChess(int x, int y) {
-		if(x < 10 && x >= 0 && y < 9 && y >= 0)
+		if(x < 4 && x >= 0 && y < 8 && y >= 0)
 			return nowBoard[x][y];
 		return null;
 	}
 
 	@Override
 	public boolean hasChess(int x, int y) {
-		if(x < 10 && x >= 0 && y < 9 && y >= 0)
+		if(x < 4 && x >= 0 && y < 8 && y >= 0)
 			if(nowBoard[x][y] != null)
 				return true;
 		return false;
