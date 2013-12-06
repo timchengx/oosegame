@@ -10,7 +10,7 @@ import com.oose.game.R;
 public class RedHorse extends ChessMan{
 
 	public RedHorse(int x, int y, int belong, ChineseChessBoard board) {
-		super(x, y, belong, board);
+		super(x, y, belong, board, 3);
 		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.red_horse);
 	}
 	@Override

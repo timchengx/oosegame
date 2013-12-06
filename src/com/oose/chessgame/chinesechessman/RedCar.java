@@ -10,7 +10,7 @@ import com.oose.game.R;
 public class RedCar extends ChessMan{
 
 	public RedCar(int x, int y, int belong, ChineseChessBoard board) {
-		super(x, y, belong, board);
+		super(x, y, belong, board, 4);
 		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.red_car);
 	}
 	public boolean moveValid(int x, int y) {

@@ -7,13 +7,15 @@ public abstract class ChessMan {
 	public static final int RED = 1;
 	public static final int BLACK = 2;
 	protected ChessBoard board;
+	protected int level;
 	protected int belongTo;
 	protected int currentX;
 	protected int currentY;
 	abstract public boolean moveValid(int x, int y);
 	abstract public boolean eatValid(int x, int y);
-	public ChessMan(int x, int y, int belong, ChessBoard board) {
+	public ChessMan(int x, int y, int belong, ChessBoard board, int level) {
 		this.board = board;
+		this.level=level;
 		this.currentX = x;
 		this.currentY = y;
 		this.belongTo = belong;
@@ -33,5 +35,8 @@ public abstract class ChessMan {
 	}
 	public int getBelong() {
 		return belongTo;
+	}
+	public int getLevel() {
+		return level;
 	}
 } 

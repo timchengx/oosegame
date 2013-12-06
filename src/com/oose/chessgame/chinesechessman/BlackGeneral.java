@@ -10,7 +10,7 @@ import com.oose.game.R;
 public class BlackGeneral extends ChessMan {
 
 	public BlackGeneral(int x, int y, int belong, ChineseChessBoard board) {
-		super(x, y, belong, board);
+		super(x, y, belong, board, 7);
 		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.black_general);
 	}
 	@Override
