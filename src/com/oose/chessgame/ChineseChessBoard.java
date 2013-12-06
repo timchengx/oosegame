@@ -11,6 +11,7 @@ import com.oose.chessgame.chinesechessman.BlackGeneral;
 import com.oose.chessgame.chinesechessman.BlackHorse;
 import com.oose.chessgame.chinesechessman.BlackShi;
 import com.oose.chessgame.chinesechessman.BlackSoldier;
+import com.oose.chessgame.chinesechessman.Dark;
 import com.oose.chessgame.chinesechessman.RedCannon;
 import com.oose.chessgame.chinesechessman.RedCar;
 import com.oose.chessgame.chinesechessman.RedElephant;
