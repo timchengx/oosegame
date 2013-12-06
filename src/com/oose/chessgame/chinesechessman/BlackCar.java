@@ -14,49 +14,16 @@ public class BlackCar extends ChessMan{
 		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.black_car);
 	}
 	public boolean moveValid(int x, int y) {
-		if(currentX == x) {
-			if(currentY < y) { 
-				for(int nowY = currentY + 1; nowY < y; nowY++) {
-					if(board.hasChess(x, nowY)) {
-						return false;
-					}
-				}
-			}
-			else {
-				for(int nowY = currentY - 1; nowY > y; nowY--) {
-					if(nowY >= board.getBoardYSize()) continue;
-					if(board.hasChess(x, nowY)) {
-						return false;
-					}
-				}
-			}
-			return true;
-		}
-		else if (currentY == y){
-			if(currentX < x) {
-				for(int nowX = currentX + 1; nowX < x; nowX++) {
-					if(board.hasChess(nowX, y)) {
-						return false;
-					}
-				}
-			}
-			else {
-				for(int nowX = currentX - 1; nowX > x; nowX--) {
-					if(nowX >= board.getBoardYSize()) continue;
-					if(board.hasChess(nowX, y)) {
-						return false;
-					}
-				}
-			}
+		if (Math.abs(x - currentX) + Math.abs(y - currentY) == 1) {
 			return true;
 		}
 		return false;
 	}
 	public boolean eatValid(int x, int y) {
-		if(moveValid(x, y) == true){
-			return true;			
-		}else{
-			return false;
+		if (moveValid(x, y)) {
+			if (this.getLevel() >= board.getChess(x, y).getLevel())
+				return true;
 		}
+		return false;
 	}
 }

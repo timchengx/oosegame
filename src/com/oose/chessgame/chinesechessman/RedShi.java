@@ -15,17 +15,18 @@ public class RedShi extends ChessMan{
 	}
 	@Override
 	public boolean moveValid(int x, int y) {
-		if(((0<=x && x<=2) || (7<=x && x<=9)) && (3<=y && y<=5)) { //鎖定九宮格
-			if((Math.abs(x-currentX) == 1) && (Math.abs(y-currentY) == 1)) {
-					return true;
-			}
+		if (Math.abs(x - currentX) + Math.abs(y - currentY) == 1) {
+			return true;
 		}
 		return false;
 	}
 	@Override
 	public boolean eatValid(int x, int y) {
-		// TODO Auto-generated method stub
-		return moveValid(x,y);
+		if (moveValid(x, y)) {
+			if (this.getLevel() >= board.getChess(x, y).getLevel())
+				return true;
+		}
+		return false;
 	}
 
 }

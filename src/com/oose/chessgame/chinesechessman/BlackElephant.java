@@ -15,17 +15,19 @@ public class BlackElephant extends ChessMan{
 	}
 	@Override
 	public boolean moveValid(int x, int y) {
-		if (5 <= x && x <= 9 && 0 <= y && y <= 8)
-			if (Math.abs((currentX - x)) == 2 && Math.abs((currentY - y)) == 2)
-				if (!board.hasChess((x + currentX) / 2, (y + currentY) / 2))
-					return true;
-
+		if (Math.abs(x - currentX) + Math.abs(y - currentY) == 1) {
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean eatValid(int x, int y) {
-		return moveValid(x, y);
+		if (moveValid(x, y)) {
+			if (this.getLevel() >= board.getChess(x, y).getLevel())
+				return true;
+		}
+		return false;
 	}
 
 }

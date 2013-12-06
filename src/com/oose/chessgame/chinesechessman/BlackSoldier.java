@@ -14,26 +14,18 @@ public class BlackSoldier extends ChessMan{
 		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.black_soldier);
 	}
 	public boolean moveValid(int x, int y) { 
-		if(currentX == x && currentX <= 4) {
-			if(Math.abs(currentY-y) == 1 ) { 
-				return true;
-			}
-		}
-		else if (currentY == y){  
-			if(currentX > x) {
-				if((currentX - 1) == x) {
-				 return true;
-				}
-			}
+		if (Math.abs(x - currentX) + Math.abs(y - currentY) == 1) {
+			return true;
 		}
 		return false;
 	}
 	public boolean eatValid(int x, int y) {
-		if(moveValid(x, y) == true){
-			return true;			
-		}else{
-			return false;
+		if (moveValid(x, y)) {
+			if (this.getLevel() >= board.getChess(x, y).getLevel()
+					|| board.getChess(x, y).getLevel() == 7)
+				return true;
 		}
+		return false;
 	}
 
 }
