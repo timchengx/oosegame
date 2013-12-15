@@ -1,6 +1,7 @@
 package com.oose.game;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 public class PictureData{
 	private String playerOneName;
@@ -15,6 +16,12 @@ public class PictureData{
 		this.playerTwoPicture = pTwo;
 	}
 	*/
+	public PictureData() {
+		this.playerOneName = "PlayerOne";
+		this.playerTwoName = "PlayerTwo";
+		this.playerOnePicture = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.ic_launcher);
+		this.playerTwoPicture = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.ic_launcher);
+	}
 	public String getPlayerOneName() {
 		return playerOneName;
 	}

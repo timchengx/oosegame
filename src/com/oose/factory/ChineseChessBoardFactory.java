@@ -19,40 +19,43 @@ import com.oose.prototype.ChessMan;
 
 public class ChineseChessBoardFactory {
 	public static ChessMan[][] makeNewChineseChessBoard(ChineseChessBoard board) {
-		ChessMan[][] chinese = new ChessMan[10][9];
+		ChessMan[][] chinese = new ChessMan[9][10];
 		
-		chinese[2][1] = new RedCannon(2,1, board);
-		chinese[2][7] = new RedCannon(2,7, board);
-		chinese[0][4] = new RedGeneral(0,4, board);
-		chinese[3][0] = new RedSoldier(3,0, board);
-		chinese[3][2] = new RedSoldier(3,2, board);
-		chinese[3][4] = new RedSoldier(3,4, board);
-		chinese[3][6] = new RedSoldier(3,6, board);
-		chinese[3][8] = new RedSoldier(3,8, board);
-		chinese[0][0] = new RedCar(0,0, board);
-		chinese[0][8] = new RedCar(0,8, board);
-		chinese[0][2] = new RedElephant(0,2, board);
-		chinese[0][6] = new RedElephant(0,6, board);
-		chinese[0][1] = new RedHorse(0,1, board);
-		chinese[0][7] = new RedHorse(0,7, board);
-		chinese[0][3] = new RedShi(0,3, board);
-		chinese[0][5] = new RedShi(0,5, board);
-		chinese[7][1] = new BlackCannon(7,1, board);
-		chinese[7][7] = new BlackCannon(7,7, board);
-		chinese[9][4] = new BlackGeneral(9,4, board);
-		chinese[6][0] = new BlackSoldier(6,0, board);
-		chinese[6][2] = new BlackSoldier(6,2, board);
-		chinese[6][4] = new BlackSoldier(6,4, board);
-		chinese[6][6] = new BlackSoldier(6,6, board);
-		chinese[6][8] = new BlackSoldier(6,8, board);
-		chinese[9][0] = new BlackCar(9,0, board);
-		chinese[9][8] = new BlackCar(9,8, board);
-		chinese[9][2] = new BlackElephant(9,2, board);
-		chinese[9][6] = new BlackElephant(9,6, board);
-		chinese[9][1] = new BlackHorse(9,1, board);
-		chinese[9][7] = new BlackHorse(9,7, board);
-		chinese[9][3] = new BlackShi(9,3, board);
-		chinese[9][5] = new BlackShi(9,5, board);
+		chinese[1][2] = new BlackCannon(1,2, board);
+		chinese[7][2] = new BlackCannon(7,2, board);
+		chinese[4][0] = new BlackGeneral(4,0, board);
+		chinese[0][3] = new BlackSoldier(0,3, board);
+		chinese[2][3] = new BlackSoldier(2,3, board);
+		chinese[4][4] = new BlackSoldier(4,3, board);
+		chinese[6][4] = new BlackSoldier(6,3, board);
+		chinese[8][3] = new BlackSoldier(8,3, board);
+		chinese[0][0] = new BlackCar(0,0, board);
+		chinese[8][0] = new BlackCar(8,0, board);
+		chinese[2][0] = new BlackElephant(2,0, board);
+		chinese[6][0] = new BlackElephant(6,0, board);
+		chinese[1][0] = new BlackHorse(1,0, board);
+		chinese[7][0] = new BlackHorse(7,0, board);
+		chinese[3][0] = new BlackShi(3,0, board);
+		chinese[5][0] = new BlackShi(5,0, board);
+		chinese[1][7] = new RedCannon(1,7, board);
+		chinese[7][7] = new RedCannon(7,7, board);
+		chinese[0][6] = new RedSoldier(0,6, board);
+		chinese[2][6] = new RedSoldier(2,6, board);
+		chinese[4][6] = new RedSoldier(4,6, board);
+		chinese[6][6] = new RedSoldier(6,6, board);
+		chinese[8][6] = new RedSoldier(8,6, board);
+		
+		chinese[0][9] = new RedCar(0,9, board);
+		chinese[1][9] = new RedHorse(1,9, board);
+		chinese[2][9] = new RedElephant(2,9, board);
+		chinese[3][9] = new RedShi(3,9, board);
+		chinese[4][9] = new RedGeneral(4,9, board);
+		chinese[5][9] = new RedShi(5,9, board);
+		chinese[6][9] = new RedElephant(6,9, board);
+		chinese[7][9] = new RedHorse(7,9, board);
+		chinese[8][9] = new RedCar(8,9, board);
+		
+		
 		
 		return chinese;
 	}

@@ -10,11 +10,9 @@ public abstract class ChessBoard implements Iterable<ChessMan> {
 	protected ChessMan[][] previousPreviousBoard;
 	private int boardXSize;
 	private int boardYSize;
-	private Bitmap backGround;
-	public ChessBoard(int x, int y, Bitmap bg) {
+	public ChessBoard(int x, int y) {
 		this.boardXSize = x;
 		this.boardYSize = y;
-		this.backGround = bg;
 		this.nowBoard = null;
 		this.previousBoard = null;
 		this.previousPreviousBoard = null;
@@ -35,7 +33,5 @@ public abstract class ChessBoard implements Iterable<ChessMan> {
 	public int getBoardYSize() {
 		return boardYSize;
 	}
-	public Bitmap getBackGround() {
-		return backGround;
-	}
+	abstract public Bitmap getBackGround();
 }

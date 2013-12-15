@@ -29,7 +29,10 @@ public class ChineseChessGame extends ChessGame {
 		for(ChessMan b : board) {
 			if(b == null) continue;
 			coord.convertToScreen(b.getX(), b.getY());
-			c.drawBitmap(b.getIcon(), coord.getX(), coord.getY(), null);
+			if(b == selectedChess)
+				c.drawBitmap(b.getSelectedIcon(), coord.getX(), coord.getY(), null);
+			else
+				c.drawBitmap(b.getIcon(), coord.getX(), coord.getY(), null);
 		}
 	}
 
@@ -49,7 +52,7 @@ public class ChineseChessGame extends ChessGame {
 					selectedChess = null;
 				
 			}
-			return NONEED_REDRAW;
+			return NEED_REDRAW;
 		}
 		else {
 			int resultCode = OPERATION_UNKNOWN;
@@ -93,7 +96,7 @@ public class ChineseChessGame extends ChessGame {
 	@Override
 	protected int move(int x, int y) {
 		int result = OPERATION_UNKNOWN;
-		if(x < 10 && x >= 0 && y < 9 && y >= 0 && selectedChess.moveValid(x, y)) {
+		if(x < 9 && x >= 0 && y < 10 && y >= 0 && selectedChess.moveValid(x, y)) {
 			board.removeChess(selectedChess.getX(),selectedChess.getY());
 			board.setBoard(x, y, selectedChess);
 			selectedChess.setXY(x, y);

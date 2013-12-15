@@ -13,6 +13,7 @@ public class ChineseChessMain extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(new ChineseChessView(this, getIntent()));
+		ChineseChessView mainView = new ChineseChessView(this, getIntent());
+		setContentView(mainView);
 	}
 }

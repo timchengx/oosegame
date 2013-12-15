@@ -1,9 +1,11 @@
 package com.oose.chessgame.chinesechessman;
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.oose.chinesechess.ChineseChessBoard;
 import com.oose.chinesechess.ChineseChessMan;
+import com.oose.factory.ChineseChessPictureList;
 import com.oose.game.OOSEGame;
 import com.oose.game.R;
 import com.oose.prototype.ChessMan;
@@ -12,9 +14,18 @@ public class RedCar extends ChineseChessMan{
 
 	public RedCar(int x, int y, ChineseChessBoard board) {
 		super(x, y, ChessMan.RED, board);
-		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.red_car);
+	}
+	@Override
+	public Bitmap getIcon() {
+		return ChineseChessPictureList.getIcon(this.getClass().getName());
+	}
+
+	@Override
+	public Bitmap getSelectedIcon() {
+		return ChineseChessPictureList.getIcon(this.getClass().getName()+"SELECTED");
 	}
 	public boolean moveValid(int x, int y) {
+		
 		if(currentX == x) {
 			if(currentY < y) { 
 				for(int nowY = currentY + 1; nowY < y; nowY++) {
@@ -51,14 +62,16 @@ public class RedCar extends ChineseChessMan{
 			}
 			return true;
 		}
-		return false;
+		//return false;
+		return true;
 	}
 	public boolean eatValid(int x, int y) {
-		if(moveValid(x, y) == true){
-			return true;			
-		}else{
-			return false;
-		}
+//		if(moveValid(x, y) == true){
+//			return true;			
+//		}else{
+//			return false;
+//		}
+		return true;
 	}
 
 

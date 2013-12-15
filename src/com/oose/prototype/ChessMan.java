@@ -3,7 +3,6 @@ package com.oose.prototype;
 import android.graphics.Bitmap;
 
 public abstract class ChessMan {
-	protected Bitmap icon;
 	public static final int RED = 1;
 	public static final int BLACK = 2;
 	protected ChessBoard board;
@@ -28,9 +27,8 @@ public abstract class ChessMan {
 		this.currentX = x;
 		this.currentY = y;
 	}
-	public Bitmap getIcon() {
-		return icon;
-	}
+	abstract public Bitmap getIcon();
+	abstract public Bitmap getSelectedIcon();
 	public int getBelong() {
 		return belongTo;
 	}

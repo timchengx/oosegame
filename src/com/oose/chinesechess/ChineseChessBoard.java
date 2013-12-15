@@ -2,6 +2,7 @@ package com.oose.chinesechess;
 
 import java.util.Iterator;
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.oose.chessgame.chinesechessman.BlackCannon;
@@ -19,6 +20,7 @@ import com.oose.chessgame.chinesechessman.RedHorse;
 import com.oose.chessgame.chinesechessman.RedShi;
 import com.oose.chessgame.chinesechessman.RedSoldier;
 import com.oose.factory.ChineseChessBoardFactory;
+import com.oose.factory.ChineseChessPictureList;
 import com.oose.game.OOSEGame;
 import com.oose.game.R;
 import com.oose.prototype.ChessBoard;
@@ -26,9 +28,8 @@ import com.oose.prototype.ChessMan;
 
 public class ChineseChessBoard extends ChessBoard {
 	public ChineseChessBoard() {
-		super(10, 9, BitmapFactory.decodeResource(OOSEGame.getRes(),
-				R.drawable.chinesechessboard));
-		this.nowBoard =  ChineseChessBoardFactory.makeNewChineseChessBoard(this);
+		super(9, 10);
+		this.nowBoard = ChineseChessBoardFactory.makeNewChineseChessBoard(this);
 	}
 
 	@Override
@@ -37,8 +38,8 @@ public class ChineseChessBoard extends ChessBoard {
 	}
 
 	private class ChessIterator implements Iterator<ChessMan> {
-		private final int totalX = 10;
-		private final int totalY = 9;
+		private final int totalX = 9;
+		private final int totalY = 10;
 		private int X = 0;
 		private int Y = 0;
 
@@ -58,7 +59,7 @@ public class ChineseChessBoard extends ChessBoard {
 		public ChessMan next() {
 			// Log.d("kerker", X +" "+ Y);
 			ChessMan currentChess = nowBoard[X][Y];
-			if (X < 10)
+			if (X < totalX)
 				X++;
 			return currentChess;
 		}
@@ -71,16 +72,21 @@ public class ChineseChessBoard extends ChessBoard {
 
 	@Override
 	public ChineseChessMan getChess(int x, int y) {
-		if (x < 10 && x >= 0 && y < 9 && y >= 0)
+		if (x < 9 && x >= 0 && y < 10 && y >= 0)
 			return (ChineseChessMan) nowBoard[x][y];
 		return null;
 	}
 
 	@Override
 	public boolean hasChess(int x, int y) {
-		if (x < 10 && x >= 0 && y < 9 && y >= 0)
+		if (x < 9 && x >= 0 && y < 10 && y >= 0)
 			if (nowBoard[x][y] != null)
 				return true;
 		return false;
+	}
+
+	@Override
+	public Bitmap getBackGround() {
+		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}
 }

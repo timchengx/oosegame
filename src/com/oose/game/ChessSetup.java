@@ -22,7 +22,7 @@ public class ChessSetup extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent intent = getIntent();
 		super.onCreate(savedInstanceState);
-		pictureSave = null;
+		pictureSave = new PictureData();
 		timeValue = KEYINDEX.DEFAULTIMELIMIT;
 		timeLimit = KEYINDEX.DEFAULTTIMELIMITSWITCH;
 		setContentView(R.layout.chess_condition_setup);
@@ -38,15 +38,15 @@ public class ChessSetup extends Activity {
 	}
 	public void pictureSetup(View view) {
 		Intent intent = new Intent(this, PictureSetup.class);
-		if(pictureSave == null)
-			intent.putExtra(KEYINDEX.INTENT_HAS_ICON_BOOLEAN, false);
-		else {
+//		if(pictureSave == null)
+//			intent.putExtra(KEYINDEX.INTENT_HAS_ICON_BOOLEAN, false);
+//		else {
 			intent.putExtra(KEYINDEX.INTENT_HAS_ICON_BOOLEAN, true);
 			intent.putExtra(KEYINDEX.PLAYER1NAME_STRING, pictureSave.getPlayerOneName());
 			intent.putExtra(KEYINDEX.PLAYER2NAME_STRING, pictureSave.getPlayerTwoName());
 			intent.putExtra(KEYINDEX.PLAYER1ICON_BITMAP, pictureSave.getPlayerOnePicture());
 			intent.putExtra(KEYINDEX.PLAYER2ICON_BITMAP, pictureSave.getPlayerTwoPicture());
-		}
+//		}
 		startActivityForResult(intent, KEYINDEX.PICTURERESULTCODE);
 	}
 	public void timeSetup(View view) {
@@ -56,8 +56,16 @@ public class ChessSetup extends Activity {
 		startActivityForResult(intent, KEYINDEX.TIMERESULTCODE);
 	}
 	public void startGame(View view) {
+		Intent intent;
 		if(currentChess == KEYINDEX.CHINESECHESS) {
-			startActivity(new Intent(this, ChineseChessMain.class));
+			intent = new Intent(this, ChineseChessMain.class);
+			intent.putExtra(KEYINDEX.PLAYER1NAME_STRING, pictureSave.getPlayerOneName());
+			intent.putExtra(KEYINDEX.PLAYER2NAME_STRING, pictureSave.getPlayerTwoName());
+			intent.putExtra(KEYINDEX.PLAYER1ICON_BITMAP, pictureSave.getPlayerOnePicture());
+			intent.putExtra(KEYINDEX.PLAYER2ICON_BITMAP, pictureSave.getPlayerTwoPicture());
+			intent.putExtra(KEYINDEX.TIMELIMIT_INT, timeValue);
+			intent.putExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, timeLimit);
+			startActivity(intent);
 		
 		finish();
 		onStop();}
@@ -67,8 +75,6 @@ public class ChessSetup extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch(requestCode) {
 		case KEYINDEX.PICTURERESULTCODE:
-			if(pictureSave == null)
-				pictureSave = new PictureData();
 			pictureSave.setPlayerOneName(data.getStringExtra(KEYINDEX.PLAYER1NAME_STRING));
 			pictureSave.setPlayerTwoName(data.getStringExtra(KEYINDEX.PLAYER2NAME_STRING));
 			pictureSave.setPlayerOnePicture((Bitmap)data.getParcelableExtra(KEYINDEX.PLAYER1ICON_BITMAP));
