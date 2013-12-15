@@ -1,4 +1,7 @@
-package com.oose.chessgame;
+package com.oose.chinesechess;
+
+import com.oose.prototype.ChessGame;
+import com.oose.prototype.ChessMan;
 
 import android.graphics.Canvas;
 import android.util.Log;
@@ -8,10 +11,11 @@ public class ChineseChessGame extends ChessGame {
 	private ChessMan selectedChess;
 	private boolean isSelected;
 
-	public ChineseChessGame() {
+	public ChineseChessGame(String one, String two, int fallback) {
 		board = new ChineseChessBoard();
-		status = new ChineseChessGameState();
+		status = new ChineseChessGameState(one, two, fallback);
 		coord = new ChineseChessCoordinate();
+		selectedChess = null;
 		isSelected = false;
 	}
 	@Override
@@ -25,7 +29,7 @@ public class ChineseChessGame extends ChessGame {
 		for(ChessMan b : board) {
 			if(b == null) continue;
 			coord.convertToScreen(b.getX(), b.getY());
-			c.drawBitmap(b.icon, coord.getX(), coord.getY(), null);
+			c.drawBitmap(b.getIcon(), coord.getX(), coord.getY(), null);
 		}
 	}
 
@@ -72,7 +76,7 @@ public class ChineseChessGame extends ChessGame {
 	protected int eat(int x, int y) {
 		int result = OPERATION_UNKNOWN;
 		Log.d("timcheng", "eat.");
-		if(selectedChess.belongTo != board.getChess(x, y).getBelong() && selectedChess.eatValid(x, y)) {
+		if(selectedChess.getBelong() != board.getChess(x, y).getBelong() && selectedChess.eatValid(x, y)) {
 			board.removeChess(selectedChess.getX(), selectedChess.getY());
 			board.setBoard(x, y, selectedChess);
 			selectedChess.setXY(x, y);

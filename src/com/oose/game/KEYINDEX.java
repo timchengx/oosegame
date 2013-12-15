@@ -18,4 +18,5 @@ public class KEYINDEX {
 	public final static int FROMFILEREQUESTCODE = 2200;
 	public final static int DEFAULTIMELIMIT = 30;
 	public final static boolean DEFAULTTIMELIMITSWITCH = true;
+	public final static int DEFAULTFALLBACKVALUE = 3;
 }

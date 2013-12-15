@@ -1,4 +1,6 @@
-package com.oose.chessgame;
+package com.oose.chinesechess;
+
+import com.oose.prototype.Coordinate;
 
 public class ChineseChessCoordinate extends Coordinate{
 	private int resultX = -1;

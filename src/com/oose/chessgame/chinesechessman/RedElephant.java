@@ -2,15 +2,16 @@ package com.oose.chessgame.chinesechessman;
 
 import android.graphics.BitmapFactory;
 
-import com.oose.chessgame.ChessMan;
-import com.oose.chessgame.ChineseChessBoard;
+import com.oose.chinesechess.ChineseChessBoard;
+import com.oose.chinesechess.ChineseChessMan;
 import com.oose.game.OOSEGame;
 import com.oose.game.R;
+import com.oose.prototype.ChessMan;
 
-public class RedElephant extends ChessMan{
+public class RedElephant extends ChineseChessMan{
 
-	public RedElephant(int x, int y, int belong, ChineseChessBoard board) {
-		super(x, y, belong, board);
+	public RedElephant(int x, int y, ChineseChessBoard board) {
+		super(x, y, ChessMan.RED, board);
 		this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.red_elephant);
 	}
 	@Override

@@ -1,4 +1,4 @@
-package com.oose.chessgame;
+package com.oose.prototype;
 
 import android.graphics.Bitmap;
 

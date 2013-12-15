@@ -1,20 +1,23 @@
-package com.oose.chessgame;
+package com.oose.prototype;
 
 import java.util.Iterator;
 
 import android.graphics.Bitmap;
 
 public abstract class ChessBoard implements Iterable<ChessMan> {
-	protected ChessMan nowBoard[][];
-	protected ChessMan previousBoard[][];
-	protected ChessMan previousPreviousBoard[][];
+	protected ChessMan[][] nowBoard;
+	protected ChessMan[][] previousBoard;
+	protected ChessMan[][] previousPreviousBoard;
 	private int boardXSize;
 	private int boardYSize;
 	private Bitmap backGround;
 	public ChessBoard(int x, int y, Bitmap bg) {
-		boardXSize = x;
-		boardYSize = y;
-		backGround = bg;
+		this.boardXSize = x;
+		this.boardYSize = y;
+		this.backGround = bg;
+		this.nowBoard = null;
+		this.previousBoard = null;
+		this.previousPreviousBoard = null;
 	}
 
 	abstract class ChessIterator implements Iterator<ChessMan>{};

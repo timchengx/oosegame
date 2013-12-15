@@ -1,4 +1,4 @@
-package com.oose.chessgame;
+package com.oose.prototype;
 
 public abstract class Coordinate {
 	abstract public void convertToBoard(int x, int y);
