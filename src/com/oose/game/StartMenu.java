@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 public class StartMenu extends Activity {
-	
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,9 +15,9 @@ public class StartMenu extends Activity {
     public void newChess(View view) {
     	Intent intent = new Intent(this, ChessMainMenu.class);
     	if(view.getId() == R.id.ButtonStartChineseChess)
-    		intent.putExtra(KEYINDEX.CHESSTYPE_INT, KEYINDEX.CHINESECHESS);
+    		intent.putExtra(ChessMainMenu.CHESSTYPE_INT, ChessMainMenu.CHINESECHESS);
     	else		//ButtonStartDarkChess
-    		intent.putExtra(KEYINDEX.CHESSTYPE_INT, KEYINDEX.DARKCHESS);
+    		intent.putExtra(ChessMainMenu.CHESSTYPE_INT, ChessMainMenu.DARKCHESS);
     	startActivity(intent);
     	onStop();
     }

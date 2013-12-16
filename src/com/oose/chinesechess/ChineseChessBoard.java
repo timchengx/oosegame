@@ -3,26 +3,10 @@ package com.oose.chinesechess;
 import java.util.Iterator;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.util.Log;
 
-import com.oose.chessgame.chinesechessman.BlackCannon;
-import com.oose.chessgame.chinesechessman.BlackCar;
-import com.oose.chessgame.chinesechessman.BlackElephant;
-import com.oose.chessgame.chinesechessman.BlackGeneral;
-import com.oose.chessgame.chinesechessman.BlackHorse;
-import com.oose.chessgame.chinesechessman.BlackShi;
-import com.oose.chessgame.chinesechessman.BlackSoldier;
-import com.oose.chessgame.chinesechessman.RedCannon;
-import com.oose.chessgame.chinesechessman.RedCar;
-import com.oose.chessgame.chinesechessman.RedElephant;
-import com.oose.chessgame.chinesechessman.RedGeneral;
-import com.oose.chessgame.chinesechessman.RedHorse;
-import com.oose.chessgame.chinesechessman.RedShi;
-import com.oose.chessgame.chinesechessman.RedSoldier;
 import com.oose.factory.ChineseChessBoardFactory;
 import com.oose.factory.ChineseChessPictureList;
-import com.oose.game.OOSEGame;
-import com.oose.game.R;
 import com.oose.prototype.ChessBoard;
 import com.oose.prototype.ChessMan;
 
@@ -57,7 +41,6 @@ public class ChineseChessBoard extends ChessBoard {
 
 		@Override
 		public ChessMan next() {
-			// Log.d("kerker", X +" "+ Y);
 			ChessMan currentChess = nowBoard[X][Y];
 			if (X < totalX)
 				X++;
@@ -70,23 +53,17 @@ public class ChineseChessBoard extends ChessBoard {
 
 	}
 
-	@Override
-	public ChineseChessMan getChess(int x, int y) {
-		if (x < 9 && x >= 0 && y < 10 && y >= 0)
-			return (ChineseChessMan) nowBoard[x][y];
-		return null;
-	}
-
-	@Override
-	public boolean hasChess(int x, int y) {
-		if (x < 9 && x >= 0 && y < 10 && y >= 0)
-			if (nowBoard[x][y] != null)
-				return true;
-		return false;
-	}
-
-	@Override
 	public Bitmap getBackGround() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
+	}
+	public void copy() {
+		Log.d("timcheng", "start copy.");
+		snapshot = new ChineseChessMan[boardXSize][boardYSize];
+		for(int i = 0; i < boardXSize; i++)
+			for(int j = 0; j < boardYSize; j++) {
+				if(snapshot[i][j] == null) continue;
+				Log.d("timcheng", snapshot[i][j].getClass().getName());
+				snapshot[i][j] = new ChineseChessMan((ChineseChessMan)nowBoard[i][j]);
+			}
 	}
 }

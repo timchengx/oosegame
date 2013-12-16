@@ -1,27 +1,35 @@
 package com.oose.chinesechess;
 
-import com.oose.prototype.ChessGame;
-import com.oose.prototype.ChessMan;
-
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.Log;
+
+import com.oose.prototype.ChessGame;
+import com.oose.prototype.ChessMan;
 
 public class ChineseChessGame extends ChessGame {
 	//protected ChineseChessBoard board;
 	private ChessMan selectedChess;
 	private boolean isSelected;
 
-	public ChineseChessGame(String one, String two, int fallback) {
+	public ChineseChessGame(String one, String two, Bitmap pOne, Bitmap pTwo,
+			int fallback) {
 		board = new ChineseChessBoard();
-		status = new ChineseChessGameState(one, two, fallback);
+		status = new ChineseChessGameState(one, two, pOne, pTwo, fallback);
 		coord = new ChineseChessCoordinate();
 		selectedChess = null;
 		isSelected = false;
 	}
+	
 	@Override
 	public void save() {
 	}
-
+	
+	private void cleanSelected() {
+		selectedChess = null;
+		isSelected = false;
+	}
+	
 	@Override
 	public void refreshBoard(Canvas c) {
 		if(board.getBackGround() != null)
@@ -37,77 +45,73 @@ public class ChineseChessGame extends ChessGame {
 	}
 
 	@Override
-	public int select(int x, int y) {
+	public boolean select(int x, int y) {
 		coord.convertToBoard(x, y);
+		
 		Log.d("timcheng",new String("select enter Who's turn "+status.whosTurn()));
 		Log.d("timcheng", coord.getX()+" "+ coord.getY());
+		
 		if(!isSelected) {
 			if(board.hasChess(coord.getX(), coord.getY())) {
-				this.selectedChess = board.getChess(coord.getX(), coord.getY());
-				if(selectedChess.getBelong() == status.whosTurn()) {
-					Log.d("timcheng", "hasSelectChess!");
+				
+				selectedChess = board.getChess(coord.getX(), coord.getY());
+				
+				if(selectedChess.getBelong() == status.whosTurn())	//Log.d("timcheng", "hasSelectChess!");
 					isSelected = true;
-				}
 				else
 					selectedChess = null;
-				
 			}
-			return NEED_REDRAW;
-		}
-		else {
-			int resultCode = OPERATION_UNKNOWN;
+		} else {
+			boolean moveResult = false;
+			board.copy();
 			if(board.hasChess(coord.getX(), coord.getY())) {
-				if(board.getChess(coord.getX(), coord.getY()) == selectedChess) {
-					isSelected = false;
-					selectedChess = null;
-					Log.d("timcheng","same chess.");
-				} else
-					resultCode = eat(coord.getX(), coord.getY());
+				if(board.getChess(coord.getX(), coord.getY()) == selectedChess) //Log.d("timcheng","same chess.");
+					cleanSelected();
+				else
+					moveResult = eat(coord.getX(), coord.getY());
 			} else {
-				resultCode = move(coord.getX(), coord.getY());
+				moveResult = move(coord.getX(), coord.getY());
 			}
-			if(resultCode == OPERATION_OK) {
+			
+			if(moveResult) {//Log.d("timcheng", "change to " +status.whosTurn());
 				status.changeTurn();
-				Log.d("timcheng", "change to " +status.whosTurn());
-				return NEED_REDRAW;
+				board.savePreviousBoard();
 			}
 		}
-		return NONEED_REDRAW;
+		return true;
 	}
 	
 	@Override
-	protected int eat(int x, int y) {
-		int result = OPERATION_UNKNOWN;
+	protected boolean eat(int x, int y) {
+		boolean result = false;
 		Log.d("timcheng", "eat.");
-		if(selectedChess.getBelong() != board.getChess(x, y).getBelong() && selectedChess.eatValid(x, y)) {
-			board.removeChess(selectedChess.getX(), selectedChess.getY());
-			board.setBoard(x, y, selectedChess);
-			selectedChess.setXY(x, y);
-			result = OPERATION_OK;
+		if(selectedChess.getBelong() != board.getChess(x, y).getBelong() && selectedChess.eat(x, y)) {
+			//board.removeChess(selectedChess.getX(), selectedChess.getY());
+			//board.setBoard(x, y, selectedChess);
+			//selectedChess.setXY(x, y);
+			result = true;
 		} else {
 			Log.d("timcheng", "want to eat your own buddy?");
-			result = OPERATION_FAIL;
+			result = false;
 		}
-		isSelected = false;
-		selectedChess = null;
+		cleanSelected();
 		return result;
 	}
 
 	@Override
-	protected int move(int x, int y) {
-		int result = OPERATION_UNKNOWN;
-		if(x < 9 && x >= 0 && y < 10 && y >= 0 && selectedChess.moveValid(x, y)) {
-			board.removeChess(selectedChess.getX(),selectedChess.getY());
-			board.setBoard(x, y, selectedChess);
-			selectedChess.setXY(x, y);
+	protected boolean move(int x, int y) {
+		boolean result = false;
+		if(x < 9 && x >= 0 && y < 10 && y >= 0 && selectedChess.move(x, y)) {
+			//board.removeChess(selectedChess.getX(),selectedChess.getY());
+			//board.setBoard(x, y, selectedChess);
+			//selectedChess.setXY(x, y);
 			Log.d("timcheng", "moveok!");
-			result = OPERATION_OK;
+			result = true;
 		} else {
 			Log.d("timcheng", "no move");
-			result = OPERATION_FAIL;
+			result = false;
 		}
-		isSelected = false;
-		selectedChess = null;
+		cleanSelected();
 		return result;
 	}
 	

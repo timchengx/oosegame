@@ -10,24 +10,34 @@ import android.view.View;
 
 public class ChessSetup extends Activity {
 	
+	public final static String TIMELIMIT_INT = "tl";
+	public final static String LIMITSWITCH_BOOLEAN = "LS";
+	public final static String PLAYER1NAME_STRING = "P1N";
+	public final static String PLAYER2NAME_STRING = "P2N";
+	public final static String PLAYER1ICON_BITMAP = "P1I";
+	public final static String PLAYER2ICON_BITMAP = "P2I";
+	public final static String INTENT_HAS_ICON_BOOLEAN = "IHI";
+	public final static int PICTURERESULTCODE = 1100;
+	public final static int TIMERESULTCODE = 1200;
+	public final static int CAMERAREQUESTCODE = 2100;
+	public final static int FROMFILEREQUESTCODE = 2200;
+	public final static int DEFAULTIMELIMIT = 30;
+	public final static boolean DEFAULTTIMELIMITSWITCH = true;
+	public final static int DEFAULTFALLBACKVALUE = 3;
+	
 	private int currentChess;
 	
-	private int timeValue;
-	private boolean timeLimit;
-	
-	private PictureData pictureSave;
+	private SettingBundle setup;
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent intent = getIntent();
 		super.onCreate(savedInstanceState);
-		pictureSave = new PictureData();
-		timeValue = KEYINDEX.DEFAULTIMELIMIT;
-		timeLimit = KEYINDEX.DEFAULTTIMELIMITSWITCH;
+		setup = new SettingBundle();
 		setContentView(R.layout.chess_condition_setup);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		currentChess = intent.getIntExtra(KEYINDEX.CHESSTYPE_INT, KEYINDEX.ERROR);
+		currentChess = intent.getIntExtra(ChessMainMenu.CHESSTYPE_INT, ChessMainMenu.ERROR);
 	}
 	public boolean onOptionsItemSelected(MenuItem item) {
 		//switch(item.getItemId()) {
@@ -41,30 +51,30 @@ public class ChessSetup extends Activity {
 //		if(pictureSave == null)
 //			intent.putExtra(KEYINDEX.INTENT_HAS_ICON_BOOLEAN, false);
 //		else {
-			intent.putExtra(KEYINDEX.INTENT_HAS_ICON_BOOLEAN, true);
-			intent.putExtra(KEYINDEX.PLAYER1NAME_STRING, pictureSave.getPlayerOneName());
-			intent.putExtra(KEYINDEX.PLAYER2NAME_STRING, pictureSave.getPlayerTwoName());
-			intent.putExtra(KEYINDEX.PLAYER1ICON_BITMAP, pictureSave.getPlayerOnePicture());
-			intent.putExtra(KEYINDEX.PLAYER2ICON_BITMAP, pictureSave.getPlayerTwoPicture());
+			intent.putExtra(INTENT_HAS_ICON_BOOLEAN, true);
+			intent.putExtra(PLAYER1NAME_STRING, setup.getPlayerOneName());
+			intent.putExtra(PLAYER2NAME_STRING, setup.getPlayerTwoName());
+			intent.putExtra(PLAYER1ICON_BITMAP, setup.getPlayerOnePicture());
+			intent.putExtra(PLAYER2ICON_BITMAP, setup.getPlayerTwoPicture());
 //		}
-		startActivityForResult(intent, KEYINDEX.PICTURERESULTCODE);
+		startActivityForResult(intent, PICTURERESULTCODE);
 	}
 	public void timeSetup(View view) {
 		Intent intent = new Intent(this, TimeSetup.class);
-		intent.putExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, timeLimit);
-		intent.putExtra(KEYINDEX.TIMELIMIT_INT, timeValue);
-		startActivityForResult(intent, KEYINDEX.TIMERESULTCODE);
+		intent.putExtra(LIMITSWITCH_BOOLEAN, setup.isTimeLimitOn());
+		intent.putExtra(TIMELIMIT_INT, setup.getTimeLimitValue());
+		startActivityForResult(intent, TIMERESULTCODE);
 	}
 	public void startGame(View view) {
 		Intent intent;
-		if(currentChess == KEYINDEX.CHINESECHESS) {
+		if(currentChess == ChessMainMenu.CHINESECHESS) {
 			intent = new Intent(this, ChineseChessMain.class);
-			intent.putExtra(KEYINDEX.PLAYER1NAME_STRING, pictureSave.getPlayerOneName());
-			intent.putExtra(KEYINDEX.PLAYER2NAME_STRING, pictureSave.getPlayerTwoName());
-			intent.putExtra(KEYINDEX.PLAYER1ICON_BITMAP, pictureSave.getPlayerOnePicture());
-			intent.putExtra(KEYINDEX.PLAYER2ICON_BITMAP, pictureSave.getPlayerTwoPicture());
-			intent.putExtra(KEYINDEX.TIMELIMIT_INT, timeValue);
-			intent.putExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, timeLimit);
+			intent.putExtra(PLAYER1NAME_STRING, setup.getPlayerOneName());
+			intent.putExtra(PLAYER2NAME_STRING, setup.getPlayerTwoName());
+			intent.putExtra(PLAYER1ICON_BITMAP, setup.getPlayerOnePicture());
+			intent.putExtra(PLAYER2ICON_BITMAP, setup.getPlayerTwoPicture());
+			intent.putExtra(TIMELIMIT_INT, setup.getTimeLimitValue());
+			intent.putExtra(LIMITSWITCH_BOOLEAN, setup.isTimeLimitOn());
 			startActivity(intent);
 		
 		finish();
@@ -74,15 +84,15 @@ public class ChessSetup extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch(requestCode) {
-		case KEYINDEX.PICTURERESULTCODE:
-			pictureSave.setPlayerOneName(data.getStringExtra(KEYINDEX.PLAYER1NAME_STRING));
-			pictureSave.setPlayerTwoName(data.getStringExtra(KEYINDEX.PLAYER2NAME_STRING));
-			pictureSave.setPlayerOnePicture((Bitmap)data.getParcelableExtra(KEYINDEX.PLAYER1ICON_BITMAP));
-			pictureSave.setPlayerTwoPicture((Bitmap)data.getParcelableExtra(KEYINDEX.PLAYER2ICON_BITMAP));
+		case PICTURERESULTCODE:
+			setup.setPlayerOneName(data.getStringExtra(PLAYER1NAME_STRING));
+			setup.setPlayerTwoName(data.getStringExtra(PLAYER2NAME_STRING));
+			setup.setPlayerOnePicture((Bitmap)data.getParcelableExtra(PLAYER1ICON_BITMAP));
+			setup.setPlayerTwoPicture((Bitmap)data.getParcelableExtra(PLAYER2ICON_BITMAP));
 			break;
-		case KEYINDEX.TIMERESULTCODE:
-			timeValue = data.getIntExtra(KEYINDEX.TIMELIMIT_INT, KEYINDEX.DEFAULTIMELIMIT);
-			timeLimit = data.getBooleanExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, true);
+		case TIMERESULTCODE:
+			setup.setTimeLimitValue(data.getIntExtra(TIMELIMIT_INT, DEFAULTIMELIMIT));
+			setup.setTimeLimitSwitch(data.getBooleanExtra(LIMITSWITCH_BOOLEAN, true));
 			break;
 		default:
 			break;

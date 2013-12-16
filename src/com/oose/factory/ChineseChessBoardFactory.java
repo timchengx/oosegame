@@ -15,19 +15,19 @@ import com.oose.chessgame.chinesechessman.RedHorse;
 import com.oose.chessgame.chinesechessman.RedShi;
 import com.oose.chessgame.chinesechessman.RedSoldier;
 import com.oose.chinesechess.ChineseChessBoard;
-import com.oose.prototype.ChessMan;
+import com.oose.chinesechess.ChineseChessMan;
 
 public class ChineseChessBoardFactory {
-	public static ChessMan[][] makeNewChineseChessBoard(ChineseChessBoard board) {
-		ChessMan[][] chinese = new ChessMan[9][10];
+	public static ChineseChessMan[][] makeNewChineseChessBoard(ChineseChessBoard board) {
+		ChineseChessMan[][] chinese = new ChineseChessMan[9][10];
 		
 		chinese[1][2] = new BlackCannon(1,2, board);
 		chinese[7][2] = new BlackCannon(7,2, board);
 		chinese[4][0] = new BlackGeneral(4,0, board);
 		chinese[0][3] = new BlackSoldier(0,3, board);
 		chinese[2][3] = new BlackSoldier(2,3, board);
-		chinese[4][4] = new BlackSoldier(4,3, board);
-		chinese[6][4] = new BlackSoldier(6,3, board);
+		chinese[4][3] = new BlackSoldier(4,3, board);
+		chinese[6][3] = new BlackSoldier(6,3, board);
 		chinese[8][3] = new BlackSoldier(8,3, board);
 		chinese[0][0] = new BlackCar(0,0, board);
 		chinese[8][0] = new BlackCar(8,0, board);

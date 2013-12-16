@@ -9,12 +9,6 @@ import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- * 
- * @see SystemUiHider
- */
 public class TimeSetup extends Activity {
 	NumberPicker timer;
 	RadioGroup buttonSwitch;
@@ -27,9 +21,9 @@ public class TimeSetup extends Activity {
 		timer = (NumberPicker) findViewById(R.id.countdownPicker);
 		timer.setMinValue(30);
 		timer.setMaxValue(90);
-		timer.setValue(intent.getIntExtra(KEYINDEX.TIMELIMIT_INT, 30));
+		timer.setValue(intent.getIntExtra(ChessSetup.TIMELIMIT_INT, 30));
 		buttonSwitch = (RadioGroup) findViewById(R.id.RadioButtonGroupTimeSwitch);
-		if(intent.getBooleanExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, true))
+		if(intent.getBooleanExtra(ChessSetup.LIMITSWITCH_BOOLEAN, true))
 			((RadioButton) findViewById(R.id.RadioButtonTimeOn)).setChecked(true);
 		else
 			((RadioButton) findViewById(R.id.RadioButtonTimeOff)).setChecked(true);
@@ -38,18 +32,18 @@ public class TimeSetup extends Activity {
 		switch(item.getItemId()) {
 		case android.R.id.home:
 		Intent intent = new Intent();
-		intent.putExtra(KEYINDEX.TIMELIMIT_INT, timer.getValue());
+		intent.putExtra(ChessSetup.TIMELIMIT_INT, timer.getValue());
 		int onOff = buttonSwitch.getCheckedRadioButtonId();
 		
 		switch(onOff) {
 		case R.id.RadioButtonTimeOn:
-			intent.putExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, true);
+			intent.putExtra(ChessSetup.LIMITSWITCH_BOOLEAN, true);
 			break;
 		case R.id.RadioButtonTimeOff:
-			intent.putExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, false);
+			intent.putExtra(ChessSetup.LIMITSWITCH_BOOLEAN, false);
 			break;
 		default:
-			intent.putExtra(KEYINDEX.LIMITSWITCH_BOOLEAN, true);
+			intent.putExtra(ChessSetup.LIMITSWITCH_BOOLEAN, true);
 			break;
 		}
 		

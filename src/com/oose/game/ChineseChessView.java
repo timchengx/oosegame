@@ -24,26 +24,27 @@ public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callb
 	Bitmap playerOnePic;
 	Bitmap playerTwoPic;
 	Paint namePaint;
-	public ChineseChessView(Context context,Intent intent) {
+
+	public ChineseChessView(Context context, Intent intent) {
 		super(context);
 		r = getResources();
-		
-		int fallbackValue = KEYINDEX.DEFAULTFALLBACKVALUE;
+
+		int fallbackValue = ChessSetup.DEFAULTFALLBACKVALUE;
 		int playerOneFallback = 0;
 		int playerTwoFallback = 0;
-		playerOne = intent.getStringExtra(KEYINDEX.PLAYER1NAME_STRING);
-		playerTwo = intent.getStringExtra(KEYINDEX.PLAYER2NAME_STRING);
-		playerOnePic = intent.getParcelableExtra(KEYINDEX.PLAYER1ICON_BITMAP);
-		playerTwoPic = intent.getParcelableExtra(KEYINDEX.PLAYER2ICON_BITMAP);
+		playerOne = intent.getStringExtra(ChessSetup.PLAYER1NAME_STRING);
+		playerTwo = intent.getStringExtra(ChessSetup.PLAYER2NAME_STRING);
+		playerOnePic = intent.getParcelableExtra(ChessSetup.PLAYER1ICON_BITMAP);
+		playerTwoPic = intent.getParcelableExtra(ChessSetup.PLAYER2ICON_BITMAP);
 		Log.d("timcheng", playerOne);
 		Log.d("timcheng", playerTwo);
-		namePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		namePaint = new Paint();
 		namePaint.setColor(Color.WHITE);
 		namePaint.setTextSize(18);
-		
-		chineseChess = new ChineseChessGame(playerOne, playerTwo, fallbackValue);
-		
-		
+
+		chineseChess = new ChineseChessGame(playerOne, playerTwo, playerOnePic,
+				playerTwoPic, fallbackValue);
+
 		holder = getHolder();
 		holder.addCallback(this);
 	}
@@ -63,12 +64,12 @@ public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callb
 	public boolean onTouchEvent(MotionEvent event) {
 		
 		if(event.getAction() == MotionEvent.ACTION_DOWN) {
-			int result = chineseChess.select((int)event.getX(), (int)event.getY());
-			if(result == ChessGame.NEED_REDRAW) {
+			boolean result = chineseChess.select((int)event.getX(), (int)event.getY());
+			if(result) {
 				Canvas c = holder.lockCanvas();
 				chineseChess.refreshBoard(c);
-				c.drawText(playerOne, 532, 547, null);
-				c.drawText(playerTwo, 532, 547, null);
+				c.drawText(playerOne, 30, 547, namePaint);
+				c.drawText(playerTwo, 360, 547, namePaint);
 				c.drawBitmap(playerOnePic, 30, 605, null);
 				c.drawBitmap(playerTwoPic, 360, 605, null);
 				holder.unlockCanvasAndPost(c);

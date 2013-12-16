@@ -3,11 +3,13 @@ package com.oose.game;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-public class PictureData{
+public class SettingBundle {
 	private String playerOneName;
 	private String playerTwoName;
 	private Bitmap playerOnePicture;
 	private Bitmap playerTwoPicture;
+	private int timeValue;
+	private boolean timeLimit;
 	/*
 	public PictureData(String nOne, Bitmap pOne, String nTwo, Bitmap pTwo) {
 		this.playerOneName = nOne;
@@ -16,11 +18,13 @@ public class PictureData{
 		this.playerTwoPicture = pTwo;
 	}
 	*/
-	public PictureData() {
+	public SettingBundle() {
 		this.playerOneName = "PlayerOne";
 		this.playerTwoName = "PlayerTwo";
 		this.playerOnePicture = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.ic_launcher);
 		this.playerTwoPicture = BitmapFactory.decodeResource(OOSEGame.getRes(), R.drawable.ic_launcher);
+		this.timeValue = ChessSetup.DEFAULTFALLBACKVALUE;
+		this.timeLimit = ChessSetup.DEFAULTTIMELIMITSWITCH;
 	}
 	public String getPlayerOneName() {
 		return playerOneName;
@@ -46,14 +50,26 @@ public class PictureData{
 	public void setPlayerTwoPicture(Bitmap playerTwoPicture) {
 		this.playerTwoPicture = playerTwoPicture;
 	}
-	public boolean hasPlayerOneImage() {
-		if(this.playerOnePicture == null)
-			return false;
-		return true;
+	public void setTimeLimitValue(int time) {
+		timeValue = time;
 	}
-	public boolean hasPlayerTwoImage() {
-		if(this.playerTwoPicture == null)
-			return false;
-		return true;
+	public int getTimeLimitValue() {
+		return timeValue;
 	}
+	public void setTimeLimitSwitch(boolean onOff) {
+		timeLimit = onOff;
+	}
+	public boolean isTimeLimitOn() {
+		return timeLimit;
+	}
+//	public boolean hasPlayerOneImage() {
+//		if(this.playerOnePicture == null)
+//			return false;
+//		return true;
+//	}
+//	public boolean hasPlayerTwoImage() {
+//		if(this.playerTwoPicture == null)
+//			return false;
+//		return true;
+//	}
 }

@@ -42,11 +42,11 @@ public class PictureSetup extends Activity {
 		playerOneImageView.setDrawingCacheEnabled(true);
 		playerTwoImageView.setDrawingCacheEnabled(true);
 		Intent pictureDataIntent = getIntent();
-		if(pictureDataIntent.getBooleanExtra(KEYINDEX.INTENT_HAS_ICON_BOOLEAN, false)) {
-			playerOneNameView.setText(pictureDataIntent.getStringExtra(KEYINDEX.PLAYER1NAME_STRING));
-			playerTwoNameView.setText(pictureDataIntent.getStringExtra(KEYINDEX.PLAYER2NAME_STRING));
-			playerOneImageView.setImageBitmap((Bitmap)pictureDataIntent.getParcelableExtra(KEYINDEX.PLAYER1ICON_BITMAP));
-			playerTwoImageView.setImageBitmap((Bitmap)pictureDataIntent.getParcelableExtra(KEYINDEX.PLAYER2ICON_BITMAP));
+		if(pictureDataIntent.getBooleanExtra(ChessSetup.INTENT_HAS_ICON_BOOLEAN, false)) {
+			playerOneNameView.setText(pictureDataIntent.getStringExtra(ChessSetup.PLAYER1NAME_STRING));
+			playerTwoNameView.setText(pictureDataIntent.getStringExtra(ChessSetup.PLAYER2NAME_STRING));
+			playerOneImageView.setImageBitmap((Bitmap)pictureDataIntent.getParcelableExtra(ChessSetup.PLAYER1ICON_BITMAP));
+			playerTwoImageView.setImageBitmap((Bitmap)pictureDataIntent.getParcelableExtra(ChessSetup.PLAYER2ICON_BITMAP));
 		}
 	}
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -56,10 +56,10 @@ public class PictureSetup extends Activity {
 		//Bundle bundle = new Bundle();
 		//bundle.putSerializable(pSaveIntentID, pictureSave);
 		//intent.putExtra(bundle);
-		intent.putExtra(KEYINDEX.PLAYER1NAME_STRING, playerOneNameView.getText().toString());
-		intent.putExtra(KEYINDEX.PLAYER2NAME_STRING, playerTwoNameView.getText().toString());
-		intent.putExtra(KEYINDEX.PLAYER1ICON_BITMAP, playerOneImageView.getDrawingCache());
-		intent.putExtra(KEYINDEX.PLAYER2ICON_BITMAP, playerTwoImageView.getDrawingCache());
+		intent.putExtra(ChessSetup.PLAYER1NAME_STRING, playerOneNameView.getText().toString());
+		intent.putExtra(ChessSetup.PLAYER2NAME_STRING, playerTwoNameView.getText().toString());
+		intent.putExtra(ChessSetup.PLAYER1ICON_BITMAP, playerOneImageView.getDrawingCache());
+		intent.putExtra(ChessSetup.PLAYER2ICON_BITMAP, playerTwoImageView.getDrawingCache());
 		setResult(RESULT_OK, intent);
 		this.finish();
 		//}
@@ -71,22 +71,22 @@ public class PictureSetup extends Activity {
 		imageFilter.setAction(Intent.ACTION_GET_CONTENT);
 		Intent intent = Intent.createChooser(imageFilter, getResources().getString(R.string.choosepicture));
 		requestID = view.getId();
-		startActivityForResult(intent, KEYINDEX.CAMERAREQUESTCODE);
+		startActivityForResult(intent, ChessSetup.CAMERAREQUESTCODE);
 	}
 	public void takePicture(View view) {
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		requestID = view.getId();
-	    startActivityForResult(intent, KEYINDEX.CAMERAREQUESTCODE);
+	    startActivityForResult(intent, ChessSetup.CAMERAREQUESTCODE);
 	}
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Bitmap pictureImage = null;
 		switch(requestCode) {
-		case KEYINDEX.CAMERAREQUESTCODE:
+		case ChessSetup.CAMERAREQUESTCODE:
 			Bundle pictureData = data.getExtras();
 			if(pictureData != null)
 				pictureImage = (Bitmap) pictureData.get("data");
 			
-		case KEYINDEX.FROMFILEREQUESTCODE:
+		case ChessSetup.FROMFILEREQUESTCODE:
 			Uri pictureUri = data.getData();
 			try {
 				pictureImage = BitmapFactory.decodeStream(getContentResolver().openInputStream(pictureUri));

@@ -1,16 +1,20 @@
 package com.oose.chinesechess;
 
+import android.graphics.Bitmap;
+
 import com.oose.prototype.GameState;
 
 public class ChineseChessGameState extends GameState {
 
-	public ChineseChessGameState(String pOne, String pTwo, int fallback) {
-		super(pOne, pTwo, fallback);
+	public ChineseChessGameState(String pOne, String pTwo, Bitmap pOnePic,
+			Bitmap pTwoPic, int fallback) {
+		super(pOne, pTwo, pOnePic, pTwoPic, fallback);
 	}
 
-	public ChineseChessGameState(String pOne, String pTwo, int pOneFB,
-			int pTwoFB, int fallback, int whoPlaying) {
-		super(pOne, pTwo, pOneFB, pTwoFB, fallback, whoPlaying);
+	public ChineseChessGameState(String pOne, String pTwo, Bitmap pOnePic,
+			Bitmap pTwoPic, int fallback, int pOneFB, int pTwoFB, int whoPlaying) {
+		super(pOne, pTwo, pOnePic, pTwoPic, pOneFB, pTwoFB, fallback,
+				whoPlaying);
 	}
 
 }
