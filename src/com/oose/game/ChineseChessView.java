@@ -48,10 +48,7 @@ public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callb
 		holder = getHolder();
 		holder.addCallback(this);
 	}
-
-	@Override
-	public void surfaceCreated(SurfaceHolder sh) {
-		Canvas c = holder.lockCanvas();
+	public void refreshScreen(Canvas c) {
 		chineseChess.refreshBoard(c);
 		c.drawText(playerOne, 30, 547, namePaint);
 		c.drawText(playerTwo, 360, 547, namePaint);
@@ -59,21 +56,18 @@ public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callb
 		c.drawBitmap(playerTwoPic, 360, 605, null);
 		holder.unlockCanvasAndPost(c);
 	}
+	@Override
+	public void surfaceCreated(SurfaceHolder sh) {
+		refreshScreen(holder.lockCanvas());
+	}
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		
 		if(event.getAction() == MotionEvent.ACTION_DOWN) {
 			boolean result = chineseChess.select((int)event.getX(), (int)event.getY());
-			if(result) {
-				Canvas c = holder.lockCanvas();
-				chineseChess.refreshBoard(c);
-				c.drawText(playerOne, 30, 547, namePaint);
-				c.drawText(playerTwo, 360, 547, namePaint);
-				c.drawBitmap(playerOnePic, 30, 605, null);
-				c.drawBitmap(playerTwoPic, 360, 605, null);
-				holder.unlockCanvasAndPost(c);
-			}
+			if(result)
+				refreshScreen(holder.lockCanvas());
 		}
 		return true;
 	}
