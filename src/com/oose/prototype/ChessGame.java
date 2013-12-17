@@ -1,8 +1,14 @@
 package com.oose.prototype;
 
+import java.io.Serializable;
+
 import android.graphics.Canvas;
 
-public abstract class ChessGame {
+public abstract class ChessGame implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3804242090043209356L;
 	protected ChessBoard board;
 	protected GameState status;
 	protected Coordinate coord;

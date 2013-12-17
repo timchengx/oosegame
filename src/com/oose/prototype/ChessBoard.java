@@ -1,12 +1,17 @@
 package com.oose.prototype;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 
 import android.graphics.Bitmap;
 
-public abstract class ChessBoard implements Iterable<ChessMan>, Observer {
+public abstract class ChessBoard implements Iterable<ChessMan>, Observer, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8448462241599153803L;
 	protected ChessMan[][] nowBoard;
 	protected ChessMan[][] pBoard;
 	protected ChessMan[][] ppBoard;

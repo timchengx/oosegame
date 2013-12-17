@@ -1,15 +1,21 @@
 package com.oose.prototype;
 
+import java.io.Serializable;
+
 import android.graphics.Bitmap;
 
-abstract public class GameState {
+abstract public class GameState implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8642239316987428479L;
 	public static final int playerOne = 1;
 	public static final int playerTwo = 2;
 	private int whoMoving;
 	private String playerOneName;
 	private String playerTwoName;
-	private Bitmap playerOnePic;
-	private Bitmap playerTwoPic;
+	private SerializableBitmap playerOnePic;
+	private SerializableBitmap playerTwoPic;
 	private int playerOneFallbackCount;
 	private int playerTwoFallbackCount;
 	private int fallbackValue;
@@ -18,8 +24,8 @@ abstract public class GameState {
 			int fallback) {
 		this.playerOneName = pOne;
 		this.playerTwoName = pTwo;
-		this.playerOnePic = pOnePic;
-		this.playerTwoPic = pTwoPic;
+		this.playerOnePic = new SerializableBitmap(pOnePic);
+		this.playerTwoPic = new SerializableBitmap(pTwoPic);
 		this.playerOneFallbackCount = 0;
 		this.playerTwoFallbackCount = 0;
 		this.fallbackValue = fallback;
@@ -43,11 +49,11 @@ abstract public class GameState {
 	}
 
 	public Bitmap getPlayerOnePic() {
-		return playerOnePic;
+		return playerOnePic.getImage();
 	}
 
 	public Bitmap getPlayerTwoPic() {
-		return playerTwoPic;
+		return playerTwoPic.getImage();
 	}
 
 	public int whosTurn() {

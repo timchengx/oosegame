@@ -1,10 +1,15 @@
 package com.oose.prototype;
 
+import java.io.Serializable;
 import java.util.Observable;
 
 import android.graphics.Bitmap;
 
-public abstract class ChessMan extends Observable implements Cloneable {
+public abstract class ChessMan extends Observable implements Cloneable, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1732597257710741013L;
 	public static final int RED = 1;
 	public static final int BLACK = 2;
 	protected ChessBoard board;

@@ -1,6 +1,12 @@
 package com.oose.game;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -82,32 +88,40 @@ public class ChineseChessMain extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View view) {
 		if(view == buttonFallback) {
-			Log.d("timcheng","let's go back!");
-			if(chineseChess.fallback())
-				mainView.refreshScreen();
+//			Log.d("timcheng","let's go back!");
+//			if(chineseChess.fallback())
+//				mainView.refreshScreen();
+			FileOutputStream fos;
+			ObjectOutputStream os;
+
+			try {
+				fos  = openFileOutput("output", Context.MODE_PRIVATE);
+				os = new ObjectOutputStream(fos);
+				os.writeObject(chineseChess);
+				os.close();
+				
+			} catch (Exception e) {
+				Log.d("timchenc", e.toString());
+			}
+			
 		}
 		else if (view == buttonMore) {
-			pmenu.show();
-		}
-		
-//		 // TODO Auto-generated method stub
-//	    PopupMenu popupMenu = new PopupMenu(Android3PopupMenuActivity.this, view);
-//	    popupMenu.getMenuInflater().inflate(R.menu.popupmenu, popupMenu.getMenu());
-//	     
-//	    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//	 
-//	     @Override
-//	     public boolean onMenuItemClick(MenuItem item) {
-//	      // Do something...
-//	      return true;
-//	     }
-//	      
-//	    });
-//	     
-//	    popupMenu.show();
-//	   }});
-//	  }
-//	}
+			//pmenu.show();
+			FileInputStream ios;
+			ObjectInputStream is;
+			try {
+			ios = openFileInput("output");
+			is = new ObjectInputStream(ios);
+			ChineseChessGame ch = (ChineseChessGame) is.readObject();
+			Log.d("timcheng", "freeze");
+			Log.d("timcheng",ch.getStatus().getPlayerOneName());
 			
+			is.close();
+			chineseChess = ch;
+			mainView.refreshScreen();
+			} catch(Exception e) {
+				Log.d("timchenc", e.toString());
+			}
+		}
 	}
 }
