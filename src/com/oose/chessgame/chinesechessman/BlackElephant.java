@@ -12,7 +12,14 @@ public class BlackElephant extends ChineseChessMan{
 	public BlackElephant(int x, int y, ChineseChessBoard board) {
 		super(x, y, ChessMan.BLACK, board);
 	}
-
+	public BlackElephant(BlackElephant be) {
+		super(be);
+	}
+	
+	@Override
+	public BlackElephant clone() throws CloneNotSupportedException {
+		return new BlackElephant(this);
+	}
 	
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());

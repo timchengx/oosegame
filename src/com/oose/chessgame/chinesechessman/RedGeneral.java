@@ -12,6 +12,15 @@ public class RedGeneral extends ChineseChessMan{
 	public RedGeneral(int x, int y, ChineseChessBoard board) {
 		super(x, y, ChessMan.RED, board);
 	}
+	
+	public RedGeneral(RedGeneral rg) {
+		super(rg);
+	}
+	
+	@Override
+	public RedGeneral clone() throws CloneNotSupportedException {
+		return new RedGeneral(this);
+	}
 
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());

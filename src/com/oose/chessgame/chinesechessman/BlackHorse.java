@@ -13,6 +13,15 @@ public class BlackHorse extends ChineseChessMan{
 		super(x, y, ChessMan.BLACK, board);
 	}
 	
+	public BlackHorse(BlackHorse bh) {
+		super(bh);
+	}
+	
+	@Override
+	public BlackHorse clone() throws CloneNotSupportedException {
+		return new BlackHorse(this);
+	}
+	
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}

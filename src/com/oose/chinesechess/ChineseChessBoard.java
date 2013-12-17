@@ -56,14 +56,33 @@ public class ChineseChessBoard extends ChessBoard {
 	public Bitmap getBackGround() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}
-	public void copy() {
+	public void copy() throws CloneNotSupportedException {
 		Log.d("timcheng", "start copy.");
 		snapshot = new ChineseChessMan[boardXSize][boardYSize];
 		for(int i = 0; i < boardXSize; i++)
 			for(int j = 0; j < boardYSize; j++) {
-				if(snapshot[i][j] == null) continue;
-				Log.d("timcheng", snapshot[i][j].getClass().getName());
-				snapshot[i][j] = new ChineseChessMan((ChineseChessMan)nowBoard[i][j]);
+				if(nowBoard[i][j] == null) continue;
+				//Log.d("timcheng", nowBoard[i][j].getClass().getName());
+				snapshot[i][j] = nowBoard[i][j].clone();
 			}
+	}
+	@Override
+	public void savePreviousBoard() {
+		if(pBoard != null)
+			ppBoard = pBoard;
+		pBoard = snapshot;
+		snapshot = null;
+	}
+	@Override
+	public boolean fallback() {
+		if(ppBoard != null) {
+			nowBoard = ppBoard;
+			pBoard = null;
+			ppBoard = null;
+			return true;
+		}
+		
+		
+		return false;
 	}
 }

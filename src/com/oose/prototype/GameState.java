@@ -60,7 +60,7 @@ abstract public class GameState {
 		else
 			whoMoving = GameState.playerOne;
 	}
-	public boolean canFallback() {
+	protected boolean canFallback() {
 		switch(whoMoving) {
 		case GameState.playerOne:
 			if(playerOneFallbackCount < fallbackValue) {

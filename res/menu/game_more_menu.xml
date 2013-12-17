@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group android:id="@+id/popupmenu">
+    <item android:id="@+id/menu_save"
+        android:title="@string/save"/>
+    <item android:id="@+id/menu_pause"
+        android:title="@string/pause"/>
+    <item android:id="@+id/menu_giveup"
+        android:title="@string/giveup"/>
+</group>
+</menu>

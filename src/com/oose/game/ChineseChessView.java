@@ -18,57 +18,53 @@ import com.oose.prototype.ChessGame;
 public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callback{//, Runnable {
 	SurfaceHolder holder;
 	Resources r;
-	ChessGame chineseChess;
-	String playerOne;
-	String playerTwo;
-	Bitmap playerOnePic;
-	Bitmap playerTwoPic;
+	ChineseChessGame chineseChess;
 	Paint namePaint;
 
-	public ChineseChessView(Context context, Intent intent) {
+	public ChineseChessView(Context context, Intent intent, ChineseChessGame ch) {
 		super(context);
 		r = getResources();
 
-		int fallbackValue = ChessSetup.DEFAULTFALLBACKVALUE;
+		
 		int playerOneFallback = 0;
 		int playerTwoFallback = 0;
-		playerOne = intent.getStringExtra(ChessSetup.PLAYER1NAME_STRING);
-		playerTwo = intent.getStringExtra(ChessSetup.PLAYER2NAME_STRING);
-		playerOnePic = intent.getParcelableExtra(ChessSetup.PLAYER1ICON_BITMAP);
-		playerTwoPic = intent.getParcelableExtra(ChessSetup.PLAYER2ICON_BITMAP);
-		Log.d("timcheng", playerOne);
-		Log.d("timcheng", playerTwo);
+		
+		//Log.d("timcheng", playerOne);
+		//Log.d("timcheng", playerTwo);
 		namePaint = new Paint();
 		namePaint.setColor(Color.WHITE);
 		namePaint.setTextSize(18);
 
-		chineseChess = new ChineseChessGame(playerOne, playerTwo, playerOnePic,
-				playerTwoPic, fallbackValue);
+		chineseChess = ch;
 
 		holder = getHolder();
 		holder.addCallback(this);
 	}
-	public void refreshScreen(Canvas c) {
+	public void refreshScreen() {
+		Canvas c = holder.lockCanvas();
 		chineseChess.refreshBoard(c);
-		c.drawText(playerOne, 30, 547, namePaint);
-		c.drawText(playerTwo, 360, 547, namePaint);
-		c.drawBitmap(playerOnePic, 30, 605, null);
-		c.drawBitmap(playerTwoPic, 360, 605, null);
+		c.drawText(chineseChess.getStatus().getPlayerOneName(), 30, 547, namePaint);
+		c.drawText(chineseChess.getStatus().getPlayerTwoName(), 360, 547, namePaint);
+		c.drawBitmap(chineseChess.getStatus().getPlayerOnePic(), 30, 605, null);
+		c.drawBitmap(chineseChess.getStatus().getPlayerTwoPic(), 360, 605, null);
 		holder.unlockCanvasAndPost(c);
 	}
+	
 	@Override
 	public void surfaceCreated(SurfaceHolder sh) {
-		refreshScreen(holder.lockCanvas());
+		refreshScreen();
 	}
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		
 		if(event.getAction() == MotionEvent.ACTION_DOWN) {
-			boolean result = chineseChess.select((int)event.getX(), (int)event.getY());
-			if(result)
-				refreshScreen(holder.lockCanvas());
+			//if((int)event.getY() < 720) {
+				chineseChess.select((int)event.getX(), (int)event.getY());
+				refreshScreen();
+			//}
 		}
+		
 		return true;
 	}
 

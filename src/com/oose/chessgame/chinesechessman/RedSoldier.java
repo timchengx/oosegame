@@ -12,7 +12,9 @@ public class RedSoldier extends ChineseChessMan {
 	public RedSoldier(int x, int y, ChineseChessBoard board) {
 		super(x, y, ChessMan.RED, board);
 	}
-
+	public RedSoldier(RedSoldier rs) {
+		super(rs);
+	}
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}
@@ -38,6 +40,11 @@ public class RedSoldier extends ChineseChessMan {
 //		}
 //		return false;
 	}
+	@Override
+	public RedSoldier clone() throws CloneNotSupportedException {
+		return new RedSoldier(this);
+	}
+
 	@Override
 	public boolean eat(int x, int y) {
 		inBoardMoveChess(x, y);

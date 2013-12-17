@@ -21,7 +21,7 @@ public abstract class ChessBoard implements Iterable<ChessMan>, Observer {
 		this.pBoard = null;
 		this.ppBoard = null;
 	}
-	abstract public void copy();
+	abstract public void copy() throws CloneNotSupportedException;
 	abstract class ChessIterator implements Iterator<ChessMan>{};
 	
 	public ChessMan getChess(int x, int y) {
@@ -38,12 +38,8 @@ public abstract class ChessBoard implements Iterable<ChessMan>, Observer {
 	}
 
 	abstract public Bitmap getBackGround();
-	public void savePreviousBoard() {
-		if(pBoard != null)
-			ppBoard = pBoard;
-		pBoard = snapshot;
-		snapshot = null;
-	}
+	abstract public void savePreviousBoard();
+	
 	private void setBoard(int x, int y, ChessMan c) {
 		nowBoard[x][y] = c;
 	}
@@ -58,4 +54,5 @@ public abstract class ChessBoard implements Iterable<ChessMan>, Observer {
 		ChessMan cm = (ChessMan) arg0;
 		this.setBoard(cm.getX(), cm.getY(), (ChessMan)arg1);
 	}
+	abstract public boolean fallback();
 }

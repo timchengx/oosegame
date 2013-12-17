@@ -23,5 +23,9 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="fallback">悔棋</string>
+    <string name="save">存檔</string>
+    <string name="pause">暫停</string>
+    <string name="giveup">投降</string>
+    <string name="moremenu">更多選項</string>
 
 </resources>

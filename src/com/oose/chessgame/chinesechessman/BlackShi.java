@@ -13,6 +13,15 @@ public class BlackShi extends ChineseChessMan {
 		super(x, y, ChessMan.BLACK, board);
 	}
 	
+	public BlackShi(BlackShi bs) {
+		super(bs);
+	}
+	
+	@Override
+	public BlackShi clone() throws CloneNotSupportedException {
+		return new BlackShi(this);
+	}
+	
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}

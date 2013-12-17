@@ -12,6 +12,15 @@ public class RedCannon extends ChineseChessMan {
 	public RedCannon(int x, int y, ChineseChessBoard board) {
 		super(x, y, ChessMan.RED, board);
 	}
+	
+	public RedCannon(RedCannon rc) {
+		super(rc);
+	}
+	
+	@Override
+	public RedCannon clone() throws CloneNotSupportedException {
+		return new RedCannon(this);
+	}
 
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());

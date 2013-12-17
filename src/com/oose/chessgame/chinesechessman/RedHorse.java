@@ -12,6 +12,16 @@ public class RedHorse extends ChineseChessMan{
 	public RedHorse(int x, int y, ChineseChessBoard board) {
 		super(x, y, ChessMan.RED, board);
 	}
+	
+	public RedHorse(RedHorse redShi) {
+		super(redShi);
+	}
+	
+	@Override
+	public RedHorse clone() throws CloneNotSupportedException {
+		return new RedHorse(this);
+	}
+	
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}

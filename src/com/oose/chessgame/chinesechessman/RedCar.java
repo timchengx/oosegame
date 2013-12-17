@@ -12,6 +12,15 @@ public class RedCar extends ChineseChessMan{
 	public RedCar(int x, int y, ChineseChessBoard board) {
 		super(x, y, ChessMan.RED, board);
 	}
+	
+	public RedCar(RedCar rc) {
+		super(rc);
+	}
+	
+	@Override
+	public RedCar clone() throws CloneNotSupportedException {
+		return new RedCar(this);
+	}
 
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());

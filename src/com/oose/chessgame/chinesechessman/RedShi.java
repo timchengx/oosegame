@@ -9,10 +9,21 @@ import com.oose.prototype.ChessMan;
 
 public class RedShi extends ChineseChessMan{
 
+	
+
 	public RedShi(int x, int y, ChineseChessBoard board) {
 		super(x, y, ChessMan.RED, board);
 	}
 	
+	public RedShi(RedShi redShi) {
+		super(redShi);
+	}
+	
+	@Override
+	public RedShi clone() throws CloneNotSupportedException {
+		return new RedShi(this);
+	}
+
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}

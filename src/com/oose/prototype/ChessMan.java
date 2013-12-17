@@ -48,4 +48,8 @@ public abstract class ChessMan extends Observable implements Cloneable {
 		this.setChanged();
 		this.notifyObservers(this);
 	}
+	@Override
+	public ChessMan clone() throws CloneNotSupportedException{
+		return null;
+	}
 } 

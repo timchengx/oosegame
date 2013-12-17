@@ -12,7 +12,14 @@ public class BlackCar extends ChineseChessMan{
 	public BlackCar(int x, int y, ChineseChessBoard board) {
 		super(x, y, ChessMan.BLACK, board);
 	}
+	public BlackCar(BlackCar bc) {
+		super(bc);
+	}
 	
+	@Override
+	public BlackCar clone() throws CloneNotSupportedException {
+		return new BlackCar(this);
+	}
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}

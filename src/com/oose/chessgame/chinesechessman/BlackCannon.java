@@ -13,6 +13,15 @@ public class BlackCannon extends ChineseChessMan {
 		super(x, y, ChessMan.BLACK, board);
 	}
 	
+	public BlackCannon(BlackCannon bc) {
+		super(bc);
+	}
+	
+	@Override
+	public BlackCannon clone() throws CloneNotSupportedException {
+		return new BlackCannon(this);
+	}
+	
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}

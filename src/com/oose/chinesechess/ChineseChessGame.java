@@ -45,7 +45,7 @@ public class ChineseChessGame extends ChessGame {
 	}
 
 	@Override
-	public boolean select(int x, int y) {
+	public void select(int x, int y) {
 		coord.convertToBoard(x, y);
 		
 		Log.d("timcheng",new String("select enter Who's turn "+status.whosTurn()));
@@ -63,7 +63,9 @@ public class ChineseChessGame extends ChessGame {
 			}
 		} else {
 			boolean moveResult = false;
-			board.copy();
+			try {
+				board.copy();
+			} catch (CloneNotSupportedException e) {}
 			if(board.hasChess(coord.getX(), coord.getY())) {
 				if(board.getChess(coord.getX(), coord.getY()) == selectedChess) //Log.d("timcheng","same chess.");
 					cleanSelected();
@@ -78,7 +80,6 @@ public class ChineseChessGame extends ChessGame {
 				board.savePreviousBoard();
 			}
 		}
-		return true;
 	}
 	
 	@Override
@@ -113,6 +114,11 @@ public class ChineseChessGame extends ChessGame {
 		}
 		cleanSelected();
 		return result;
+	}
+
+	@Override
+	public boolean fallback() {
+		return board.fallback();
 	}
 	
 }

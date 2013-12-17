@@ -13,6 +13,15 @@ public class RedElephant extends ChineseChessMan{
 		super(x, y, ChessMan.RED, board);
 	}
 	
+	public RedElephant(RedElephant re) {
+		super(re);
+	}
+	
+	@Override
+	public RedElephant clone() throws CloneNotSupportedException {
+		return new RedElephant(this);
+	}
+	
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}
