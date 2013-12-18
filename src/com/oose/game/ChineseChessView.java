@@ -24,10 +24,6 @@ public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callb
 	public ChineseChessView(Context context, Intent intent, ChineseChessGame ch) {
 		super(context);
 		r = getResources();
-
-		
-		int playerOneFallback = 0;
-		int playerTwoFallback = 0;
 		
 		//Log.d("timcheng", playerOne);
 		//Log.d("timcheng", playerTwo);

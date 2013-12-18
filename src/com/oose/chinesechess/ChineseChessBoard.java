@@ -11,6 +11,10 @@ import com.oose.prototype.ChessBoard;
 import com.oose.prototype.ChessMan;
 
 public class ChineseChessBoard extends ChessBoard {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2522051701579026903L;
 	public ChineseChessBoard() {
 		super(9, 10);
 		this.nowBoard = ChineseChessBoardFactory.makeNewChineseChessBoard(this);
@@ -74,15 +78,15 @@ public class ChineseChessBoard extends ChessBoard {
 		snapshot = null;
 	}
 	@Override
-	public boolean fallback() {
-		if(ppBoard != null) {
-			nowBoard = ppBoard;
-			pBoard = null;
-			ppBoard = null;
+	public void fallback() {
+		nowBoard = ppBoard;
+		pBoard = null;
+		ppBoard = null;
+	}
+	@Override
+	public boolean canFallback() {
+		if(ppBoard != null)
 			return true;
-		}
-		
-		
 		return false;
 	}
 }

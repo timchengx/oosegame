@@ -27,9 +27,9 @@ public class SerializableBitmap implements Serializable {
 	}
 
 	private void writeObject(ObjectOutputStream out) throws IOException {
-		final ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-		final byte[] imageByteArray = stream.toByteArray();
+		byte[] imageByteArray = stream.toByteArray();
 		out.writeInt(imageByteArray.length);
 		out.write(imageByteArray);
 	}
@@ -37,9 +37,9 @@ public class SerializableBitmap implements Serializable {
 	private void readObject(ObjectInputStream in) throws IOException,
 			ClassNotFoundException {
 
-		final int length = in.readInt();
-		final byte[] imageByteArray = new byte[length];
+		int size = in.readInt();
+		byte[] imageByteArray = new byte[size];
 		in.readFully(imageByteArray);
-		image = BitmapFactory.decodeByteArray(imageByteArray, 0, length);
+		this.image = BitmapFactory.decodeByteArray(imageByteArray, 0, size);
 	}
 }

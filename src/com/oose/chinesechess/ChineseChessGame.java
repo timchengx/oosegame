@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.oose.prototype.ChessGame;
 import com.oose.prototype.ChessMan;
+import com.oose.prototype.GameState;
 
 public class ChineseChessGame extends ChessGame {
 	//protected ChineseChessBoard board;
@@ -15,14 +16,10 @@ public class ChineseChessGame extends ChessGame {
 	public ChineseChessGame(String one, String two, Bitmap pOne, Bitmap pTwo,
 			int fallback) {
 		board = new ChineseChessBoard();
-		status = new ChineseChessGameState(one, two, pOne, pTwo, fallback);
+		status = new ChineseChessGameState(one, two, pOne, pTwo, fallback,0,0,GameState.playerOne);
 		coord = new ChineseChessCoordinate();
 		selectedChess = null;
 		isSelected = false;
-	}
-	
-	@Override
-	public void save() {
 	}
 	
 	private void cleanSelected() {
@@ -118,7 +115,20 @@ public class ChineseChessGame extends ChessGame {
 
 	@Override
 	public boolean fallback() {
-		return board.fallback();
+		if(board.canFallback())
+			if(status.canFallback()) {
+				board.fallback();
+				return true;
+			}
+		return false;
+	}
+
+	@Override
+	public int giveUp() {
+		if(status.whosTurn() == GameState.playerOne)
+			return GameState.playerTwo;
+		else
+			return GameState.playerOne;
 	}
 	
 }

@@ -16,8 +16,6 @@ public abstract class ChessMan extends Observable implements Cloneable, Serializ
 	protected int belongTo;
 	protected int currentX;
 	protected int currentY;
-	public Bitmap icon;
-	public Bitmap selected;
 	abstract public boolean move(int x, int y);
 	abstract public boolean eat(int x, int y);
 	public ChessMan(int x, int y, int belong, ChessBoard board) {
@@ -54,7 +52,5 @@ public abstract class ChessMan extends Observable implements Cloneable, Serializ
 		this.notifyObservers(this);
 	}
 	@Override
-	public ChessMan clone() throws CloneNotSupportedException{
-		return null;
-	}
+	abstract public ChessMan clone() throws CloneNotSupportedException;
 } 

@@ -10,14 +10,7 @@ public class SettingBundle {
 	private Bitmap playerTwoPicture;
 	private int timeValue;
 	private boolean timeLimit;
-	/*
-	public PictureData(String nOne, Bitmap pOne, String nTwo, Bitmap pTwo) {
-		this.playerOneName = nOne;
-		this.playerOnePicture = pOne;
-		this.playerTwoName = nTwo;
-		this.playerTwoPicture = pTwo;
-	}
-	*/
+
 	public SettingBundle() {
 		this.playerOneName = "PlayerOne";
 		this.playerTwoName = "PlayerTwo";
@@ -62,14 +55,4 @@ public class SettingBundle {
 	public boolean isTimeLimitOn() {
 		return timeLimit;
 	}
-//	public boolean hasPlayerOneImage() {
-//		if(this.playerOnePicture == null)
-//			return false;
-//		return true;
-//	}
-//	public boolean hasPlayerTwoImage() {
-//		if(this.playerTwoPicture == null)
-//			return false;
-//		return true;
-//	}
 }

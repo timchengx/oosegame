@@ -27,5 +27,7 @@
     <string name="pause">暫停</string>
     <string name="giveup">投降</string>
     <string name="moremenu">更多選項</string>
+    <string name="fallbackok">悔棋成功 剩餘次數: </string>
+    <string name="fallbackfail">悔棋失敗</string>
 
 </resources>

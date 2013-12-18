@@ -2,33 +2,10 @@ package com.oose.chinesechess;
 
 import com.oose.prototype.Coordinate;
 
-public class ChineseChessCoordinate extends Coordinate{
+public class ChineseChessCoordinate extends Coordinate {
 	private int resultX = -1;
 	private int resultY = -1;
 	public void convertToBoard(int x, int y) {
-//		if (x < 235) {
-//			if (x < 22) { //error
-//				resultX = -1;
-//			} else if (x > 231){
-//				resultX = 4;
-//			} else {
-//				resultX = (x - 22) / 42;
-//			}
-//		} else { //x: 235~468
-//			if (x > 446) {
-//				resultX = -1;
-//			} else if (x < 244){
-//				resultX = 9;
-//			} else {
-//				resultX = (x - 25) / 42;
-//			}
-//		}
-//		
-//		if (y < 22 || y > 399) { //error
-//			resultY = -1;
-//		} else {
-//			resultY = (y - 22) / 42;
-//		}
 		if (x <= 480) { //board size
 			resultX = (x - 6) / 52;
 			if(resultX == 9) {
@@ -36,15 +13,12 @@ public class ChineseChessCoordinate extends Coordinate{
 			}
 		}
 		
-		
 		if (y <= 532) { //board size
 			resultY = (y - 6) / 52;
 			if(resultY == 10) {
 				resultY = resultY - 1;
 			}
 		}
-
-
 	}
 	public int getX() {
 		return resultX;

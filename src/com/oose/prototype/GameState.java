@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import android.graphics.Bitmap;
 
-abstract public class GameState implements Serializable{
+abstract public class GameState implements Serializable {
 	/**
 	 * 
 	 */
@@ -13,6 +13,17 @@ abstract public class GameState implements Serializable{
 	public static final int playerTwo = 2;
 	private int whoMoving;
 	private String playerOneName;
+	public int getPlayerOneFallbackCount() {
+		return playerOneFallbackCount;
+	}
+
+	public int getPlayerTwoFallbackCount() {
+		return playerTwoFallbackCount;
+	}
+
+	public int getFallbackValue() {
+		return fallbackValue;
+	}
 	private String playerTwoName;
 	private SerializableBitmap playerOnePic;
 	private SerializableBitmap playerTwoPic;
@@ -21,7 +32,7 @@ abstract public class GameState implements Serializable{
 	private int fallbackValue;
 
 	public GameState(String pOne, String pTwo, Bitmap pOnePic, Bitmap pTwoPic,
-			int fallback) {
+			int fallback, int pOnefallback, int pTwofallback, int whoPlaying) {
 		this.playerOneName = pOne;
 		this.playerTwoName = pTwo;
 		this.playerOnePic = new SerializableBitmap(pOnePic);
@@ -30,11 +41,6 @@ abstract public class GameState implements Serializable{
 		this.playerTwoFallbackCount = 0;
 		this.fallbackValue = fallback;
 		this.whoMoving = GameState.playerOne;
-	}
-
-	public GameState(String pOne, String pTwo, Bitmap pOnePic, Bitmap pTwoPic,
-			int fallback, int pOnefallback, int pTwofallback, int whoPlaying) {
-		this(pOne, pTwo, pOnePic, pTwoPic, fallback);
 		this.playerOneFallbackCount = pOnefallback;
 		this.playerTwoFallbackCount = pTwofallback;
 		this.whoMoving = whoPlaying;
@@ -66,7 +72,7 @@ abstract public class GameState implements Serializable{
 		else
 			whoMoving = GameState.playerOne;
 	}
-	protected boolean canFallback() {
+	public boolean canFallback() {
 		switch(whoMoving) {
 		case GameState.playerOne:
 			if(playerOneFallbackCount < fallbackValue) {
@@ -76,12 +82,12 @@ abstract public class GameState implements Serializable{
 			break;
 		case GameState.playerTwo:
 			if(playerTwoFallbackCount < fallbackValue) {
-				playerOneFallbackCount++;
+				playerTwoFallbackCount++;
 				return true;
 			}
 			break;
 		default:
-			return false;
+			break;
 		}
 		return false;
 	}

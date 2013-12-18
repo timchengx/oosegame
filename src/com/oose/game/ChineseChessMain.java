@@ -1,8 +1,6 @@
 package com.oose.game;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import android.app.Activity;
@@ -10,6 +8,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -17,8 +16,10 @@ import android.widget.FrameLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.Toast;
 
 import com.oose.chinesechess.ChineseChessGame;
+import com.oose.prototype.GameState;
 
 
 
@@ -32,7 +33,7 @@ public class ChineseChessMain extends Activity implements OnClickListener{
 	RelativeLayout relative;
 	ChineseChessGame chineseChess;
 	int fallbackValue;
-	PopupMenu pmenu;
+	PopupMenu moreMenuButton;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,8 +73,30 @@ public class ChineseChessMain extends Activity implements OnClickListener{
 	    buttonMore.setLayoutParams(buttonMoreRule);
 	    buttonMore.setOnClickListener(this);
 	    
-	    pmenu = new PopupMenu(this, buttonMore);
-		pmenu.getMenuInflater().inflate(R.menu.game_more_menu, pmenu.getMenu());
+	    moreMenuButton = new PopupMenu(this, buttonMore);
+		moreMenuButton.getMenuInflater().inflate(R.menu.game_more_menu, moreMenuButton.getMenu());
+		
+		moreMenuButton
+				.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						switch(item.getItemId()) {
+						case R.id.menu_save:
+							saveGame();
+							break;
+						case R.id.menu_pause:
+							break;
+						case R.id.menu_giveup:
+							giveUP();
+							break;
+						default:
+							break;
+						}
+						return true;
+					}
+
+				});
 		
 		
 	    relative.addView(buttonFallback);
@@ -85,43 +108,71 @@ public class ChineseChessMain extends Activity implements OnClickListener{
 		
 		setContentView(frame);
 	}
+
+	public void fallBack() {
+		String toastText = getString(R.string.fallbackok);
+		if (chineseChess.fallback()) {
+			mainView.refreshScreen();
+			int count = chineseChess.getStatus().getFallbackValue();
+			switch (chineseChess.getStatus().whosTurn()) {
+			case GameState.playerOne:
+				count -= chineseChess.getStatus().getPlayerOneFallbackCount();
+				break;
+			case GameState.playerTwo:
+				count -= chineseChess.getStatus().getPlayerTwoFallbackCount();
+				break;
+			default:
+				break;
+			}
+			toastText += count;
+		} else
+			toastText = getString(R.string.fallbackfail);
+		Toast.makeText(getApplicationContext(), toastText, Toast.LENGTH_SHORT)
+				.show();
+	}
 	@Override
 	public void onClick(View view) {
 		if(view == buttonFallback) {
-//			Log.d("timcheng","let's go back!");
-//			if(chineseChess.fallback())
-//				mainView.refreshScreen();
-			FileOutputStream fos;
-			ObjectOutputStream os;
-
-			try {
-				fos  = openFileOutput("output", Context.MODE_PRIVATE);
-				os = new ObjectOutputStream(fos);
-				os.writeObject(chineseChess);
-				os.close();
-				
-			} catch (Exception e) {
-				Log.d("timchenc", e.toString());
-			}
-			
+			fallBack();
 		}
 		else if (view == buttonMore) {
-			//pmenu.show();
-			FileInputStream ios;
-			ObjectInputStream is;
-			try {
-			ios = openFileInput("output");
-			is = new ObjectInputStream(ios);
-			ChineseChessGame ch = (ChineseChessGame) is.readObject();
-			Log.d("timcheng", "freeze");
-			Log.d("timcheng",ch.getStatus().getPlayerOneName());
-			
-			is.close();
-			chineseChess = ch;
-			mainView.refreshScreen();
-			} catch(Exception e) {
-				Log.d("timchenc", e.toString());
-			}
+			moreMenuButton.show();
 		}
+	}
+	private void saveGame() {
+		FileOutputStream fos;
+		ObjectOutputStream os;
+
+		try {
+			fos  = openFileOutput("output", Context.MODE_PRIVATE);
+			os = new ObjectOutputStream(fos);
+			os.writeObject(chineseChess);
+			os.close();
+			Toast.makeText(getApplicationContext(), "Save Succeed!", Toast.LENGTH_SHORT)
+			.show();
+			
+		} catch (Exception e) {
+			Log.d("timchenc", e.toString());
+		}
+		
+//		FileInputStream ios;
+//		ObjectInputStream is;
+//		try {
+//		ios = openFileInput("output");
+//		is = new ObjectInputStream(ios);
+//		ChineseChessGame ch = (ChineseChessGame) is.readObject();
+//		Log.d("timcheng", "freeze");
+//		Log.d("timcheng",ch.getStatus().getPlayerOneName());
+//		
+//		is.close();
+//		chineseChess = ch;
+//		mainView.refreshScreen();
+//		} catch(Exception e) {
+//			Log.d("timchenc", e.toString());
+//		}
+	}
+	private void giveUP() {
+		Log.d("timcheng",chineseChess.giveUp()+""+"Win!");
+		finish();
 	}
 }

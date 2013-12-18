@@ -48,16 +48,11 @@ public abstract class ChessBoard implements Iterable<ChessMan>, Observer, Serial
 	private void setBoard(int x, int y, ChessMan c) {
 		nowBoard[x][y] = c;
 	}
-//	public int getBoardXSize() {
-//		return boardXSize;
-//	}
-//	public int getBoardYSize() {
-//		return boardYSize;
-//	}
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		ChessMan cm = (ChessMan) arg0;
 		this.setBoard(cm.getX(), cm.getY(), (ChessMan)arg1);
 	}
-	abstract public boolean fallback();
+	abstract public void fallback();
+	abstract public boolean canFallback();
 }
