@@ -2,8 +2,6 @@ package com.oose.prototype;
 
 import java.io.Serializable;
 import java.util.Iterator;
-import java.util.Observable;
-import java.util.Observer;
 
 import android.graphics.Bitmap;
 

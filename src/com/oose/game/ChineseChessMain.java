@@ -1,6 +1,8 @@
 package com.oose.game;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import android.app.Activity;
@@ -37,6 +39,24 @@ public class ChineseChessMain extends Activity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if(getIntent().getBooleanExtra("kerker", false)) {
+			FileInputStream ios;
+			ObjectInputStream is;
+			try {
+			ios = openFileInput("output");
+			is = new ObjectInputStream(ios);
+			ChineseChessGame ch = (ChineseChessGame) is.readObject();
+			Log.d("timcheng", "freeze");
+			Log.d("timcheng",ch.getStatus().getPlayerOneName());
+			
+			is.close();
+			chineseChess = ch;
+			//mainView.refreshScreen();
+			} catch(Exception e) {
+				Log.d("timchenc", e.toString());
+			}
+		}
+		else {
 		fallbackValue = ChessSetup.DEFAULTFALLBACKVALUE;
 		String playerOne = getIntent().getStringExtra(ChessSetup.PLAYER1NAME_STRING);
 		String playerTwo = getIntent().getStringExtra(ChessSetup.PLAYER2NAME_STRING);
@@ -44,6 +64,7 @@ public class ChineseChessMain extends Activity implements OnClickListener{
 		Bitmap playerTwoPic = getIntent().getParcelableExtra(ChessSetup.PLAYER2ICON_BITMAP);
 		chineseChess = new ChineseChessGame(playerOne, playerTwo, playerOnePic,
 				playerTwoPic, fallbackValue);
+		}
 		
 		mainView = new ChineseChessView(this, getIntent(), chineseChess);
 		
@@ -107,6 +128,7 @@ public class ChineseChessMain extends Activity implements OnClickListener{
 		frame.addView(relative);
 		
 		setContentView(frame);
+		//mainView.refreshScreen();
 	}
 
 	public void fallBack() {

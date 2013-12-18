@@ -52,6 +52,9 @@ public class ChessMainMenu extends Activity {
 		}
 		else {
 			//LoadGame
+			Intent intent = new Intent(this, ChineseChessMain.class);
+			intent.putExtra("kerker", true);
+			startActivity(intent);
 		}
 		onStop();
 	}

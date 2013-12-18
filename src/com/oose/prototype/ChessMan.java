@@ -1,11 +1,10 @@
 package com.oose.prototype;
 
 import java.io.Serializable;
-import java.util.Observable;
 
 import android.graphics.Bitmap;
 
-public abstract class ChessMan extends Observable implements Cloneable, Serializable {
+public abstract class ChessMan implements Cloneable, Serializable, Observable {
 	/**
 	 * 
 	 */
@@ -18,14 +17,27 @@ public abstract class ChessMan extends Observable implements Cloneable, Serializ
 	protected int currentY;
 	abstract public boolean move(int x, int y);
 	abstract public boolean eat(int x, int y);
+	private boolean isChanged;
 	public ChessMan(int x, int y, int belong, ChessBoard board) {
 		this.board = board;
 		this.currentX = x;
 		this.currentY = y;
 		this.belongTo = belong;
-		addObserver(board);
+		isChanged = false;
+		//addObserver((Observer)board);
 	}
-
+	public void setChanged() {
+		isChanged = true;
+	}
+	
+	@Override
+	public void notifyObservers(Object o) {
+		if(isChanged) {
+			Observer observer = board;
+			observer.update(this, o);
+		}
+		isChanged = false;
+	}
 	public ChessMan(ChessMan cm) {
 		this(cm.currentX, cm.currentY, cm.belongTo, cm.board);
 	}

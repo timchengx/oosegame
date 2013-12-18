@@ -89,4 +89,5 @@ public class ChineseChessBoard extends ChessBoard {
 			return true;
 		return false;
 	}
+
 }
