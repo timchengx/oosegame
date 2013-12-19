@@ -38,7 +38,7 @@ public class ChineseChessMain extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent intent = getIntent();
 		super.onCreate(savedInstanceState);
-		if (intent.getBooleanExtra("kerker", false)) {
+		if (intent.getBooleanExtra("load file", false)) {
 			FileInputStream ios;
 			ObjectInputStream is;
 			try {

@@ -78,7 +78,7 @@ public class ProfileSetup extends Activity {
 		imageFilter.setAction(Intent.ACTION_GET_CONTENT);
 		Intent intent = Intent.createChooser(imageFilter, getResources().getString(R.string.choosepicture));
 		requestID = view.getId();
-		startActivityForResult(intent, ChessSetup.CAMERAREQUESTCODE);
+		startActivityForResult(intent, ChessSetup.FROMFILEREQUESTCODE);
 	}
 	
 	/* if user push take picture button, this method will handle it */
@@ -111,6 +111,7 @@ public class ProfileSetup extends Activity {
 		}
 		if(pictureImage != null) {
 			pictureImage = Bitmap.createScaledBitmap(pictureImage, 100, 100, false);
+			
 			if(requestID == R.id.ButtonPlayer1TakePicture || 
 					requestID == R.id.ButtonPlayer1SetPictureFromFile)
 				playerOneImageView.setImageBitmap(pictureImage);

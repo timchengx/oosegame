@@ -20,8 +20,6 @@
     <string name="takepicture">立即拍攝</string>
     <string name="choosepicture">選擇照片</string>
     <string name="chinesechessgame">ChineseChessGame</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="fallback">悔棋</string>
     <string name="save">存檔</string>
     <string name="pause">暫停</string>
