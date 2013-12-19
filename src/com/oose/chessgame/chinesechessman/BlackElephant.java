@@ -9,6 +9,8 @@ import com.oose.prototype.ChessMan;
 
 public class BlackElephant extends ChineseChessMan{
 
+	private static final long serialVersionUID = 587763541630849072L;
+
 	public BlackElephant(int x, int y, ChineseChessBoard board) {
 		super(x, y, ChessMan.BLACK, board);
 	}
@@ -20,12 +22,12 @@ public class BlackElephant extends ChineseChessMan{
 	public BlackElephant clone() throws CloneNotSupportedException {
 		return new BlackElephant(this);
 	}
-	
+	@Override
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}
 
-	
+	@Override
 	public Bitmap getSelectedIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
 	}

@@ -1,10 +1,6 @@
 package com.oose.prototype;
 
+/* Observer/Observable Design Pattern */
 interface Observer {
-
-	/**
-	 * @param args
-	 */
-	public void update(Observable o, Object p);
-
+	public void update(Observable from, Object carry);
 }

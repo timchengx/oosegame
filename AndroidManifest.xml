@@ -31,7 +31,7 @@
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
-            android:name="com.oose.game.PictureSetup"
+            android:name="com.oose.game.ProfileSetup"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/picturesetup"
             android:theme="@style/FullscreenTheme" >

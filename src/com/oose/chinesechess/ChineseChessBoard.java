@@ -11,12 +11,13 @@ import com.oose.prototype.ChessBoard;
 import com.oose.prototype.ChessMan;
 
 public class ChineseChessBoard extends ChessBoard {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -2522051701579026903L;
+
 	public ChineseChessBoard() {
-		super(9, 10);
+		super(9, 10); // ChineseChessBoard's size
+
+		/* call factory to create a new ChineseChessBoard */
 		this.nowBoard = ChineseChessBoardFactory.makeNewChineseChessBoard(this);
 	}
 
@@ -25,6 +26,7 @@ public class ChineseChessBoard extends ChessBoard {
 		return new ChessIterator();
 	}
 
+	/* implements iterator */
 	private class ChessIterator implements Iterator<ChessMan> {
 		private final int totalX = 9;
 		private final int totalY = 10;
@@ -52,42 +54,27 @@ public class ChineseChessBoard extends ChessBoard {
 		}
 
 		@Override
-		public void remove() {
-		}
+		public void remove() {}
 
 	}
 
+	@Override
 	public Bitmap getBackGround() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}
+
+	@Override
 	public void copy() throws CloneNotSupportedException {
 		Log.d("timcheng", "start copy.");
+		/* create a new ChessBoard state, copy all chessman to this state */
 		snapshot = new ChineseChessMan[boardXSize][boardYSize];
-		for(int i = 0; i < boardXSize; i++)
-			for(int j = 0; j < boardYSize; j++) {
-				if(nowBoard[i][j] == null) continue;
-				//Log.d("timcheng", nowBoard[i][j].getClass().getName());
+		for (int i = 0; i < boardXSize; i++) {
+			for (int j = 0; j < boardYSize; j++) {
+				if (nowBoard[i][j] == null)
+					continue;
 				snapshot[i][j] = nowBoard[i][j].clone();
 			}
-	}
-	@Override
-	public void savePreviousBoard() {
-		if(pBoard != null)
-			ppBoard = pBoard;
-		pBoard = snapshot;
-		snapshot = null;
-	}
-	@Override
-	public void fallback() {
-		nowBoard = ppBoard;
-		pBoard = null;
-		ppBoard = null;
-	}
-	@Override
-	public boolean canFallback() {
-		if(ppBoard != null)
-			return true;
-		return false;
+		}
 	}
 
 }

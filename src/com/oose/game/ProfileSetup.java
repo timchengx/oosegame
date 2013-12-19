@@ -14,57 +14,64 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- * 
- * @see SystemUiHider
- */
-public class PictureSetup extends Activity {
-	
-	private int requestID;
-	
+/* user can set and take/choose picture from this activity */
+public class ProfileSetup extends Activity {
+
+	private int requestID;	// to know which button has been pushed
+
+	/* player one and two - input and picture view */
 	ImageView playerOneImageView;
 	ImageView playerTwoImageView;
-	EditText playerOneNameView;
-	EditText playerTwoNameView;
-	
-	
+	EditText playerOneNameInput;
+	EditText playerTwoNameInput;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		/* setup activity layout */
 		setContentView(R.layout.picture_setup);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		/* get players name and image view - for input and show picture */
 		playerOneImageView = (ImageView) findViewById(R.id.imagePlayer1);
 		playerTwoImageView = (ImageView) findViewById(R.id.imagePlayer2);
-		playerOneNameView = (EditText) findViewById(R.id.editTextPlayer1);
-		playerTwoNameView = (EditText) findViewById(R.id.editTextPlayer2);
+		playerOneNameInput = (EditText) findViewById(R.id.editTextPlayer1);
+		playerTwoNameInput = (EditText) findViewById(R.id.editTextPlayer2);
+		
 		playerOneImageView.setDrawingCacheEnabled(true);
 		playerTwoImageView.setDrawingCacheEnabled(true);
+		
+		/* if name and picture has been set before, load previous setting */
 		Intent pictureDataIntent = getIntent();
-		if(pictureDataIntent.getBooleanExtra(ChessSetup.INTENT_HAS_ICON_BOOLEAN, false)) {
-			playerOneNameView.setText(pictureDataIntent.getStringExtra(ChessSetup.PLAYER1NAME_STRING));
-			playerTwoNameView.setText(pictureDataIntent.getStringExtra(ChessSetup.PLAYER2NAME_STRING));
-			playerOneImageView.setImageBitmap((Bitmap)pictureDataIntent.getParcelableExtra(ChessSetup.PLAYER1ICON_BITMAP));
-			playerTwoImageView.setImageBitmap((Bitmap)pictureDataIntent.getParcelableExtra(ChessSetup.PLAYER2ICON_BITMAP));
+		if (pictureDataIntent.getBooleanExtra(
+				ChessSetup.INTENT_HAS_ICON_BOOLEAN, false)) {
+			playerOneNameInput.setText(pictureDataIntent
+					.getStringExtra(ChessSetup.PLAYER1NAME_STRING));
+			playerTwoNameInput.setText(pictureDataIntent
+					.getStringExtra(ChessSetup.PLAYER2NAME_STRING));
+			playerOneImageView.setImageBitmap((Bitmap) pictureDataIntent
+					.getParcelableExtra(ChessSetup.PLAYER1ICON_BITMAP));
+			playerTwoImageView.setImageBitmap((Bitmap) pictureDataIntent
+					.getParcelableExtra(ChessSetup.PLAYER2ICON_BITMAP));
 		}
 	}
+	
 	public boolean onOptionsItemSelected(MenuItem item) {
-		//switch(item.getItemId()) {
-		//case android.R.id.home:
 		Intent intent = new Intent();
-		//Bundle bundle = new Bundle();
-		//bundle.putSerializable(pSaveIntentID, pictureSave);
-		//intent.putExtra(bundle);
-		intent.putExtra(ChessSetup.PLAYER1NAME_STRING, playerOneNameView.getText().toString());
-		intent.putExtra(ChessSetup.PLAYER2NAME_STRING, playerTwoNameView.getText().toString());
+		
+		/* save users name and picture */
+		intent.putExtra(ChessSetup.PLAYER1NAME_STRING, playerOneNameInput.getText().toString());
+		intent.putExtra(ChessSetup.PLAYER2NAME_STRING, playerTwoNameInput.getText().toString());
 		intent.putExtra(ChessSetup.PLAYER1ICON_BITMAP, playerOneImageView.getDrawingCache());
 		intent.putExtra(ChessSetup.PLAYER2ICON_BITMAP, playerTwoImageView.getDrawingCache());
+		
+		/* back to previous activity */
 		setResult(RESULT_OK, intent);
-		this.finish();
-		//}
+		finish();
 		return true;
 	}
+	
+	/*  */
 	public void pickPicture(View view) {
 		Intent imageFilter = new Intent();
 		imageFilter.setType("image/*");
@@ -73,11 +80,16 @@ public class PictureSetup extends Activity {
 		requestID = view.getId();
 		startActivityForResult(intent, ChessSetup.CAMERAREQUESTCODE);
 	}
+	
+	/* if user push take picture button, this method will handle it */
 	public void takePicture(View view) {
+		/* call camera to take picture */
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		requestID = view.getId();
 	    startActivityForResult(intent, ChessSetup.CAMERAREQUESTCODE);
 	}
+	
+	/* this method will be called after user finish take or select picture */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Bitmap pictureImage = null;
 		switch(requestCode) {
@@ -85,15 +97,13 @@ public class PictureSetup extends Activity {
 			Bundle pictureData = data.getExtras();
 			if(pictureData != null)
 				pictureImage = (Bitmap) pictureData.get("data");
-			
+			break;
 		case ChessSetup.FROMFILEREQUESTCODE:
 			Uri pictureUri = data.getData();
 			try {
 				pictureImage = BitmapFactory.decodeStream(getContentResolver().openInputStream(pictureUri));
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				//show a android error...
+				// if error, do nothing...
 			}
 			break;
 		default:

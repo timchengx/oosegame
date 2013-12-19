@@ -9,6 +9,7 @@ import com.oose.prototype.ChessMan;
 
 public class BlackCar extends ChineseChessMan{
 
+	private static final long serialVersionUID = 2267427798908938020L;
 	public BlackCar(int x, int y, ChineseChessBoard board) {
 		super(x, y, ChessMan.BLACK, board);
 	}

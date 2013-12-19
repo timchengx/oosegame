@@ -3,8 +3,10 @@ package com.oose.chinesechess;
 import com.oose.prototype.Coordinate;
 
 public class ChineseChessCoordinate extends Coordinate {
-	private int resultX = -1;
-	private int resultY = -1;
+	
+	private static final long serialVersionUID = 4461799999953227840L;
+	
+	@Override
 	public void convertToBoard(int x, int y) {
 		if (x <= 480) { //board size
 			resultX = (x - 6) / 52;
@@ -20,12 +22,8 @@ public class ChineseChessCoordinate extends Coordinate {
 			}
 		}
 	}
-	public int getX() {
-		return resultX;
-	}
-	public int getY() {
-		return resultY;
-	}
+	
+	@Override
 	public void convertToScreen(int x, int y) {
 		switch(x) {
 		case 0:

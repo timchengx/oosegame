@@ -2,31 +2,23 @@ package com.oose.game;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.oose.chinesechess.ChineseChessGame;
-import com.oose.prototype.ChessGame;
 
 public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callback{//, Runnable {
 	SurfaceHolder holder;
-	Resources r;
 	ChineseChessGame chineseChess;
 	Paint namePaint;
 
 	public ChineseChessView(Context context, Intent intent, ChineseChessGame ch) {
 		super(context);
-		r = getResources();
 		
-		//Log.d("timcheng", playerOne);
-		//Log.d("timcheng", playerTwo);
 		namePaint = new Paint();
 		namePaint.setColor(Color.WHITE);
 		namePaint.setTextSize(18);

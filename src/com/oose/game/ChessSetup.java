@@ -22,6 +22,8 @@ public class ChessSetup extends Activity {
 	public final static int CAMERAREQUESTCODE = 2100;
 	public final static int FROMFILEREQUESTCODE = 2200;
 	public final static int DEFAULTIMELIMIT = 30;
+	public final static int DEFAULTTIMELIMIT_MAX = 60;
+	public final static int DEFAULTTIMELIMIT_MIN = 30;
 	public final static boolean DEFAULTTIMELIMITSWITCH = true;
 	public final static int DEFAULTFALLBACKVALUE = 3;
 	
@@ -47,7 +49,7 @@ public class ChessSetup extends Activity {
 		return true;
 	}
 	public void pictureSetup(View view) {
-		Intent intent = new Intent(this, PictureSetup.class);
+		Intent intent = new Intent(this, ProfileSetup.class);
 //		if(pictureSave == null)
 //			intent.putExtra(KEYINDEX.INTENT_HAS_ICON_BOOLEAN, false);
 //		else {
