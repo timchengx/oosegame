@@ -24,12 +24,12 @@ public class BlackGeneral extends DarkChessMan {
 	public BlackGeneral clone() throws CloneNotSupportedException {
 		return new BlackGeneral(this);
 	}
-	
+	@Override
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}
 
-	
+	@Override
 	public Bitmap getSelectedIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
 	}

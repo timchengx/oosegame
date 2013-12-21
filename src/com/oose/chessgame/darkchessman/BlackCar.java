@@ -21,19 +21,22 @@ public class BlackCar extends DarkChessMan{
 	public BlackCar clone() throws CloneNotSupportedException {
 		return new BlackCar(this);
 	}
+	@Override
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}
 
-	
+	@Override
 	public Bitmap getSelectedIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
 	}
+	@Override
 	public boolean move(int x, int y) {
 		inBoardMoveChess(x, y);
 		return true;
 
 	}
+	@Override
 	public boolean eat(int x, int y) {
 		return move(x, y);
 	}

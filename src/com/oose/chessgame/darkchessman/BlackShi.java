@@ -3,6 +3,8 @@ import android.graphics.Bitmap;
 
 
 
+
+
 import com.oose.darkchess.DarkChessBoard;
 import com.oose.darkchess.DarkChessMan;
 import com.oose.factory.ChineseChessPictureList;
@@ -22,12 +24,12 @@ public class BlackShi extends DarkChessMan{
 	public BlackShi clone() throws CloneNotSupportedException {
 		return new BlackShi(this);
 	}
-	
+	@Override
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}
 
-	
+	@Override
 	public Bitmap getSelectedIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
 	}

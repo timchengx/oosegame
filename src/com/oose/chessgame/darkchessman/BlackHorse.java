@@ -2,6 +2,8 @@ package com.oose.chessgame.darkchessman;
 import android.graphics.Bitmap;
 
 
+
+
 import com.oose.darkchess.DarkChessBoard;
 import com.oose.darkchess.DarkChessMan;
 import com.oose.factory.ChineseChessPictureList;
@@ -22,12 +24,12 @@ public class BlackHorse extends DarkChessMan{
 	public BlackHorse clone() throws CloneNotSupportedException {
 		return new BlackHorse(this);
 	}
-	
+	@Override
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}
 
-	
+	@Override
 	public Bitmap getSelectedIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
 	}

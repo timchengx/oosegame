@@ -20,11 +20,11 @@ public class RedShi extends DarkChessMan{
 	public RedShi clone() throws CloneNotSupportedException {
 		return new RedShi(this);
 	}
-
+	@Override
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}
-
+	@Override
 	public Bitmap getSelectedIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
 	}
