@@ -28,5 +28,6 @@
     <string name="fallbackok">悔棋成功 剩餘次數: </string>
     <string name="fallbackfail">悔棋失敗</string>
     <string name="saveok">存檔成功</string>
+    <string name="darkchessgame">DarkChessGame</string>
 
 </resources>

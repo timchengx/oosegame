@@ -14,9 +14,8 @@ import com.oose.chessgame.darkchessman.RedGeneral;
 import com.oose.chessgame.darkchessman.RedHorse;
 import com.oose.chessgame.darkchessman.RedShi;
 import com.oose.chessgame.darkchessman.RedSoldier;
-import com.oose.darkchess.DarkChessMan;
 import com.oose.darkchess.DarkChessBoard;
-import com.oose.prototype.ChessMan;
+import com.oose.darkchess.DarkChessMan;
 
 /* a ChineseChessBoard factory, create a brand new ChineseChessBoard */
 public class DarkChessBoardFactory {

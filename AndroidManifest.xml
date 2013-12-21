@@ -11,10 +11,11 @@
         android:targetSdkVersion="18" />
 
     <application
+        android:name="com.oose.game.OOSEGame"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" android:name="OOSEGame">
+        android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
         <activity
             android:name="com.oose.game.StartMenu"
             android:label="@string/app_name" >
@@ -27,31 +28,43 @@
         <activity
             android:name="com.oose.game.ChessMainMenu"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:label="@string/chess"
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
             android:name="com.oose.game.ProfileSetup"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:label="@string/picturesetup"
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
             android:name="com.oose.game.TimeSetup"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:label="@string/timesetup"
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
             android:name="com.oose.game.ChessSetup"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:label="@string/chessconditionsetup"
             android:theme="@style/FullscreenTheme" >
         </activity>
         <activity
             android:name="com.oose.game.ChineseChessMain"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:label="@string/chinesechessgame"
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="com.oose.game.DarkChessMain"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:label="@string/darkchessgame"
             android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
         </activity>
     </application>

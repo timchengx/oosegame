@@ -40,11 +40,11 @@ public class DarkChessGame extends ChessGame{
 			if (b == null)
 				continue;
 			coord.convertToScreen(b.getX(), b.getY());
-			if (b == selectedChess)
-				c.drawBitmap(b.getSelectedIcon(), coord.getX(), coord.getY(),
-						null);
-			else
-				c.drawBitmap(b.getIcon(), coord.getX(), coord.getY(), null);
+//			if (b == selectedChess)
+//				c.drawBitmap(b.getSelectedIcon(), coord.getX(), coord.getY(),
+//						null);
+//			else
+//				c.drawBitmap(b.getIcon(), coord.getX(), coord.getY(), null);
 		}
 	}
 
