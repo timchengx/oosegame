@@ -4,9 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.Log;
 
-import com.oose.chinesechess.ChineseChessBoard;
-import com.oose.chinesechess.ChineseChessCoordinate;
-import com.oose.chinesechess.ChineseChessGameState;
+import com.oose.darkchess.DarkChessBoard;
+import com.oose.darkchess.DarkChessCoordinate;
+import com.oose.darkchess.DarkChessGameState;
 import com.oose.prototype.ChessGame;
 import com.oose.prototype.ChessMan;
 
@@ -19,10 +19,10 @@ public class DarkChessGame extends ChessGame{
 
 	public DarkChessGame(String one, String two, Bitmap pOne, Bitmap pTwo,
 			int fallback, int timeLimit) {
-		board = new ChineseChessBoard();
-		status = new ChineseChessGameState(one, two, pOne, pTwo, fallback,
+		board = new DarkChessBoard();
+		status = new DarkChessGameState(one, two, pOne, pTwo, fallback,
 				timeLimit);
-		coord = new ChineseChessCoordinate();
+		coord = new DarkChessCoordinate();
 		selectedChess = null;
 		isSelected = false;
 	}

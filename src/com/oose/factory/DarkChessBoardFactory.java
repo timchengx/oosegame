@@ -16,10 +16,11 @@ import com.oose.chessgame.darkchessman.RedShi;
 import com.oose.chessgame.darkchessman.RedSoldier;
 import com.oose.darkchess.DarkChessMan;
 import com.oose.darkchess.DarkChessBoard;
+import com.oose.prototype.ChessMan;
 
 /* a ChineseChessBoard factory, create a brand new ChineseChessBoard */
 public class DarkChessBoardFactory {
-	public static DarkChessMan[][] makeNewChineseChessBoard(
+	public static DarkChessMan[][] makeNewDarkChessBoard(
 			DarkChessBoard darkChessBoard) {
 		DarkChessMan[][] dark = new DarkChessMan[9][10];
 
@@ -71,4 +72,5 @@ public class DarkChessBoardFactory {
 
 		return dark;
 	}
+
 }

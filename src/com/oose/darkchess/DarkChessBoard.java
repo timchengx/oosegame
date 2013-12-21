@@ -5,8 +5,7 @@ import java.util.Iterator;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.oose.chinesechess.ChineseChessMan;
-import com.oose.chinesechess.ChineseChessBoard.ChessIterator;
+
 import com.oose.factory.ChineseChessPictureList;
 import com.oose.factory.DarkChessBoardFactory;
 import com.oose.prototype.ChessBoard;
@@ -20,7 +19,7 @@ public class DarkChessBoard extends ChessBoard{
 		super(9, 10); // ChineseChessBoard's size
 
 		/* call factory to create a new ChineseChessBoard */
-		this.nowBoard = DarkChessBoardFactory.makeNewChineseChessBoard(this);
+		this.nowBoard = DarkChessBoardFactory.makeNewDarkChessBoard(this);
 	}
 
 	@Override
@@ -69,7 +68,7 @@ public class DarkChessBoard extends ChessBoard{
 	public void copy() throws CloneNotSupportedException {
 		Log.d("timcheng", "start copy.");
 		/* create a new ChessBoard state, copy all chessman to this state */
-		snapshot = new ChineseChessMan[boardXSize][boardYSize];
+		snapshot = new DarkChessMan[boardXSize][boardYSize];
 		for (int i = 0; i < boardXSize; i++) {
 			for (int j = 0; j < boardYSize; j++) {
 				if (nowBoard[i][j] == null)
