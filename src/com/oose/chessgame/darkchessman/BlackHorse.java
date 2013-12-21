@@ -1,27 +1,26 @@
-package com.oose.chessgame.chinesechessman;
-
+package com.oose.chessgame.darkchessman;
 import android.graphics.Bitmap;
 
-import com.oose.chinesechess.ChineseChessBoard;
-import com.oose.chinesechess.ChineseChessMan;
+
+import com.oose.darkchess.DarkChessBoard;
+import com.oose.darkchess.DarkChessMan;
 import com.oose.factory.ChineseChessPictureList;
 import com.oose.prototype.ChessMan;
 
-public class BlackGeneral extends ChineseChessMan {
+public class BlackHorse extends DarkChessMan{
+	private static final long serialVersionUID = -1409206149650707436L;
 
-	private static final long serialVersionUID = -125460878316517268L;
-	public BlackGeneral(int x, int y, ChineseChessBoard board) {
+	public BlackHorse(int x, int y, DarkChessBoard board) {
 		super(x, y, ChessMan.BLACK, board);
 	}
-
 	
-	public BlackGeneral(BlackGeneral bg) {
-		super(bg);
+	public BlackHorse(BlackHorse bh) {
+		super(bh);
 	}
 	
 	@Override
-	public BlackGeneral clone() throws CloneNotSupportedException {
-		return new BlackGeneral(this);
+	public BlackHorse clone() throws CloneNotSupportedException {
+		return new BlackHorse(this);
 	}
 	
 	public Bitmap getIcon() {
@@ -36,10 +35,12 @@ public class BlackGeneral extends ChineseChessMan {
 	public boolean move(int x, int y) {
 		inBoardMoveChess(x, y);
 		return true;
+
 	}
+
 	@Override
 	public boolean eat(int x, int y) {
-		return move(x,y);
+		return move(x, y);
 	}
 
 }

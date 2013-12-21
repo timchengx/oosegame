@@ -1,16 +1,17 @@
-package com.oose.chessgame.chinesechessman;
+package com.oose.chessgame.darkchessman;
+
 
 import android.graphics.Bitmap;
 
-import com.oose.chinesechess.ChineseChessBoard;
-import com.oose.chinesechess.ChineseChessMan;
+import com.oose.darkchess.DarkChessBoard;
+import com.oose.darkchess.DarkChessMan;
 import com.oose.factory.ChineseChessPictureList;
 import com.oose.prototype.ChessMan;
 
-public class BlackGeneral extends ChineseChessMan {
+public class BlackGeneral extends DarkChessMan {
 
 	private static final long serialVersionUID = -125460878316517268L;
-	public BlackGeneral(int x, int y, ChineseChessBoard board) {
+	public BlackGeneral(int x, int y, DarkChessBoard board) {
 		super(x, y, ChessMan.BLACK, board);
 	}
 

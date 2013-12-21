@@ -1,34 +1,33 @@
-package com.oose.chessgame.chinesechessman;
+package com.oose.chessgame.darkchessman;
 
 import android.graphics.Bitmap;
 
-import com.oose.chinesechess.ChineseChessBoard;
-import com.oose.chinesechess.ChineseChessMan;
+import com.oose.darkchess.DarkChessBoard;
+import com.oose.darkchess.DarkChessMan;
 import com.oose.factory.ChineseChessPictureList;
 import com.oose.prototype.ChessMan;
 
-public class BlackGeneral extends ChineseChessMan {
+public class BlackElephant extends DarkChessMan{
 
-	private static final long serialVersionUID = -125460878316517268L;
-	public BlackGeneral(int x, int y, ChineseChessBoard board) {
+	private static final long serialVersionUID = 587763541630849072L;
+
+	public BlackElephant(int x, int y, DarkChessBoard board) {
 		super(x, y, ChessMan.BLACK, board);
 	}
-
-	
-	public BlackGeneral(BlackGeneral bg) {
-		super(bg);
+	public BlackElephant(BlackElephant be) {
+		super(be);
 	}
 	
 	@Override
-	public BlackGeneral clone() throws CloneNotSupportedException {
-		return new BlackGeneral(this);
+	public BlackElephant clone() throws CloneNotSupportedException {
+		return new BlackElephant(this);
 	}
-	
+	@Override
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}
 
-	
+	@Override
 	public Bitmap getSelectedIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
 	}
@@ -36,10 +35,12 @@ public class BlackGeneral extends ChineseChessMan {
 	public boolean move(int x, int y) {
 		inBoardMoveChess(x, y);
 		return true;
+
 	}
+
 	@Override
 	public boolean eat(int x, int y) {
-		return move(x,y);
+		return move(x, y);
 	}
 
 }
