@@ -67,20 +67,21 @@ public class ChessSetup extends Activity {
 		startActivityForResult(intent, TIMERESULTCODE);
 	}
 	public void startGame(View view) {
-		Intent intent;
-		if(currentChess == ChessMainMenu.CHINESECHESS) {
-			intent = new Intent(this, ChineseChessMain.class);
-			intent.putExtra(PLAYER1NAME_STRING, setup.getPlayerOneName());
-			intent.putExtra(PLAYER2NAME_STRING, setup.getPlayerTwoName());
-			intent.putExtra(PLAYER1ICON_BITMAP, setup.getPlayerOnePicture());
-			intent.putExtra(PLAYER2ICON_BITMAP, setup.getPlayerTwoPicture());
-			intent.putExtra(TIMELIMIT_INT, setup.getTimeLimitValue());
-			intent.putExtra(LIMITSWITCH_BOOLEAN, setup.isTimeLimitOn());
-			startActivity(intent);
+		Intent intent = new Intent();
+		intent.putExtra(PLAYER1NAME_STRING, setup.getPlayerOneName());
+		intent.putExtra(PLAYER2NAME_STRING, setup.getPlayerTwoName());
+		intent.putExtra(PLAYER1ICON_BITMAP, setup.getPlayerOnePicture());
+		intent.putExtra(PLAYER2ICON_BITMAP, setup.getPlayerTwoPicture());
+		intent.putExtra(TIMELIMIT_INT, setup.getTimeLimitValue());
+		intent.putExtra(LIMITSWITCH_BOOLEAN, setup.isTimeLimitOn());
+		if(currentChess == ChessMainMenu.CHINESECHESS)
+			intent.setClass(this, ChineseChessMain.class);
+		else	// start dark chess
+			intent.setClass(this, DarkChessMain.class);
 		
+		startActivity(intent);
 		finish();
-		onStop();}
-		else; //KEYINDEX.DARKCHESS
+		onStop();
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
