@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 
 
 
+
+
 import com.oose.darkchess.DarkChessBoard;
 import com.oose.darkchess.DarkChessMan;
 import com.oose.factory.DarkChessPictureList;
@@ -13,7 +15,7 @@ public class BlackHorse extends DarkChessMan{
 	private static final long serialVersionUID = -1409206149650707436L;
 
 	public BlackHorse(int x, int y, DarkChessBoard board) {
-		super(x, y, ChessMan.BLACK, board);
+		super(x, y, ChessMan.BLACK, board, 3);
 	}
 	
 	public BlackHorse(BlackHorse bh) {
@@ -26,23 +28,18 @@ public class BlackHorse extends DarkChessMan{
 	}
 	@Override
 	public Bitmap getIcon() {
-		return DarkChessPictureList.getIcon(this.getClass().getName());
-	}
-
+	
+		if (this.visible)
+			return DarkChessPictureList.getIcon(this.getClass().getName());
+		
+		else
+			return DarkChessPictureList.getIcon("com.oose.chessgame.darkchessman.UnFlip");
+		}
 	@Override
 	public Bitmap getSelectedIcon() {
+		if (this.visible)
 		return DarkChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
+		else
+			return DarkChessPictureList.getIcon("com.oose.chessgame.darkchessman.UnFlip" + "SELECTED");
 	}
-	@Override
-	public boolean move(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
-
-	}
-
-	@Override
-	public boolean eat(int x, int y) {
-		return move(x, y);
-	}
-
 }

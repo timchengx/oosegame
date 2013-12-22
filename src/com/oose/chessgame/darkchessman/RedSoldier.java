@@ -5,6 +5,9 @@ import android.graphics.Bitmap;
 
 
 
+
+import android.util.Log;
+
 import com.oose.darkchess.DarkChessBoard;
 import com.oose.darkchess.DarkChessMan;
 import com.oose.factory.DarkChessPictureList;
@@ -13,50 +16,44 @@ public class RedSoldier extends DarkChessMan {
 	private static final long serialVersionUID = 1042800279641311800L;
 
 	public RedSoldier(int x, int y, DarkChessBoard board) {
-		super(x, y, ChessMan.RED, board);
+		super(x, y, ChessMan.RED, board, 1);
 	}
 	public RedSoldier(RedSoldier rs) {
 		super(rs);
 	}
 	@Override
 	public Bitmap getIcon() {
-		return DarkChessPictureList.getIcon(this.getClass().getName());
-	}
+	
+		if (this.visible)
+			return DarkChessPictureList.getIcon(this.getClass().getName());
+		
+		else
+			return DarkChessPictureList.getIcon("com.oose.chessgame.darkchessman.UnFlip");
+		}
 	@Override
 	public Bitmap getSelectedIcon() {
+		if (this.visible)
 		return DarkChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
+		else
+			return DarkChessPictureList.getIcon("com.oose.chessgame.darkchessman.UnFlip" + "SELECTED");
 	}
-	@Override
-	public boolean move(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
-//		if(currentX == x && currentX >= 5) {
-//			if(Math.abs(currentY-y) == 1 ) { 
-//				return true;
-//			}
-//		}
-//		else if (currentY == y){  
-//			if(currentX < x) {
-//				if((currentX + 1) == x) {
-//					return true;	
-//				}
-//			}
-//		}
-//		return false;
-	}
+	
 	@Override
 	public RedSoldier clone() throws CloneNotSupportedException {
 		return new RedSoldier(this);
 	}
 
+	
 	@Override
 	public boolean eat(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
-//		if(moveValid(x, y) == true){
-//			return true;			
-//		}else{
-//			return false;
-//		}
+		if (moveValid(x, y)&& board.getChess(x, y).isVisible()) {
+			if (this.getLevel() >= board.getChess(x, y).getLevel()
+					|| board.getChess(x, y).getLevel() == 7){
+				inBoardMoveChess(x, y);
+				return true;
+				}
+		}
+		return false;
 	}
+	
 }

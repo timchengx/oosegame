@@ -12,131 +12,79 @@ public class BlackCannon extends DarkChessMan {
 	private static final long serialVersionUID = -3780197486852603943L;
 
 	public BlackCannon(int x, int y, DarkChessBoard board) {
-		super(x, y, ChessMan.BLACK, board);
+		super(x, y, ChessMan.BLACK, board, 2);
 	}
+
 	public BlackCannon(BlackCannon bc) {
 		super(bc);
 	}
-	
+
 	@Override
 	public BlackCannon clone() throws CloneNotSupportedException {
 		return new BlackCannon(this);
 	}
-	@Override
-	public Bitmap getIcon() {
-		return DarkChessPictureList.getIcon(this.getClass().getName());
-	}
 
 	@Override
-	public Bitmap getSelectedIcon() {
-		return DarkChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
-	}
+	public Bitmap getIcon() {
+	
+		if (this.visible)
+			return DarkChessPictureList.getIcon(this.getClass().getName());
+		
+		else
+			return DarkChessPictureList.getIcon("com.oose.chessgame.darkchessman.UnFlip");
+		}
 	@Override
-	public boolean move(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
-//		if (currentX == x) {
-//			if (currentY < y) {
-//				for (int nowY = currentY + 1; nowY < y; nowY++) {
-//					if (board.hasChess(x, nowY)) {
-//						return false;
-//					}
-//				}
-//			} else {
-//				for (int nowY = currentY - 1; nowY > y; nowY--) {
-//					if (nowY >= board.getBoardYSize())
-//						continue;
-//					// this != getChess, boundry check
-//					if (board.hasChess(x, nowY)) {
-//						return false;
-//					}
-//				}
-//			}
-//			return true;
-//		} else if (currentY == y) {
-//			if (currentX < x) {
-//				for (int nowX = currentX + 1; nowX < x; nowX++) {
-//					if (board.hasChess(nowX, y)) {
-//						return false;
-//					}
-//				}
-//			} else {
-//				for (int nowX = currentX - 1; nowX > x; nowX--) {
-//					if (nowX >= board.getBoardXSize())
-//						continue;
-//					if (board.hasChess(nowX, y)) {
-//						return false;
-//					}
-//				}
-//			}
-//			return true;
-//		}
-//		return false;
+	public Bitmap getSelectedIcon() {
+		if (this.visible)
+		return DarkChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
+		else
+			return DarkChessPictureList.getIcon("com.oose.chessgame.darkchessman.UnFlip" + "SELECTED");
 	}
+	
+
 
 	@Override
 	public boolean eat(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
-//		boolean hasOneChess = false;
-//		if (currentX == x) {
-//			if (currentY < y) {
-//				for (int nowY = currentY + 1; nowY < y; nowY++) {
-//					if (board.hasChess(x, nowY)) {
-//						if (hasOneChess) {
-//							return false;
-//						} else {
-//							hasOneChess = true;
-//						}
-//
-//					}
-//				}
-//			} else {
-//				for (int nowY = currentY - 1; nowY > y; nowY--) {
-//					if (nowY >= board.getBoardYSize())
-//						continue;
-//					// this != getChess, boundry check
-//					if (board.hasChess(x, nowY)) {
-//						if (hasOneChess) {
-//							return false;
-//						} else {
-//							hasOneChess = true;
-//						}
-//					}
-//				}
-//			}
-//			if (hasOneChess) {
-//				return true;
-//			}
-//		} else if (currentY == y) {
-//			if (currentX < x) {
-//				for (int nowX = currentX + 1; nowX < x; nowX++) {
-//					if (board.hasChess(nowX, y)) {
-//						if (hasOneChess) {
-//							return false;
-//						} else {
-//							hasOneChess = true;
-//						}
-//					}
-//				}
-//			} else {
-//				for (int nowX = currentX - 1; nowX > x; nowX--) {
-//					if (nowX >= board.getBoardXSize())
-//						continue;
-//					if (board.hasChess(nowX, y)) {
-//						if (hasOneChess) {
-//							return false;
-//						} else {
-//							hasOneChess = true;
-//						}
-//					}
-//				}
-//			}
-//			if (hasOneChess) {
-//				return true;
-//			}
-//		}
-//		return false;
+		if (!(this.isVisible() && board.getChess(x, y).isVisible())) {
+			return false;
+		}
+		int hasChess = 0;
+		if (currentX == x) {
+			if (currentY < y) {
+				for (int nowY = currentY + 1; nowY < y; nowY++) {
+					if (board.hasChess(x, nowY)) {
+						hasChess++;
+					}
+				}
+			} else {
+				for (int nowY = currentY - 1; nowY > y; nowY--) {
+					if (board.hasChess(x, nowY)) {
+						hasChess++;
+					}
+				}
+			}
+		} else if (currentY == y) {
+			if (currentX < x) {
+				for (int nowX = currentX + 1; nowX < x; nowX++) {
+					if (board.hasChess(nowX, y)) {
+						hasChess++;
+					}
+				}
+			} else {
+				for (int nowX = currentX - 1; nowX > x; nowX--) {
+					if (board.hasChess(nowX, y)) {
+						hasChess++;
+					}
+				}
+			}
+
+		}
+
+		if (hasChess == 1) {
+			inBoardMoveChess(x, y);
+			return true;
+		}
+		return false;
 	}
 
 }

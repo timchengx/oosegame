@@ -11,7 +11,7 @@ public class BlackCar extends DarkChessMan{
 	
 	private static final long serialVersionUID = 2267427798908938020L;
 	public BlackCar(int x, int y,  DarkChessBoard board) {
-		super(x, y, ChessMan.BLACK, board);
+		super(x, y, ChessMan.BLACK, board, 4);
 	}
 	public BlackCar(BlackCar bc) {
 		super(bc);
@@ -23,21 +23,18 @@ public class BlackCar extends DarkChessMan{
 	}
 	@Override
 	public Bitmap getIcon() {
-		return DarkChessPictureList.getIcon(this.getClass().getName());
-	}
-
+	
+		if (this.visible)
+			return DarkChessPictureList.getIcon(this.getClass().getName());
+		
+		else
+			return DarkChessPictureList.getIcon("com.oose.chessgame.darkchessman.UnFlip");
+		}
 	@Override
 	public Bitmap getSelectedIcon() {
+		if (this.visible)
 		return DarkChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
-	}
-	@Override
-	public boolean move(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
-
-	}
-	@Override
-	public boolean eat(int x, int y) {
-		return move(x, y);
+		else
+			return DarkChessPictureList.getIcon("com.oose.chessgame.darkchessman.UnFlip" + "SELECTED");
 	}
 }

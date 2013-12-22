@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 
 
 
+
+
 import com.oose.darkchess.DarkChessBoard;
 import com.oose.darkchess.DarkChessMan;
 import com.oose.factory.DarkChessPictureList;
@@ -13,7 +15,7 @@ public class BlackShi extends DarkChessMan{
 
 	private static final long serialVersionUID = 5287378310377711625L;
 	public BlackShi(int x, int y, DarkChessBoard board) {
-		super(x, y, ChessMan.BLACK, board);
+		super(x, y, ChessMan.BLACK, board, 6);
 	}
 	
 	public BlackShi(BlackShi bs) {
@@ -26,29 +28,18 @@ public class BlackShi extends DarkChessMan{
 	}
 	@Override
 	public Bitmap getIcon() {
-		return DarkChessPictureList.getIcon(this.getClass().getName());
-	}
-
+	
+		if (this.visible)
+			return DarkChessPictureList.getIcon(this.getClass().getName());
+		
+		else
+			return DarkChessPictureList.getIcon("com.oose.chessgame.darkchessman.UnFlip");
+		}
 	@Override
 	public Bitmap getSelectedIcon() {
+		if (this.visible)
 		return DarkChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
+		else
+			return DarkChessPictureList.getIcon("com.oose.chessgame.darkchessman.UnFlip" + "SELECTED");
 	}
-	@Override
-	public boolean move(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
-//		if(((0<=x && x<=2) || (7<=x && x<=9)) && (3<=y && y<=5))
-//		{
-//			if((Math.abs(x-currentX) == 1) && (Math.abs(y-currentY) == 1))
-//			{
-//				return true;
-//			}
-//		}
-//		return false;
-	}
-	@Override
-	public boolean eat(int x, int y) {
-		return move(x,y);
-	}
-
 }

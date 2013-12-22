@@ -90,7 +90,15 @@ public class DarkChessPictureList {
 		hashMap.put(PACKAGENAME + "BlackCannon" + "SELECTED", BitmapFactory
 				.decodeResource(OOSEGame.getRes(),
 						R.drawable.dark_selected_black_cannon));
-
+		
+		
+		hashMap.put(PACKAGENAME + "UnFlip", BitmapFactory.decodeResource(
+				OOSEGame.getRes(), R.drawable.dark_unflip));
+		
+		hashMap.put(PACKAGENAME + "UnFlip" + "SELECTED", BitmapFactory
+				.decodeResource(OOSEGame.getRes(),
+						R.drawable.dark_selected_unflip));
+		
 		hashMap.put("com.oose.darkchess.DarkChessBoard", BitmapFactory
 				.decodeResource(OOSEGame.getRes(),
 						R.drawable.dark_chessboard));

@@ -29,6 +29,10 @@ public abstract class ChessMan implements Cloneable, Serializable, Observable {
 	abstract public Bitmap getIcon();
 	abstract public Bitmap getSelectedIcon();
 	
+	/*for dark chess*/
+	protected boolean visible = false;
+	protected int level = 0;
+	
 	/* implements Cloneable */
 	@Override
 	abstract public ChessMan clone() throws CloneNotSupportedException;
@@ -77,5 +81,19 @@ public abstract class ChessMan implements Cloneable, Serializable, Observable {
 		this.notifyObservers(this);
 	}
 	
+	public boolean isVisible(){
+		if(visible){
+		return true;
+		}
+		else
+		return false;
+	}
+	public int getLevel(){
+		return this.level;
+	}
+	public void open() {
+		//this.icon = BitmapFactory.decodeResource(OOSEGame.getRes(),R.drawable.black_general);
+		this.visible = true;
+	}
 	
 } 

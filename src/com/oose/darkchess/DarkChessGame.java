@@ -10,12 +10,13 @@ import com.oose.darkchess.DarkChessGameState;
 import com.oose.prototype.ChessGame;
 import com.oose.prototype.ChessMan;
 
-public class DarkChessGame extends ChessGame{
+public class DarkChessGame extends ChessGame {
 
 	private static final long serialVersionUID = 5954468991685346851L;
 
 	private ChessMan selectedChess;
 	private boolean isSelected;
+	private boolean isFirstHand = true;
 
 	public DarkChessGame(String one, String two, Bitmap pOne, Bitmap pTwo,
 			int fallback, int timeLimit) {
@@ -40,16 +41,15 @@ public class DarkChessGame extends ChessGame{
 			if (b == null)
 				continue;
 			coord.convertToScreen(b.getX(), b.getY());
-			
-		
+
 			if (b == selectedChess)
 				c.drawBitmap(b.getSelectedIcon(), coord.getX(), coord.getY(),
 						null);
 			else {
-				Log.d("timcheng", ""+coord.getX()+ " "+coord.getY());
+				Log.d("timcheng", "" + coord.getX() + " " + coord.getY());
 				c.drawBitmap(b.getIcon(), coord.getX(), coord.getY(), null);
 			}
-			
+
 		}
 	}
 
@@ -66,11 +66,12 @@ public class DarkChessGame extends ChessGame{
 
 				selectedChess = board.getChess(coord.getX(), coord.getY());
 
-				if (selectedChess.getBelong() == status.whosTurn()) // Log.d("timcheng",
-																	// "hasSelectChess!");
-					isSelected = true;
-				else
-					selectedChess = null;
+				// if (selectedChess.getBelong() == status.whosTurn()) //
+				// Log.d("timcheng",
+				// "hasSelectChess!");
+				isSelected = true;
+				// else
+				// selectedChess = null;
 			}
 		} else {
 			boolean moveResult = false;
@@ -79,16 +80,28 @@ public class DarkChessGame extends ChessGame{
 			} catch (CloneNotSupportedException e) {
 			}
 			if (board.hasChess(coord.getX(), coord.getY())) {
-				if (board.getChess(coord.getX(), coord.getY()) == selectedChess) // Log.d("timcheng","same chess.");
-					cleanSelected();
-				else
+				if (board.getChess(coord.getX(), coord.getY()) == selectedChess) { // Log.d("timcheng","same chess.");
+					if (!(selectedChess.isVisible())) {
+						board.getChess(coord.getX(), coord.getY()).open();
+						moveResult = true;
+					} else {
+						cleanSelected();
+					}
+				} else if (selectedChess.getBelong() == status.whosTurn()) {
 					moveResult = eat(coord.getX(), coord.getY());
-			} else {
+				}
+			} else if (selectedChess.getBelong() == status.whosTurn()) {
 				moveResult = move(coord.getX(), coord.getY());
 			}
 
-			if (moveResult) {// Log.d("timcheng", "change to "
-								// +status.whosTurn());
+			if (isFirstHand) {
+				isFirstHand = false;
+				isSelected = false;
+				board.savePreviousBoard();
+			} else if (moveResult) {// Log.d("timcheng", "change to "
+									// +status.whosTurn());
+				isSelected = false;
+
 				status.changeTurn();
 				board.savePreviousBoard();
 			}
@@ -126,7 +139,7 @@ public class DarkChessGame extends ChessGame{
 
 	@Override
 	public boolean fallback() {
-		if(canFallback()) {
+		if (canFallback()) {
 			board.fallback();
 			status.fallback();
 			return true;
@@ -138,6 +151,5 @@ public class DarkChessGame extends ChessGame{
 	public boolean canFallback() {
 		return board.canFallback() && status.canFallback();
 	}
-
 
 }

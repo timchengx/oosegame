@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 
 
 
+
+
 import com.oose.darkchess.DarkChessBoard;
 import com.oose.darkchess.DarkChessMan;
 import com.oose.factory.DarkChessPictureList;
@@ -13,7 +15,7 @@ public class BlackSoldier extends DarkChessMan{
 
 	private static final long serialVersionUID = -7365495055614093258L;
 	public BlackSoldier(int x, int y, DarkChessBoard board) {
-		super(x, y, ChessMan.BLACK, board);
+		super(x, y, ChessMan.BLACK, board, 1);
 	}
 	
 	public BlackSoldier(BlackSoldier bs) {
@@ -26,28 +28,32 @@ public class BlackSoldier extends DarkChessMan{
 	}
 	@Override
 	public Bitmap getIcon() {
-		return DarkChessPictureList.getIcon(this.getClass().getName());
-	}
-
+	
+		if (this.visible)
+			return DarkChessPictureList.getIcon(this.getClass().getName());
+		
+		else
+			return DarkChessPictureList.getIcon("com.oose.chessgame.darkchessman.UnFlip");
+		}
 	@Override
 	public Bitmap getSelectedIcon() {
+		if (this.visible)
 		return DarkChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
+		else
+			return DarkChessPictureList.getIcon("com.oose.chessgame.darkchessman.UnFlip" + "SELECTED");
 	}
-	@Override
-	public boolean move(int x, int y) { 
-		inBoardMoveChess(x, y);
-		return true;
-
-	}
+	
 	@Override
 	public boolean eat(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
-//		if(moveValid(x, y) == true){
-//			return true;			
-//		}else{
-//			return false;
-//		}
+		if (moveValid(x, y)&& board.getChess(x, y).isVisible()) {
+			if (this.getLevel() >= board.getChess(x, y).getLevel()
+					|| board.getChess(x, y).getLevel() == 7)
+				{
+				inBoardMoveChess(x, y);
+				return true;}
+		}
+		return false;
 	}
+	
 
 }

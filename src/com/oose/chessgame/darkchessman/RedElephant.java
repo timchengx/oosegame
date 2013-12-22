@@ -9,7 +9,7 @@ public class RedElephant extends DarkChessMan{
 	private static final long serialVersionUID = -2626627629521329374L;
 
 	public RedElephant(int x, int y, DarkChessBoard board) {
-		super(x, y, ChessMan.RED, board);
+		super(x, y, ChessMan.RED, board, 5);
 	}
 	
 	public RedElephant(RedElephant re) {
@@ -22,27 +22,20 @@ public class RedElephant extends DarkChessMan{
 	}
 	@Override
 	public Bitmap getIcon() {
-		return DarkChessPictureList.getIcon(this.getClass().getName());
-	}
+	
+		if (this.visible)
+			return DarkChessPictureList.getIcon(this.getClass().getName());
+		
+		else
+			return DarkChessPictureList.getIcon("com.oose.chessgame.darkchessman.UnFlip");
+		}
 	@Override
 	public Bitmap getSelectedIcon() {
+		if (this.visible)
 		return DarkChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
+		else
+			return DarkChessPictureList.getIcon("com.oose.chessgame.darkchessman.UnFlip" + "SELECTED");
 	}
-	@Override
-	public boolean move(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
-//		if (0 <= x && x <= 4 && 0 <= y && y <= 8)
-//			if (Math.abs((currentX - x)) == 2 && Math.abs((currentY - y)) == 2)
-//				if (!board.hasChess((x + currentX) / 2, (y + currentY) / 2))
-//					return true;
-//
-//		return false;
-	}
-
-	@Override
-	public boolean eat(int x, int y) {
-		return move(x, y);
-	}
+	
 
 }
