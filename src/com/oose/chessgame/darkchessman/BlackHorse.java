@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 
 import com.oose.darkchess.DarkChessBoard;
 import com.oose.darkchess.DarkChessMan;
-import com.oose.factory.ChineseChessPictureList;
+import com.oose.factory.DarkChessPictureList;
 import com.oose.prototype.ChessMan;
 
 public class BlackHorse extends DarkChessMan{
@@ -26,12 +26,12 @@ public class BlackHorse extends DarkChessMan{
 	}
 	@Override
 	public Bitmap getIcon() {
-		return ChineseChessPictureList.getIcon(this.getClass().getName());
+		return DarkChessPictureList.getIcon(this.getClass().getName());
 	}
 
 	@Override
 	public Bitmap getSelectedIcon() {
-		return ChineseChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
+		return DarkChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
 	}
 	@Override
 	public boolean move(int x, int y) {

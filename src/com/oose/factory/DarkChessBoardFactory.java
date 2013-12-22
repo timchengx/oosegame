@@ -21,53 +21,53 @@ import com.oose.darkchess.DarkChessMan;
 public class DarkChessBoardFactory {
 	public static DarkChessMan[][] makeNewDarkChessBoard(
 			DarkChessBoard darkChessBoard) {
-		DarkChessMan[][] dark = new DarkChessMan[9][10];
+		DarkChessMan[][] dark = new DarkChessMan[4][8];
 
-		dark[1][2] = new BlackCannon(1, 2, darkChessBoard);
-		dark[7][2] = new BlackCannon(7, 2, darkChessBoard);
+		dark[0][0] = new BlackCannon(0, 0, darkChessBoard);
+		dark[0][1] = new BlackCannon(0, 1, darkChessBoard);
 
-		dark[4][0] = new BlackGeneral(4, 0, darkChessBoard);
+		dark[0][2] = new BlackGeneral(0, 2, darkChessBoard);
 
 		dark[0][3] = new BlackSoldier(0, 3, darkChessBoard);
-		dark[2][3] = new BlackSoldier(2, 3, darkChessBoard);
-		dark[4][3] = new BlackSoldier(4, 3, darkChessBoard);
-		dark[6][3] = new BlackSoldier(6, 3, darkChessBoard);
-		dark[8][3] = new BlackSoldier(8, 3, darkChessBoard);
+		dark[0][4] = new BlackSoldier(0, 4, darkChessBoard);
+		dark[0][5] = new BlackSoldier(0, 5, darkChessBoard);
+		dark[0][6] = new BlackSoldier(0, 6, darkChessBoard);
+		dark[0][7] = new BlackSoldier(0, 7, darkChessBoard);
 
-		dark[0][0] = new BlackCar(0, 0, darkChessBoard);
-		dark[8][0] = new BlackCar(8, 0, darkChessBoard);
+		dark[1][0] = new BlackCar(1, 0, darkChessBoard);
+		dark[1][1] = new BlackCar(1, 1, darkChessBoard);
 
-		dark[2][0] = new BlackElephant(2, 0, darkChessBoard);
-		dark[6][0] = new BlackElephant(6, 0, darkChessBoard);
+		dark[1][2] = new BlackElephant(1, 2, darkChessBoard);
+		dark[1][3] = new BlackElephant(1, 3, darkChessBoard);
 
-		dark[1][0] = new BlackHorse(1, 0, darkChessBoard);
-		dark[7][0] = new BlackHorse(7, 0, darkChessBoard);
+		dark[1][4] = new BlackHorse(1, 4, darkChessBoard);
+		dark[1][5] = new BlackHorse(1, 5, darkChessBoard);
 
-		dark[3][0] = new BlackShi(3, 0, darkChessBoard);
-		dark[5][0] = new BlackShi(5, 0, darkChessBoard);
+		dark[1][6] = new BlackShi(1, 6, darkChessBoard);
+		dark[1][7] = new BlackShi(1, 7, darkChessBoard);
 
-		dark[1][7] = new RedCannon(1, 7, darkChessBoard);
-		dark[7][7] = new RedCannon(7, 7, darkChessBoard);
+		dark[2][0] = new RedCannon(2, 0, darkChessBoard);
+		dark[2][1] = new RedCannon(2, 1, darkChessBoard);
 
-		dark[4][9] = new RedGeneral(4, 9, darkChessBoard);
+		dark[2][2] = new RedGeneral(2, 2, darkChessBoard);
 
-		dark[0][6] = new RedSoldier(0, 6, darkChessBoard);
+		dark[2][3] = new RedSoldier(2, 3, darkChessBoard);
+		dark[2][4] = new RedSoldier(2, 4, darkChessBoard);
+		dark[2][5] = new RedSoldier(2, 5, darkChessBoard);
 		dark[2][6] = new RedSoldier(2, 6, darkChessBoard);
-		dark[4][6] = new RedSoldier(4, 6, darkChessBoard);
-		dark[6][6] = new RedSoldier(6, 6, darkChessBoard);
-		dark[8][6] = new RedSoldier(8, 6, darkChessBoard);
+		dark[2][7] = new RedSoldier(2, 7, darkChessBoard);
 
-		dark[0][9] = new RedCar(0, 9, darkChessBoard);
-		dark[8][9] = new RedCar(8, 9, darkChessBoard);
+		dark[3][0] = new RedCar(3, 0, darkChessBoard);
+		dark[3][1] = new RedCar(3, 1, darkChessBoard);
 
-		dark[1][9] = new RedHorse(1, 9, darkChessBoard);
-		dark[7][9] = new RedHorse(7, 9, darkChessBoard);
+		dark[3][2] = new RedHorse(3, 2, darkChessBoard);
+		dark[3][3] = new RedHorse(3, 3, darkChessBoard);
 
-		dark[2][9] = new RedElephant(2, 9, darkChessBoard);
-		dark[6][9] = new RedElephant(6, 9, darkChessBoard);
+		dark[3][4] = new RedElephant(3, 4, darkChessBoard);
+		dark[3][5] = new RedElephant(3, 5, darkChessBoard);
 
-		dark[3][9] = new RedShi(3, 9, darkChessBoard);
-		dark[5][9] = new RedShi(5, 9, darkChessBoard);
+		dark[3][6] = new RedShi(3, 6, darkChessBoard);
+		dark[3][7] = new RedShi(3, 7, darkChessBoard);
 
 		return dark;
 	}

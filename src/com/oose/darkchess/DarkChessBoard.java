@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 
-import com.oose.factory.ChineseChessPictureList;
+import com.oose.factory.DarkChessPictureList;
 import com.oose.factory.DarkChessBoardFactory;
 import com.oose.prototype.ChessBoard;
 import com.oose.prototype.ChessMan;
@@ -16,7 +16,7 @@ public class DarkChessBoard extends ChessBoard{
 	private static final long serialVersionUID = -2522051701579026903L;
 
 	public DarkChessBoard() {
-		super(9, 10); // ChineseChessBoard's size
+		super(4, 8); // ChineseChessBoard's size
 
 		/* call factory to create a new ChineseChessBoard */
 		this.nowBoard = DarkChessBoardFactory.makeNewDarkChessBoard(this);
@@ -29,8 +29,8 @@ public class DarkChessBoard extends ChessBoard{
 
 	/* implements iterator */
 	private class ChessIterator implements Iterator<ChessMan> {
-		private final int totalX = 9;
-		private final int totalY = 10;
+		private final int totalX = 4;
+		private final int totalY = 8;
 		private int X = 0;
 		private int Y = 0;
 
@@ -61,7 +61,7 @@ public class DarkChessBoard extends ChessBoard{
 
 	@Override
 	public Bitmap getBackGround() {
-		return ChineseChessPictureList.getIcon(this.getClass().getName());
+		return DarkChessPictureList.getIcon(this.getClass().getName());
 	}
 
 	@Override

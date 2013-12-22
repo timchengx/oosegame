@@ -40,11 +40,16 @@ public class DarkChessGame extends ChessGame{
 			if (b == null)
 				continue;
 			coord.convertToScreen(b.getX(), b.getY());
-//			if (b == selectedChess)
-//				c.drawBitmap(b.getSelectedIcon(), coord.getX(), coord.getY(),
-//						null);
-//			else
-//				c.drawBitmap(b.getIcon(), coord.getX(), coord.getY(), null);
+			
+		
+			if (b == selectedChess)
+				c.drawBitmap(b.getSelectedIcon(), coord.getX(), coord.getY(),
+						null);
+			else {
+				Log.d("timcheng", ""+coord.getX()+ " "+coord.getY());
+				c.drawBitmap(b.getIcon(), coord.getX(), coord.getY(), null);
+			}
+			
 		}
 	}
 
@@ -108,7 +113,7 @@ public class DarkChessGame extends ChessGame{
 	@Override
 	protected boolean move(int x, int y) {
 		boolean result = false;
-		if (x < 9 && x >= 0 && y < 10 && y >= 0 && selectedChess.move(x, y)) {
+		if (x < 4 && x >= 0 && y < 8 && y >= 0 && selectedChess.move(x, y)) {
 			Log.d("timcheng", "moveok!");
 			result = true;
 		} else {

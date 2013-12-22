@@ -33,12 +33,12 @@ public class DarkChessView extends SurfaceView implements
 	public void refreshScreen() {
 		Canvas c = holder.lockCanvas();
 		darkChess.refreshBoard(c);
-		c.drawText(darkChess.getStatus().getPlayerOneName(), 30, 547,
+		c.drawText(darkChess.getStatus().getPlayerOneName(), 370, 47,
 				namePaint);
-		c.drawText(darkChess.getStatus().getPlayerTwoName(), 360, 547,
+		c.drawText(darkChess.getStatus().getPlayerTwoName(), 370, 547,
 				namePaint);
-		c.drawBitmap(darkChess.getStatus().getPlayerOnePic(), 30, 605, null);
-		c.drawBitmap(darkChess.getStatus().getPlayerTwoPic(), 360, 605, null);
+		c.drawBitmap(darkChess.getStatus().getPlayerOnePic(), 370, 105, null);
+		c.drawBitmap(darkChess.getStatus().getPlayerTwoPic(), 370, 605, null);
 		holder.unlockCanvasAndPost(c);
 	}
 
