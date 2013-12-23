@@ -91,6 +91,14 @@ public abstract class ChessBoard implements Iterable<ChessMan>, Observer, Fallba
 		return false;
 	}
 	
+	public int getBoardXSize() {
+		return boardXSize;
+	}
+	
+	public int getBoardYSize() {
+		return boardYSize;
+	}
+	
 	/* implements Observer */
 	@Override
 	public void update(Observable arg0, Object arg1) {

@@ -27,15 +27,18 @@ public class BlackGeneral extends ChineseChessMan {
 	public Bitmap getIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName());
 	}
-
-	
 	public Bitmap getSelectedIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
 	}
 	@Override
 	public boolean move(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
+		if(((0<=y && y<=2) || (7<=y && y<=9)) && (3<=x && x<=5)) { 
+			if(Math.abs(x-currentX) + Math.abs(y-currentY) == 1 ) {
+					inBoardMoveChess(x, y);
+					return true;
+			}
+		}
+		return false;
 	}
 	@Override
 	public boolean eat(int x, int y) {

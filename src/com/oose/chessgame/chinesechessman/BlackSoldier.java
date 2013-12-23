@@ -33,31 +33,25 @@ public class BlackSoldier extends ChineseChessMan {
 	}
 	@Override
 	public boolean move(int x, int y) { 
-		inBoardMoveChess(x, y);
+		if(currentY == x && currentY <= 4) {
+			if(Math.abs(currentX-x) == 1 ) { 
+				inBoardMoveChess(x, y);
+				return true;
+			}
+		}
+		else if (currentX == x){  
+			if(currentY > y) {
+				if((currentY - 1) == y) {
+				inBoardMoveChess(x, y);
+				 return true;
+				}
+			}
+		}
 		return true;
-//		if(currentX == x && currentX <= 4) {
-//			if(Math.abs(currentY-y) == 1 ) { 
-//				return true;
-//			}
-//		}
-//		else if (currentY == y){  
-//			if(currentX > x) {
-//				if((currentX - 1) == x) {
-//				 return true;
-//				}
-//			}
-//		}
-//		return false;
 	}
 	@Override
 	public boolean eat(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
-//		if(moveValid(x, y) == true){
-//			return true;			
-//		}else{
-//			return false;
-//		}
+		return move(x, y);
 	}
 
 }

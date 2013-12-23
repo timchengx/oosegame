@@ -31,55 +31,52 @@ public class RedCar extends ChineseChessMan{
 	public Bitmap getSelectedIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
 	}
+
 	@Override
 	public boolean move(int x, int y) {
+
+		if (currentX == x) {
+			if (currentY < y) {
+				for (int nowY = currentY + 1; nowY < y; nowY++) {
+					if (board.hasChess(x, nowY)) {
+						return false;
+					}
+				}
+			} else {
+				for (int nowY = currentY - 1; nowY > y; nowY--) {
+					if (nowY >= board.getBoardYSize())
+						continue;
+					if (board.hasChess(x, nowY)) {
+						return false;
+					}
+				}
+			}
+			inBoardMoveChess(x, y);
+			return true;
+		} else if (currentY == y) {
+			if (currentX < x) {
+				for (int nowX = currentX + 1; nowX < x; nowX++) {
+					if (board.hasChess(nowX, y)) {
+						return false;
+					}
+				}
+			} else {
+				for (int nowX = currentX - 1; nowX > x; nowX--) {
+					if (nowX >= board.getBoardYSize())
+						continue;
+					if (board.hasChess(nowX, y)) {
+						return false;
+					}
+				}
+			}
+			inBoardMoveChess(x, y);
+			return true;
+		}
 		inBoardMoveChess(x, y);
-//		if(currentX == x) {
-//			if(currentY < y) { 
-//				for(int nowY = currentY + 1; nowY < y; nowY++) {
-//					if(board.hasChess(x, nowY)) {
-//						return false;
-//					}
-//				}
-//			}
-//			else {
-//				for(int nowY = currentY - 1; nowY > y; nowY--) {
-//					if(nowY >= board.getBoardYSize()) continue;
-//					if(board.hasChess(x, nowY)) {
-//						return false;
-//					}
-//				}
-//			}
-//			return true;
-//		}
-//		else if (currentY == y){
-//			if(currentX < x) {
-//				for(int nowX = currentX + 1; nowX < x; nowX++) {
-//					if(board.hasChess(nowX, y)) {
-//						return false;
-//					}
-//				}
-//			}
-//			else {
-//				for(int nowX = currentX - 1; nowX > x; nowX--) {
-//					if(nowX >= board.getBoardYSize()) continue;
-//					if(board.hasChess(nowX, y)) {
-//						return false;
-//					}
-//				}
-//			}
-//			return true;
-//		}
-		//return false;
 		return true;
 	}
 	@Override
 	public boolean eat(int x, int y) {
-//		if(moveValid(x, y) == true){
-//			return true;			
-//		}else{
-//			return false;
-//		}
 		return move(x,y);
 	}
 

@@ -24,38 +24,33 @@ public class RedSoldier extends ChineseChessMan {
 	public Bitmap getSelectedIcon() {
 		return ChineseChessPictureList.getIcon(this.getClass().getName() + "SELECTED");
 	}
-	@Override
-	public boolean move(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
-//		if(currentX == x && currentX >= 5) {
-//			if(Math.abs(currentY-y) == 1 ) { 
-//				return true;
-//			}
-//		}
-//		else if (currentY == y){  
-//			if(currentX < x) {
-//				if((currentX + 1) == x) {
-//					return true;	
-//				}
-//			}
-//		}
-//		return false;
-	}
+
 	@Override
 	public RedSoldier clone() throws CloneNotSupportedException {
 		return new RedSoldier(this);
 	}
 
 	@Override
+	public boolean move(int x, int y) {
+		if (currentY == y && currentY >= 5) {
+			if (Math.abs(currentX - x) == 1) {
+				inBoardMoveChess(x, y);
+				return true;
+			}
+		} else if (currentX == x) {
+			if (currentY < y) {
+				if ((currentY + 1) == y) {
+					inBoardMoveChess(x, y);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public boolean eat(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
-//		if(moveValid(x, y) == true){
-//			return true;			
-//		}else{
-//			return false;
-//		}
+		return move(x, y);
 	}
 
 }

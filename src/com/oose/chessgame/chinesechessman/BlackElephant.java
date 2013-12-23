@@ -33,14 +33,14 @@ public class BlackElephant extends ChineseChessMan{
 	}
 	@Override
 	public boolean move(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
-//		if (5 <= x && x <= 9 && 0 <= y && y <= 8)
-//			if (Math.abs((currentX - x)) == 2 && Math.abs((currentY - y)) == 2)
-//				if (!board.hasChess((x + currentX) / 2, (y + currentY) / 2))
-//					return true;
-//
-//		return false;
+		if (0 <= x && x <= 8 && 0 <= y && y <= 4)
+		if (Math.abs((currentX - x)) == 2 && Math.abs((currentY - y)) == 2)
+			if (!board.hasChess((x + currentX) / 2, (y + currentY) / 2)) {
+				inBoardMoveChess(x, y);
+				return true;
+			}
+
+		return false;
 	}
 
 	@Override

@@ -34,24 +34,26 @@ public class BlackHorse extends ChineseChessMan{
 	}
 	@Override
 	public boolean move(int x, int y) {
-		inBoardMoveChess(x, y);
-		return true;
-//		if (Math.abs(currentX - x) == 2 && Math.abs(currentY - y) == 1) {
-//			if (x > currentY && (!board.hasChess(currentX + 1, currentY))) {// 目標在右邊
-//				return true;
-//			} else if (x < currentY
-//					&& (!board.hasChess(currentX - 1, currentY))) {// 目標在左邊
-//				return true;
-//			}
-//		} else if (Math.abs(currentX - x) == 1 && Math.abs(currentY - y) == 2) {
-//			if (y > currentY && (!board.hasChess(currentX, currentY + 1))) {// 目標在下面
-//				return true;
-//			} else if (y < currentY
-//					&& (!board.hasChess(currentX, currentY - 1))) {// 目標在上面
-//				return true;
-//			}
-//		}
-//		return false;
+		if (Math.abs(currentX - x) == 2 && Math.abs(currentY - y) == 1) {
+			if (x > currentY && (!board.hasChess(currentX + 1, currentY))) {// 目標在右邊
+				inBoardMoveChess(x, y);
+				return true;
+			} else if (x < currentY
+					&& (!board.hasChess(currentX - 1, currentY))) {// 目標在左邊
+				inBoardMoveChess(x, y);
+				return true;
+			}
+		} else if (Math.abs(currentX - x) == 1 && Math.abs(currentY - y) == 2) {
+			if (y > currentY && (!board.hasChess(currentX, currentY + 1))) {// 目標在下面
+				inBoardMoveChess(x, y);
+				return true;
+			} else if (y < currentY
+					&& (!board.hasChess(currentX, currentY - 1))) {// 目標在上面
+				inBoardMoveChess(x, y);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
