@@ -36,7 +36,7 @@ public class DarkChessGame extends ChessGame {
 	@Override
 	public void refreshBoard(Canvas c) {
 		if (board.getBackGround() != null)
-			c.drawBitmap(board.getBackGround(), 0, 0, null);
+			c.drawBitmap(board.getBackGround(), 130, 0, null);
 		for (ChessMan b : board) {
 			if (b == null)
 				continue;
@@ -97,14 +97,19 @@ public class DarkChessGame extends ChessGame {
 			if (isFirstHand) {
 				isFirstHand = false;
 				isSelected = false;
+				if (selectedChess.getBelong() == status.whosTurn()) {
+					status.changeTurn();
+				}
+				
 				board.savePreviousBoard();
 			} else if (moveResult) {// Log.d("timcheng", "change to "
 									// +status.whosTurn());
 				isSelected = false;
-
+				
 				status.changeTurn();
 				board.savePreviousBoard();
 			}
+			cleanSelected();
 		}
 	}
 
