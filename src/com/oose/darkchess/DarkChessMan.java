@@ -3,20 +3,23 @@ package com.oose.darkchess;
 import com.oose.prototype.ChessBoard;
 import com.oose.prototype.ChessMan;
 
-abstract public class DarkChessMan extends ChessMan{
+abstract public class DarkChessMan extends ChessMan {
 
 	private static final long serialVersionUID = 400101495365023888L;
 	
-
+	/*for dark chess*/
+	protected boolean visible;
+	protected int level;
 	
-	public  DarkChessMan(int x, int y, int belong, ChessBoard board, int level) {
+	public DarkChessMan(int x, int y, int belong, ChessBoard board, int level) {
 		super(x, y, belong, board);
 		this.level = level;
 	}
 
-	public  DarkChessMan(DarkChessMan cm) {
+	public DarkChessMan(DarkChessMan cm) {
 		super(cm);
-		this.level = level;
+		this.visible = cm.visible;
+		this.level = cm.level;
 	}
 	
 	public boolean moveValid(int x, int y) {
@@ -37,8 +40,8 @@ abstract public class DarkChessMan extends ChessMan{
 	}
 	@Override
 	public boolean eat(int x, int y) {
-		if (moveValid(x, y)&& board.getChess(x, y).isVisible()) {
-			if (this.getLevel() >= board.getChess(x, y).getLevel()){
+		if (moveValid(x, y)&& ((DarkChessMan) board.getChess(x, y)).isVisible()) {
+			if (this.getLevel() >= ((DarkChessMan) board.getChess(x, y)).getLevel()){
 				inBoardMoveChess(x, y);
 				return true;
 				}
@@ -46,7 +49,15 @@ abstract public class DarkChessMan extends ChessMan{
 		return false;
 	}
 	
-	
-
-	
+	public boolean isVisible(){
+		if(visible)
+			return true;
+		return false;
+	}
+	public int getLevel(){
+		return this.level;
+	}
+	public void open() {
+		visible = true;
+	}
 }

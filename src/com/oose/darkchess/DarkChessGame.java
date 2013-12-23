@@ -81,8 +81,8 @@ public class DarkChessGame extends ChessGame {
 			}
 			if (board.hasChess(coord.getX(), coord.getY())) {
 				if (board.getChess(coord.getX(), coord.getY()) == selectedChess) { // Log.d("timcheng","same chess.");
-					if (!(selectedChess.isVisible())) {
-						board.getChess(coord.getX(), coord.getY()).open();
+					if (!(((DarkChessMan) selectedChess).isVisible())) {
+						((DarkChessMan) board.getChess(coord.getX(), coord.getY())).open();
 						moveResult = true;
 					} else {
 						cleanSelected();

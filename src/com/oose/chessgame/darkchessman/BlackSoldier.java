@@ -45,12 +45,12 @@ public class BlackSoldier extends DarkChessMan{
 	
 	@Override
 	public boolean eat(int x, int y) {
-		if (moveValid(x, y)&& board.getChess(x, y).isVisible()) {
-			if (this.getLevel() >= board.getChess(x, y).getLevel()
-					|| board.getChess(x, y).getLevel() == 7)
-				{
+		if (moveValid(x, y)&& ((DarkChessMan) board.getChess(x, y)).isVisible()) {
+			if (this.getLevel() >= ((DarkChessMan) board.getChess(x, y)).getLevel()
+					|| ((DarkChessMan) board.getChess(x, y)).getLevel() == 7) {
 				inBoardMoveChess(x, y);
-				return true;}
+				return true;
+			}
 		}
 		return false;
 	}

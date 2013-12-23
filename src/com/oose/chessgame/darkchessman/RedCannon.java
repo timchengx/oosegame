@@ -44,7 +44,7 @@ public class RedCannon extends DarkChessMan {
 
 	@Override
 	public boolean eat(int x, int y) {
-		if (!(this.isVisible() && board.getChess(x, y).isVisible())) {
+		if (!(this.isVisible() && ((DarkChessMan) board.getChess(x, y)).isVisible())) {
 			return false;
 		}
 		int hasChess = 0;

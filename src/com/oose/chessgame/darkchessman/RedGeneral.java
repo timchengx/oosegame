@@ -44,8 +44,8 @@ public class RedGeneral extends DarkChessMan{
 
 	@Override
 	public boolean eat(int x, int y) {
-		if (moveValid(x, y)&& board.getChess(x, y).isVisible()) {
-			if (board.getChess(x, y).getLevel() == 1){
+		if (moveValid(x, y)&& ((DarkChessMan) board.getChess(x, y)).isVisible()) {
+			if (((DarkChessMan) board.getChess(x, y)).getLevel() == 1){
 				return false;
 				}
 			else{

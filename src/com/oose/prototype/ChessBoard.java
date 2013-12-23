@@ -102,8 +102,8 @@ public abstract class ChessBoard implements Iterable<ChessMan>, Observer, Fallba
 	/* implements Observer */
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		ChessMan cm = (ChessMan) arg0;
-		this.setChess(cm.getX(), cm.getY(), (ChessMan) arg1);
-	}
+        ChessMan cm = (ChessMan) arg0;
+        this.setChess(cm.getX(), cm.getY(), (ChessMan) arg1);
+}
 
 }
