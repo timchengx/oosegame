@@ -54,7 +54,7 @@ public class DarkChessGame extends ChessGame {
 	}
 
 	@Override
-	public void select(int x, int y) {
+	public int select(int x, int y) {
 		coord.convertToBoard(x, y);
 
 		Log.d("timcheng",
@@ -111,6 +111,7 @@ public class DarkChessGame extends ChessGame {
 			}
 			cleanSelected();
 		}
+		return 0;
 	}
 
 	@Override
@@ -155,6 +156,11 @@ public class DarkChessGame extends ChessGame {
 	@Override
 	public boolean canFallback() {
 		return board.canFallback() && status.canFallback();
+	}
+
+	@Override
+	protected int isEnd() {
+		return 0;
 	}
 
 }

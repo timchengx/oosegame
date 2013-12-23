@@ -29,5 +29,6 @@
     <string name="fallbackfail">悔棋失敗</string>
     <string name="saveok">存檔成功</string>
     <string name="darkchessgame">DarkChessGame</string>
+    <string name="gameover">遊戲結束</string>
 
 </resources>

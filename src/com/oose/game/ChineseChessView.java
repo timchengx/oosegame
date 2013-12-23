@@ -10,15 +10,18 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.oose.chinesechess.ChineseChessGame;
+import com.oose.prototype.ChessGame;
+import com.oose.prototype.Observable;
 
-public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callback{//, Runnable {
+public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callback, Observable {//, Runnable {
 	SurfaceHolder holder;
 	ChineseChessGame chineseChess;
 	Paint namePaint;
+	ChineseChessMain mainActivity;
 
-	public ChineseChessView(Context context, Intent intent, ChineseChessGame ch) {
+	public ChineseChessView(Context context, Intent intent, ChineseChessGame ch, ChineseChessMain recall) {
 		super(context);
-		
+		mainActivity = recall;
 		namePaint = new Paint();
 		namePaint.setColor(Color.WHITE);
 		namePaint.setTextSize(18);
@@ -45,17 +48,20 @@ public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callb
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		
+		int gameResult = ChessGame.GAMECONTINUE;
 		if(event.getAction() == MotionEvent.ACTION_DOWN) {
-			//if((int)event.getY() < 720) {
-				chineseChess.select((int)event.getX(), (int)event.getY());
-				refreshScreen();
-			//}
+			gameResult = chineseChess.select((int)event.getX(), (int)event.getY());
+			refreshScreen();
 		}
-		
+		if(gameResult != ChessGame.GAMECONTINUE)
+			notifyObservers(Integer.valueOf(gameResult));
 		return true;
 	}
 
+	@Override
+	public void notifyObservers(Object carry) {
+		mainActivity.update(this, carry);
+	}
 	@Override
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
 	}

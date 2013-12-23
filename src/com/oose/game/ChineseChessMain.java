@@ -6,7 +6,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -22,8 +24,11 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Toast;
 
 import com.oose.chinesechess.ChineseChessGame;
+import com.oose.prototype.GameState;
+import com.oose.prototype.Observable;
+import com.oose.prototype.Observer;
 
-public class ChineseChessMain extends Activity implements OnClickListener{
+public class ChineseChessMain extends Activity implements OnClickListener, Observer {
 	
 	Button buttonFallback;
 	Button buttonMore;
@@ -66,7 +71,7 @@ public class ChineseChessMain extends Activity implements OnClickListener{
 					playerTwoPic, fallbackValue, timeLimitValue);
 		}
 		
-		mainView = new ChineseChessView(this, intent, chineseChess);
+		mainView = new ChineseChessView(this, intent, chineseChess, this);
 
 		frame = new FrameLayout(this);
 		relative = new RelativeLayout(this);
@@ -188,6 +193,24 @@ public class ChineseChessMain extends Activity implements OnClickListener{
 //		} catch(Exception e) {
 //			Log.d("timchenc", e.toString());
 //		}
+
+	@Override
+	public void update(Observable from, Object carry) {
+		String message;
+		if((Integer)carry == GameState.PLAYERONE)
+			message = chineseChess.getStatus().getPlayerOneName();
+		else
+			message = chineseChess.getStatus().getPlayerTwoName();
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.gameover);
+		builder.setMessage(message + "贏了！");
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
+		builder.create().show();
+	}
 
 	
 }

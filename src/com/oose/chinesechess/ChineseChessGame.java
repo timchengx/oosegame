@@ -4,8 +4,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.Log;
 
+import com.oose.chessgame.chinesechessman.RedGeneral;
+import com.oose.chessgame.chinesechessman.BlackGeneral;
 import com.oose.prototype.ChessGame;
 import com.oose.prototype.ChessMan;
+import com.oose.prototype.GameState;
 
 public class ChineseChessGame extends ChessGame {
 
@@ -46,7 +49,8 @@ public class ChineseChessGame extends ChessGame {
 	}
 
 	@Override
-	public void select(int x, int y) {
+	public int select(int x, int y) {
+		int gameOver = GAMECONTINUE;
 		coord.convertToBoard(x, y);
 
 		Log.d("timcheng",
@@ -81,10 +85,51 @@ public class ChineseChessGame extends ChessGame {
 
 			if (moveResult) {// Log.d("timcheng", "change to "
 								// +status.whosTurn());
+				gameOver = isEnd();
 				status.changeTurn();
 				board.savePreviousBoard();
 			}
 		}
+		return gameOver;
+	}
+	
+	@Override
+	protected int isEnd() {
+		int player = status.whosTurn();
+		String RedGeneral = RedGeneral.class.getName();
+		String BlackGeneral = BlackGeneral.class.getName();
+		
+		for (ChessMan b : board) {
+			if (b != null) {
+				if (b.getClass().getName().equals(BlackGeneral)) {
+					for (int Y = b.getY() + 1; Y < 10; Y++) {
+						if (board.hasChess(b.getX(), Y)) {
+							if (board.getChess(b.getX(), Y).getClass().getName().equals(RedGeneral)) {
+								if (player == GameState.PLAYERONE)
+									return GameState.PLAYERTWO;
+								return GameState.PLAYERONE;
+							}
+							else
+								return GAMECONTINUE;
+						}
+					}
+					return GAMECONTINUE;
+				}
+			}
+		}
+		
+		for (ChessMan b : board) {
+			if (b != null) {
+				if (b.getClass().getName().equals(BlackGeneral))
+					if (player == GameState.PLAYERONE)
+						return GAMECONTINUE;
+				if (b.getClass().getName().equals(RedGeneral))
+					if (player == GameState.PLAYERTWO)
+						return GAMECONTINUE;
+			}
+		}
+		
+		return player;
 	}
 
 	@Override

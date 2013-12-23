@@ -32,20 +32,20 @@ public class RedSoldier extends ChineseChessMan {
 
 	@Override
 	public boolean move(int x, int y) {
-		if (currentY == y && currentY >= 5) {
-			if (Math.abs(currentX - x) == 1) {
-				inBoardMoveChess(x, y);
-				return true;
-			}
-		} else if (currentX == x) {
-			if (currentY < y) {
-				if ((currentY + 1) == y) {
+//		if (currentY == y && currentY >= 5) {
+//			if (Math.abs(currentX - x) == 1) {
+//				inBoardMoveChess(x, y);
+//				return true;
+//			}
+//		} else if (currentX == x) {
+//			if (currentY < y) {
+//				if ((currentY + 1) == y) {
 					inBoardMoveChess(x, y);
 					return true;
-				}
-			}
-		}
-		return false;
+//				}
+//			}
+//		}
+//		return false;
 	}
 
 	@Override
