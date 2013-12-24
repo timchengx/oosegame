@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -29,7 +28,8 @@ import com.oose.prototype.GameState;
 import com.oose.prototype.Observable;
 import com.oose.prototype.Observer;
 
-public class DarkChessMain extends Activity implements OnClickListener, Observer {
+public class DarkChessMain extends Activity implements OnClickListener,
+		Observer {
 	public static final String SAVEGAME_KEY = "DCMSGK";
 	public static final String PEACERESULT = "PR";
 	Button buttonFallback;
@@ -143,24 +143,30 @@ public class DarkChessMain extends Activity implements OnClickListener, Observer
 
 		setContentView(frame);
 	}
+
 	private void peace() {
 		String message;
-		if(darkChess.getStatus().whosTurn() == GameState.PLAYERONE)
+		if (darkChess.getStatus().whosTurn() == GameState.PLAYERONE)
 			message = darkChess.getStatus().getPlayerTwoName();
 		else
 			message = darkChess.getStatus().getPlayerOneName();
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.gameover);
 		builder.setMessage(message + " " + getString(R.string.peacedescription));
-		builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                showResult(PEACERESULT);
-            }
-        });
-		builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {}});
+		builder.setPositiveButton(getString(R.string.yes),
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						showResult(PEACERESULT);
+					}
+				});
+		builder.setNegativeButton(getString(R.string.no),
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+					}
+				});
 		builder.create().show();
 	}
+
 	private void fallBack() {
 		String toastText = getString(R.string.fallbackok);
 		if (darkChess.fallback()) {
@@ -175,7 +181,7 @@ public class DarkChessMain extends Activity implements OnClickListener, Observer
 
 	private void giveUP() {
 		String message;
-		if(darkChess.getStatus().whosTurn() == GameState.PLAYERONE)
+		if (darkChess.getStatus().whosTurn() == GameState.PLAYERONE)
 			message = darkChess.getStatus().getPlayerTwoName();
 		else
 			message = darkChess.getStatus().getPlayerOneName();
@@ -207,24 +213,26 @@ public class DarkChessMain extends Activity implements OnClickListener, Observer
 			Log.d("timcheng", e.toString());
 		}
 	}
+
 	private void showResult(String result) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.gameover);
-		if(result.equals(PEACERESULT))
+		if (result.equals(PEACERESULT))
 			builder.setMessage(getString(R.string.peace));
 		else
 			builder.setMessage(result + "贏了！");
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                finish();
-            }
-        });
+			public void onClick(DialogInterface dialog, int id) {
+				finish();
+			}
+		});
 		builder.create().show();
 	}
+
 	@Override
 	public void update(Observable from, Object carry) {
 		String message;
-		if((Integer)carry == GameState.PLAYERONE)
+		if ((Integer) carry == GameState.PLAYERONE)
 			message = darkChess.getStatus().getPlayerOneName();
 		else
 			message = darkChess.getStatus().getPlayerTwoName();

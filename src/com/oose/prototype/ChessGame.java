@@ -7,7 +7,7 @@ import android.graphics.Canvas;
 public abstract class ChessGame implements Serializable, Fallback {
 
 	private static final long serialVersionUID = 3804242090043209356L;
-	
+
 	public static final int GAMECONTINUE = 0;
 
 	/* MVC's Model */
@@ -25,12 +25,15 @@ public abstract class ChessGame implements Serializable, Fallback {
 
 	/* Called By select() to check action is valid or not */
 	abstract protected boolean move(int x, int y);
+
 	abstract protected boolean eat(int x, int y);
+
 	abstract protected int isEnd();
 
 	/* fallback to previous state */
 	@Override
 	abstract public boolean fallback();
+
 	@Override
 	abstract public boolean canFallback();
 

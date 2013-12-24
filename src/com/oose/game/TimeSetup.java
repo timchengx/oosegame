@@ -20,31 +20,34 @@ public class TimeSetup extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		/* set this activity's layout */
 		setContentView(R.layout.time_setup);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
+
 		/* get data from previous activity */
 		Intent intent = getIntent();
 
 		timer = (NumberPicker) findViewById(R.id.countdownPicker);
 		buttonSwitch = (RadioGroup) findViewById(R.id.RadioButtonGroupTimeSwitch);
-		
+
 		timer.setMinValue(ChessSetup.DEFAULTTIMELIMIT_MIN);
 		timer.setMaxValue(ChessSetup.DEFAULTTIMELIMIT_MAX);
-		
-		/* if user had set time limit before, get previous set value*/
-		timer.setValue(intent.getIntExtra(ChessSetup.TIMELIMIT_INT, ChessSetup.DEFAULTTIMELIMIT_MIN));
 
-		/* 
-		 * if user had set time limit on/off, get previous setup 
-		 * if not, turn the time limit on
+		/* if user had set time limit before, get previous set value */
+		timer.setValue(intent.getIntExtra(ChessSetup.TIMELIMIT_INT,
+				ChessSetup.DEFAULTTIMELIMIT_MIN));
+
+		/*
+		 * if user had set time limit on/off, get previous setup if not, turn
+		 * the time limit on
 		 */
-		if(intent.getBooleanExtra(ChessSetup.LIMITSWITCH_BOOLEAN, true))
-			((RadioButton) findViewById(R.id.RadioButtonTimeOn)).setChecked(true);
+		if (intent.getBooleanExtra(ChessSetup.LIMITSWITCH_BOOLEAN, true))
+			((RadioButton) findViewById(R.id.RadioButtonTimeOn))
+					.setChecked(true);
 		else
-			((RadioButton) findViewById(R.id.RadioButtonTimeOff)).setChecked(true);
+			((RadioButton) findViewById(R.id.RadioButtonTimeOff))
+					.setChecked(true);
 
 	}
 
@@ -52,11 +55,11 @@ public class TimeSetup extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent = new Intent();
 		int onOff = buttonSwitch.getCheckedRadioButtonId();
-		
+
 		/* save time limit value */
 		intent.putExtra(ChessSetup.TIMELIMIT_INT, timer.getValue());
 
-		/* determin and save is time limit is  on/off */
+		/* determine and save is time limit is on/off */
 		switch (onOff) {
 		case R.id.RadioButtonTimeOn:
 			intent.putExtra(ChessSetup.LIMITSWITCH_BOOLEAN, true);
@@ -74,6 +77,7 @@ public class TimeSetup extends Activity {
 		finish();
 		return true;
 	}
+
 	@Override
 	public void onBackPressed() {
 		onOptionsItemSelected(null);

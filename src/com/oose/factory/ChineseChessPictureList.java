@@ -9,7 +9,6 @@ import com.oose.game.ChineseChessView;
 import com.oose.game.OOSEGame;
 import com.oose.game.R;
 
-
 /* a lookup table, for all ChineseChess to get their Bitmap resources */
 public class ChineseChessPictureList {
 	private static final String PACKAGENAME = "com.oose.chessgame.chinesechessman.";
@@ -96,9 +95,8 @@ public class ChineseChessPictureList {
 		hashMap.put("com.oose.chinesechess.ChineseChessBoard", BitmapFactory
 				.decodeResource(OOSEGame.getRes(),
 						R.drawable.chinese_chessboard));
-		hashMap.put(ChineseChessView.FRAME, BitmapFactory
-				.decodeResource(OOSEGame.getRes(),
-						R.drawable.chinese_frame));
+		hashMap.put(ChineseChessView.FRAME, BitmapFactory.decodeResource(
+				OOSEGame.getRes(), R.drawable.chinese_frame));
 	}
 
 	public static Bitmap getIcon(String key) {

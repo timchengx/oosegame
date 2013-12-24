@@ -204,21 +204,7 @@ public class ChineseChessMain extends Activity implements OnClickListener, Obser
 			Log.d("timchenc", e.toString());
 		}
 	}
-//		FileInputStream ios;
-//		ObjectInputStream is;
-//		try {
-//		ios = openFileInput("output");
-//		is = new ObjectInputStream(ios);
-//		ChineseChessGame ch = (ChineseChessGame) is.readObject();
-//		Log.d("timcheng", "freeze");
-//		Log.d("timcheng",ch.getStatus().getPlayerOneName());
-//		
-//		is.close();
-//		chineseChess = ch;
-//		mainView.refreshScreen();
-//		} catch(Exception e) {
-//			Log.d("timchenc", e.toString());
-//		}
+
 	private void showResult(String result) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.gameover);
@@ -233,6 +219,7 @@ public class ChineseChessMain extends Activity implements OnClickListener, Obser
         });
 		builder.create().show();
 	}
+	
 	@Override
 	public void update(Observable from, Object carry) {
 		String message;

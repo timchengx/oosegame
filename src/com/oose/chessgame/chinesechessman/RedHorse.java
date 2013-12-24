@@ -33,12 +33,11 @@ public class RedHorse extends ChineseChessMan{
 	}
 	@Override
 	public boolean move(int x, int y) {
-
 		if (Math.abs(currentX - x) == 2 && Math.abs(currentY - y) == 1) {
-			if (x > currentY && (!board.hasChess(currentX + 1, currentY))) {// 目標在右邊
+			if (x > currentX && (!board.hasChess(currentX + 1, currentY))) {// 目標在右邊
 				inBoardMoveChess(x, y);
 				return true;
-			} else if (x < currentY
+			} else if (x < currentX
 					&& (!board.hasChess(currentX - 1, currentY))) {// 目標在左邊
 				inBoardMoveChess(x, y);
 				return true;

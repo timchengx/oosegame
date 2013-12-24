@@ -92,7 +92,7 @@ public class ChineseChessGame extends ChessGame {
 		}
 		return gameOver;
 	}
-	
+
 	@Override
 	protected int isEnd() {
 		int player = status.whosTurn();
@@ -101,21 +101,22 @@ public class ChineseChessGame extends ChessGame {
 		String rivalGeneral;
 		boolean isLookingEachOther = false;
 		boolean hasBeenEaten = true;
-		
-		if(player == GameState.PLAYERONE)
+
+		if (player == GameState.PLAYERONE)
 			rivalGeneral = BlackGeneral;
 		else
 			rivalGeneral = RedGeneral;
-		
-		for(ChessMan b : board) {
-			if(b != null) {
+
+		for (ChessMan b : board) {
+			if (b != null) {
 				if (b.getClass().getName().equals(BlackGeneral)) {
 					boolean hasChess = false;
 					for (int Y = b.getY() + 1; Y < 10; Y++) {
 						if (board.hasChess(b.getX(), Y)) {
-							if(!hasChess) {
+							if (!hasChess) {
 								hasChess = true;
-								if (board.getChess(b.getX(), Y).getClass().getName().equals(RedGeneral)) {
+								if (board.getChess(b.getX(), Y).getClass()
+										.getName().equals(RedGeneral)) {
 									isLookingEachOther = true;
 								}
 							}
@@ -124,97 +125,23 @@ public class ChineseChessGame extends ChessGame {
 				}
 			}
 		}
-		
-		for(ChessMan b : board)
-			if(b != null)
-				if(b.getClass().getName().equals(rivalGeneral))
+
+		for (ChessMan b : board)
+			if (b != null)
+				if (b.getClass().getName().equals(rivalGeneral))
 					hasBeenEaten = false;
-		
-		if(isLookingEachOther || hasBeenEaten) {
-			if(isLookingEachOther) {
-				if(player == GameState.PLAYERONE)
+
+		if (isLookingEachOther || hasBeenEaten) {
+			if (isLookingEachOther) {
+				if (player == GameState.PLAYERONE)
 					return GameState.PLAYERTWO;
 				else
 					return player;
-			}
-			else
+			} else
 				return player;
 		}
 		return GAMECONTINUE;
-		
-//		for (ChessMan b : board) {
-//			if (b != null) {
-//				if (b.getClass().getName().equals(BlackGeneral)) {
-//					for (int Y = b.getY() + 1; Y < 10; Y++) {
-//						if (board.hasChess(b.getX(), Y)) {
-//							if (board.getChess(b.getX(), Y).getClass().getName().equals(RedGeneral)) {
-//								if (player == GameState.PLAYERONE)
-//									return GameState.PLAYERTWO;
-//								return GameState.PLAYERONE;
-//							}
-//							else
-//								return GAMECONTINUE;
-//						}
-//					}
-//					return GAMECONTINUE;
-//				}
-//			}
-//		}
-//		
-//		for (ChessMan b : board) {
-//			if (b != null) {
-//				if (b.getClass().getName().equals(BlackGeneral))
-//					if (player == GameState.PLAYERONE)
-//						return GAMECONTINUE;
-//				if (b.getClass().getName().equals(RedGeneral))
-//					if (player == GameState.PLAYERTWO)
-//						return GAMECONTINUE;
-//			}
-//		}
-//		
-//		return player;
 	}
-	
-//	protected int isEnd() {
-//		int player = status.whosTurn();
-//		boolean isLookingEachOther = false;
-//		boolean isAnotherDie = false;
-//		String rivalGeneral;
-//		String RedGeneral = RedGeneral.class.getName();
-//		String BlackGeneral = BlackGeneral.class.getName();
-//		
-//		for (ChessMan b : board)
-//			if (b != null)
-//				if (b.getClass().getName().equals(BlackGeneral))
-//					for (int Y = b.getY() + 1; Y < 10; Y++)
-//						if (board.hasChess(b.getX(), Y))
-//							if (board.getChess(b.getX(), Y).getClass().getName().equals(RedGeneral))
-//								isLookingEachOther = true;
-//		
-//		
-//		if(player == GameState.PLAYERONE)
-//			rivalGeneral = BlackGeneral;
-//		else
-//			rivalGeneral = RedGeneral;
-//		
-//		for (ChessMan b : board)
-//			if (b != null)
-//				if (b.getClass().getName().equals(rivalGeneral))
-//						isAnotherDie = true;
-//		
-//		if(isLookingEachOther || isAnotherDie) {
-//			if(isLookingEachOther) {
-//				if(player == GameState.PLAYERONE)
-//					return GameState.PLAYERTWO;
-//				else
-//					return GameState.PLAYERONE;
-//			}
-//			else
-//				return player;
-//		}
-//			
-//		return GAMECONTINUE;
-//	}
 
 	@Override
 	protected boolean eat(int x, int y) {
@@ -247,7 +174,7 @@ public class ChineseChessGame extends ChessGame {
 
 	@Override
 	public boolean fallback() {
-		if(canFallback()) {
+		if (canFallback()) {
 			board.fallback();
 			status.fallback();
 			return true;

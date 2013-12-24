@@ -7,7 +7,7 @@ import com.oose.chinesechess.ChineseChessMan;
 import com.oose.factory.ChineseChessPictureList;
 import com.oose.prototype.ChessMan;
 
-public class BlackHorse extends ChineseChessMan{
+public class BlackHorse extends ChineseChessMan {
 
 	private static final long serialVersionUID = -1409206149650707436L;
 
@@ -35,10 +35,10 @@ public class BlackHorse extends ChineseChessMan{
 	@Override
 	public boolean move(int x, int y) {
 		if (Math.abs(currentX - x) == 2 && Math.abs(currentY - y) == 1) {
-			if (x > currentY && (!board.hasChess(currentX + 1, currentY))) {// 目標在右邊
+			if (x > currentX && (!board.hasChess(currentX + 1, currentY))) {// 目標在右邊
 				inBoardMoveChess(x, y);
 				return true;
-			} else if (x < currentY
+			} else if (x < currentX
 					&& (!board.hasChess(currentX - 1, currentY))) {// 目標在左邊
 				inBoardMoveChess(x, y);
 				return true;

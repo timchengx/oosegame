@@ -1,6 +1,5 @@
 package com.oose.factory;
 
-
 import java.util.HashMap;
 
 import android.graphics.Bitmap;
@@ -91,22 +90,19 @@ public class DarkChessPictureList {
 		hashMap.put(PACKAGENAME + "BlackCannon" + "SELECTED", BitmapFactory
 				.decodeResource(OOSEGame.getRes(),
 						R.drawable.dark_selected_black_cannon));
-		
-		
+
 		hashMap.put(PACKAGENAME + "UnFlip", BitmapFactory.decodeResource(
 				OOSEGame.getRes(), R.drawable.dark_unflip));
-		
+
 		hashMap.put(PACKAGENAME + "UnFlip" + "SELECTED", BitmapFactory
 				.decodeResource(OOSEGame.getRes(),
 						R.drawable.dark_selected_unflip));
-		
+
 		hashMap.put("com.oose.darkchess.DarkChessBoard", BitmapFactory
-				.decodeResource(OOSEGame.getRes(),
-						R.drawable.dark_chessboard));
-		
-		hashMap.put(DarkChessView.FRAME, BitmapFactory
-				.decodeResource(OOSEGame.getRes(),
-						R.drawable.dark_frame));
+				.decodeResource(OOSEGame.getRes(), R.drawable.dark_chessboard));
+
+		hashMap.put(DarkChessView.FRAME, BitmapFactory.decodeResource(
+				OOSEGame.getRes(), R.drawable.dark_frame));
 	}
 
 	public static Bitmap getIcon(String key) {

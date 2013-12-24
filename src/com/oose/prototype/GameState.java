@@ -9,7 +9,7 @@ abstract public class GameState implements Serializable, Fallback {
 	private static final long serialVersionUID = -8642239316987428479L;
 	public static final int PLAYERONE = 1;
 	public static final int PLAYERTWO = 2;
-	
+
 	private int currentPlayer;
 	private String playerOneName;
 	private String playerTwoName;
@@ -19,10 +19,10 @@ abstract public class GameState implements Serializable, Fallback {
 	private int playerTwoFallbackCount;
 	private int playerOneTime;
 	private int playerTwoTime;
-	
+
 	public GameState(String pOne, String pTwo, Bitmap pOnePic, Bitmap pTwoPic,
 			int fallback, int timeLimit) {
-		
+
 		this.currentPlayer = GameState.PLAYERONE;
 		this.playerOneName = pOne;
 		this.playerTwoName = pTwo;
@@ -32,11 +32,11 @@ abstract public class GameState implements Serializable, Fallback {
 		this.playerTwoFallbackCount = fallback;
 		this.playerOneTime = timeLimit;
 		this.playerTwoTime = timeLimit;
-		
+
 	}
-	
+
 	public int getCurrentUserFallbackCount() {
-		if(currentPlayer == PLAYERONE)
+		if (currentPlayer == PLAYERONE)
 			return playerOneFallbackCount;
 		return playerTwoFallbackCount;
 	}
@@ -83,22 +83,20 @@ abstract public class GameState implements Serializable, Fallback {
 		else
 			currentPlayer = GameState.PLAYERONE;
 	}
-	
+
 	@Override
 	public boolean canFallback() {
-		if(currentPlayer == PLAYERONE) {
-			if(playerOneFallbackCount > 0)
+		if (currentPlayer == PLAYERONE) {
+			if (playerOneFallbackCount > 0)
 				return true;
-		}
-		else
-			if(playerTwoFallbackCount > 0)
-				return true;
+		} else if (playerTwoFallbackCount > 0)
+			return true;
 		return false;
 	}
-	
+
 	@Override
 	public boolean fallback() {
-		if(currentPlayer == PLAYERONE)
+		if (currentPlayer == PLAYERONE)
 			playerOneFallbackCount--;
 		else
 			playerTwoFallbackCount--;

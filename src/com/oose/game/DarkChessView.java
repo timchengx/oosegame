@@ -17,14 +17,16 @@ import com.oose.prototype.GameState;
 import com.oose.prototype.Observable;
 import com.oose.prototype.Observer;
 
-public class DarkChessView extends SurfaceView implements SurfaceHolder.Callback, Observable {// , Runnable {
+public class DarkChessView extends SurfaceView implements
+		SurfaceHolder.Callback, Observable {// , Runnable {
 	public static final String FRAME = "FRAME";
 	SurfaceHolder holder;
 	DarkChessGame darkChess;
 	Paint namePaint;
 	Observer mainActivity;
 
-	public DarkChessView(Context context, Intent intent, DarkChessGame ch, DarkChessMain mA) {
+	public DarkChessView(Context context, Intent intent, DarkChessGame ch,
+			DarkChessMain mA) {
 		super(context);
 
 		namePaint = new Paint();
@@ -42,16 +44,14 @@ public class DarkChessView extends SurfaceView implements SurfaceHolder.Callback
 		Canvas c = holder.lockCanvas();
 		c.drawColor(Color.BLACK);
 		darkChess.refreshBoard(c);
-		c.drawText(darkChess.getStatus().getPlayerOneName(), 20, 47,
-				namePaint);
-		c.drawText(darkChess.getStatus().getPlayerTwoName(), 20, 547,
-				namePaint);
+		c.drawText(darkChess.getStatus().getPlayerOneName(), 20, 47, namePaint);
+		c.drawText(darkChess.getStatus().getPlayerTwoName(), 20, 547, namePaint);
 		c.drawBitmap(darkChess.getStatus().getPlayerOnePic(), 20, 105, null);
 		c.drawBitmap(darkChess.getStatus().getPlayerTwoPic(), 20, 605, null);
-		if(darkChess.getStatus().whosTurn() == GameState.PLAYERONE)
-			c.drawBitmap(frame, 30, 605, null);
+		if (darkChess.getStatus().whosTurn() == GameState.PLAYERONE)
+			c.drawBitmap(frame, 20, 105, null);
 		else
-			c.drawBitmap(frame, 360, 605, null);
+			c.drawBitmap(frame, 20, 605, null);
 		holder.unlockCanvasAndPost(c);
 	}
 
@@ -64,10 +64,11 @@ public class DarkChessView extends SurfaceView implements SurfaceHolder.Callback
 	public boolean onTouchEvent(MotionEvent event) {
 		int gameResult = ChessGame.GAMECONTINUE;
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			gameResult = darkChess.select((int) event.getX(), (int) event.getY());
+			gameResult = darkChess.select((int) event.getX(),
+					(int) event.getY());
 			refreshScreen();
 		}
-		if(gameResult != ChessGame.GAMECONTINUE)
+		if (gameResult != ChessGame.GAMECONTINUE)
 			notifyObservers(Integer.valueOf(gameResult));
 		return true;
 	}
@@ -79,6 +80,7 @@ public class DarkChessView extends SurfaceView implements SurfaceHolder.Callback
 	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0) {
 	}
+
 	/*
 	 * @Override public void run() { //for time count down(thread) }
 	 */
