@@ -34,7 +34,6 @@ public class RedCar extends ChineseChessMan{
 
 	@Override
 	public boolean move(int x, int y) {
-
 		if (currentX == x) {
 			if (currentY < y) {
 				for (int nowY = currentY + 1; nowY < y; nowY++) {
@@ -46,6 +45,7 @@ public class RedCar extends ChineseChessMan{
 				for (int nowY = currentY - 1; nowY > y; nowY--) {
 					if (nowY >= board.getBoardYSize())
 						continue;
+					// this != getChess, boundry check
 					if (board.hasChess(x, nowY)) {
 						return false;
 					}
@@ -62,7 +62,7 @@ public class RedCar extends ChineseChessMan{
 				}
 			} else {
 				for (int nowX = currentX - 1; nowX > x; nowX--) {
-					if (nowX >= board.getBoardYSize())
+					if (nowX >= board.getBoardXSize())
 						continue;
 					if (board.hasChess(nowX, y)) {
 						return false;
@@ -72,8 +72,7 @@ public class RedCar extends ChineseChessMan{
 			inBoardMoveChess(x, y);
 			return true;
 		}
-		inBoardMoveChess(x, y);
-		return true;
+		return false;
 	}
 	@Override
 	public boolean eat(int x, int y) {

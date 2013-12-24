@@ -2,6 +2,7 @@ package com.oose.game;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,11 +11,14 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.oose.darkchess.DarkChessGame;
+import com.oose.factory.DarkChessPictureList;
 import com.oose.prototype.ChessGame;
+import com.oose.prototype.GameState;
 import com.oose.prototype.Observable;
 import com.oose.prototype.Observer;
 
 public class DarkChessView extends SurfaceView implements SurfaceHolder.Callback, Observable {// , Runnable {
+	public static final String FRAME = "FRAME";
 	SurfaceHolder holder;
 	DarkChessGame darkChess;
 	Paint namePaint;
@@ -34,7 +38,9 @@ public class DarkChessView extends SurfaceView implements SurfaceHolder.Callback
 	}
 
 	public void refreshScreen() {
+		Bitmap frame = DarkChessPictureList.getIcon(FRAME);
 		Canvas c = holder.lockCanvas();
+		c.drawColor(Color.BLACK);
 		darkChess.refreshBoard(c);
 		c.drawText(darkChess.getStatus().getPlayerOneName(), 20, 47,
 				namePaint);
@@ -42,6 +48,10 @@ public class DarkChessView extends SurfaceView implements SurfaceHolder.Callback
 				namePaint);
 		c.drawBitmap(darkChess.getStatus().getPlayerOnePic(), 20, 105, null);
 		c.drawBitmap(darkChess.getStatus().getPlayerTwoPic(), 20, 605, null);
+		if(darkChess.getStatus().whosTurn() == GameState.PLAYERONE)
+			c.drawBitmap(frame, 30, 605, null);
+		else
+			c.drawBitmap(frame, 360, 605, null);
 		holder.unlockCanvasAndPost(c);
 	}
 

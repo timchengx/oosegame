@@ -69,9 +69,12 @@ public class BlackCannon extends ChineseChessMan {
 			}
 			result = true;
 		}
-		if(result)
+		if(result) {
 			inBoardMoveChess(x, y);
-		return true;
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Override

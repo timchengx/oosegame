@@ -6,6 +6,7 @@ import java.util.HashMap;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.oose.game.DarkChessView;
 import com.oose.game.OOSEGame;
 import com.oose.game.R;
 
@@ -102,6 +103,10 @@ public class DarkChessPictureList {
 		hashMap.put("com.oose.darkchess.DarkChessBoard", BitmapFactory
 				.decodeResource(OOSEGame.getRes(),
 						R.drawable.dark_chessboard));
+		
+		hashMap.put(DarkChessView.FRAME, BitmapFactory
+				.decodeResource(OOSEGame.getRes(),
+						R.drawable.dark_frame));
 	}
 
 	public static Bitmap getIcon(String key) {

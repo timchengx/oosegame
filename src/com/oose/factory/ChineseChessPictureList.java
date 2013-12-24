@@ -5,6 +5,7 @@ import java.util.HashMap;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.oose.game.ChineseChessView;
 import com.oose.game.OOSEGame;
 import com.oose.game.R;
 
@@ -95,6 +96,9 @@ public class ChineseChessPictureList {
 		hashMap.put("com.oose.chinesechess.ChineseChessBoard", BitmapFactory
 				.decodeResource(OOSEGame.getRes(),
 						R.drawable.chinese_chessboard));
+		hashMap.put(ChineseChessView.FRAME, BitmapFactory
+				.decodeResource(OOSEGame.getRes(),
+						R.drawable.chinese_frame));
 	}
 
 	public static Bitmap getIcon(String key) {

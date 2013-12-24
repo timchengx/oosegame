@@ -7,5 +7,6 @@
         android:title="@string/pause"/>
     <item android:id="@+id/menu_giveup"
         android:title="@string/giveup"/>
+    <item android:id="@+id/menu_peace" android:title="@string/peace"></item>
 </group>
 </menu>

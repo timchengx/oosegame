@@ -1,7 +1,6 @@
 package com.oose.chessgame.darkchessman;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import com.oose.darkchess.DarkChessBoard;
 import com.oose.darkchess.DarkChessMan;

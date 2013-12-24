@@ -43,11 +43,13 @@ public class BlackCar extends ChineseChessMan{
 				for (int nowY = currentY - 1; nowY > y; nowY--) {
 					if (nowY >= board.getBoardYSize())
 						continue;
+					// this != getChess, boundry check
 					if (board.hasChess(x, nowY)) {
 						return false;
 					}
 				}
 			}
+			inBoardMoveChess(x, y);
 			return true;
 		} else if (currentY == y) {
 			if (currentX < x) {
@@ -58,7 +60,7 @@ public class BlackCar extends ChineseChessMan{
 				}
 			} else {
 				for (int nowX = currentX - 1; nowX > x; nowX--) {
-					if (nowX >= board.getBoardYSize())
+					if (nowX >= board.getBoardXSize())
 						continue;
 					if (board.hasChess(nowX, y)) {
 						return false;

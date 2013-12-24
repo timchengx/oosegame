@@ -30,6 +30,7 @@ import com.oose.prototype.Observer;
 
 public class ChineseChessMain extends Activity implements OnClickListener, Observer {
 	public static final String SAVEGAME_KEY = "CCMSGK";
+	public static final String PEACERESULT = "PR";
 	Button buttonFallback;
 	Button buttonMore;
 	ChineseChessView mainView;
@@ -47,7 +48,7 @@ public class ChineseChessMain extends Activity implements OnClickListener, Obser
 			FileInputStream ios;
 			ObjectInputStream is;
 			try {
-				ios = openFileInput("output");
+				ios = openFileInput(SAVEGAME_KEY);
 				is = new ObjectInputStream(ios);
 				ChineseChessGame ch = (ChineseChessGame) is.readObject();
 				Log.d("timcheng", "freeze");
@@ -119,6 +120,8 @@ public class ChineseChessMain extends Activity implements OnClickListener, Obser
 						case R.id.menu_giveup:
 							giveUP();
 							break;
+						case R.id.menu_peace:
+							peace();
 						default:
 							break;
 						}
@@ -136,6 +139,25 @@ public class ChineseChessMain extends Activity implements OnClickListener, Obser
 		setContentView(frame);
 	}
 
+	private void peace() {
+		String message;
+		if(chineseChess.getStatus().whosTurn() == GameState.PLAYERONE)
+			message = chineseChess.getStatus().getPlayerTwoName();
+		else
+			message = chineseChess.getStatus().getPlayerOneName();
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.gameover);
+		builder.setMessage(message + " " + getString(R.string.peacedescription));
+		builder.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                showResult(PEACERESULT);
+            }
+        });
+		builder.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {}});
+		builder.create().show();
+	}
 	private void fallBack() {
 		String toastText = getString(R.string.fallbackok);
 		if (chineseChess.fallback()) {
@@ -149,8 +171,12 @@ public class ChineseChessMain extends Activity implements OnClickListener, Obser
 	}
 
 	private void giveUP() {
-		Log.d("timcheng", chineseChess.giveUp() + "" + "Win!");
-		finish();
+		String message;
+		if(chineseChess.getStatus().whosTurn() == GameState.PLAYERONE)
+			message = chineseChess.getStatus().getPlayerTwoName();
+		else
+			message = chineseChess.getStatus().getPlayerOneName();
+		showResult(message);
 	}
 
 	@Override
@@ -193,7 +219,20 @@ public class ChineseChessMain extends Activity implements OnClickListener, Obser
 //		} catch(Exception e) {
 //			Log.d("timchenc", e.toString());
 //		}
-
+	private void showResult(String result) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.gameover);
+		if(result.equals(PEACERESULT))
+			builder.setMessage(getString(R.string.peace));
+		else
+			builder.setMessage(result + "贏了！");
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
+		builder.create().show();
+	}
 	@Override
 	public void update(Observable from, Object carry) {
 		String message;
@@ -201,15 +240,7 @@ public class ChineseChessMain extends Activity implements OnClickListener, Obser
 			message = chineseChess.getStatus().getPlayerOneName();
 		else
 			message = chineseChess.getStatus().getPlayerTwoName();
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.gameover);
-		builder.setMessage(message + "贏了！");
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                finish();
-            }
-        });
-		builder.create().show();
+		showResult(message);
 	}
 
 	

@@ -2,6 +2,7 @@ package com.oose.game;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,11 +11,16 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.oose.chinesechess.ChineseChessGame;
+import com.oose.factory.ChineseChessPictureList;
 import com.oose.prototype.ChessGame;
+import com.oose.prototype.GameState;
 import com.oose.prototype.Observable;
 import com.oose.prototype.Observer;
 
 public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callback, Observable {//, Runnable {
+	
+	public static final String FRAME = "FRAME";
+	
 	SurfaceHolder holder;
 	ChineseChessGame chineseChess;
 	Paint namePaint;
@@ -33,12 +39,18 @@ public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callb
 		holder.addCallback(this);
 	}
 	public void refreshScreen() {
+		Bitmap frame = ChineseChessPictureList.getIcon(FRAME);
 		Canvas c = holder.lockCanvas();
+		c.drawColor(Color.BLACK);
 		chineseChess.refreshBoard(c);
 		c.drawText(chineseChess.getStatus().getPlayerOneName(), 30, 547, namePaint);
 		c.drawText(chineseChess.getStatus().getPlayerTwoName(), 360, 547, namePaint);
 		c.drawBitmap(chineseChess.getStatus().getPlayerOnePic(), 30, 605, null);
 		c.drawBitmap(chineseChess.getStatus().getPlayerTwoPic(), 360, 605, null);
+		if(chineseChess.getStatus().whosTurn() == GameState.PLAYERONE)
+			c.drawBitmap(frame, 30, 605, null);
+		else
+			c.drawBitmap(frame, 360, 605, null);
 		holder.unlockCanvasAndPost(c);
 	}
 	

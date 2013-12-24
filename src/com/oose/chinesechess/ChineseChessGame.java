@@ -98,39 +98,123 @@ public class ChineseChessGame extends ChessGame {
 		int player = status.whosTurn();
 		String RedGeneral = RedGeneral.class.getName();
 		String BlackGeneral = BlackGeneral.class.getName();
+		String rivalGeneral;
+		boolean isLookingEachOther = false;
+		boolean hasBeenEaten = true;
 		
-		for (ChessMan b : board) {
-			if (b != null) {
+		if(player == GameState.PLAYERONE)
+			rivalGeneral = BlackGeneral;
+		else
+			rivalGeneral = RedGeneral;
+		
+		for(ChessMan b : board) {
+			if(b != null) {
 				if (b.getClass().getName().equals(BlackGeneral)) {
+					boolean hasChess = false;
 					for (int Y = b.getY() + 1; Y < 10; Y++) {
 						if (board.hasChess(b.getX(), Y)) {
-							if (board.getChess(b.getX(), Y).getClass().getName().equals(RedGeneral)) {
-								if (player == GameState.PLAYERONE)
-									return GameState.PLAYERTWO;
-								return GameState.PLAYERONE;
+							if(!hasChess) {
+								hasChess = true;
+								if (board.getChess(b.getX(), Y).getClass().getName().equals(RedGeneral)) {
+									isLookingEachOther = true;
+								}
 							}
-							else
-								return GAMECONTINUE;
 						}
 					}
-					return GAMECONTINUE;
 				}
 			}
 		}
 		
-		for (ChessMan b : board) {
-			if (b != null) {
-				if (b.getClass().getName().equals(BlackGeneral))
-					if (player == GameState.PLAYERONE)
-						return GAMECONTINUE;
-				if (b.getClass().getName().equals(RedGeneral))
-					if (player == GameState.PLAYERTWO)
-						return GAMECONTINUE;
-			}
-		}
+		for(ChessMan b : board)
+			if(b != null)
+				if(b.getClass().getName().equals(rivalGeneral))
+					hasBeenEaten = false;
 		
-		return player;
+		if(isLookingEachOther || hasBeenEaten) {
+			if(isLookingEachOther) {
+				if(player == GameState.PLAYERONE)
+					return GameState.PLAYERTWO;
+				else
+					return player;
+			}
+			else
+				return player;
+		}
+		return GAMECONTINUE;
+		
+//		for (ChessMan b : board) {
+//			if (b != null) {
+//				if (b.getClass().getName().equals(BlackGeneral)) {
+//					for (int Y = b.getY() + 1; Y < 10; Y++) {
+//						if (board.hasChess(b.getX(), Y)) {
+//							if (board.getChess(b.getX(), Y).getClass().getName().equals(RedGeneral)) {
+//								if (player == GameState.PLAYERONE)
+//									return GameState.PLAYERTWO;
+//								return GameState.PLAYERONE;
+//							}
+//							else
+//								return GAMECONTINUE;
+//						}
+//					}
+//					return GAMECONTINUE;
+//				}
+//			}
+//		}
+//		
+//		for (ChessMan b : board) {
+//			if (b != null) {
+//				if (b.getClass().getName().equals(BlackGeneral))
+//					if (player == GameState.PLAYERONE)
+//						return GAMECONTINUE;
+//				if (b.getClass().getName().equals(RedGeneral))
+//					if (player == GameState.PLAYERTWO)
+//						return GAMECONTINUE;
+//			}
+//		}
+//		
+//		return player;
 	}
+	
+//	protected int isEnd() {
+//		int player = status.whosTurn();
+//		boolean isLookingEachOther = false;
+//		boolean isAnotherDie = false;
+//		String rivalGeneral;
+//		String RedGeneral = RedGeneral.class.getName();
+//		String BlackGeneral = BlackGeneral.class.getName();
+//		
+//		for (ChessMan b : board)
+//			if (b != null)
+//				if (b.getClass().getName().equals(BlackGeneral))
+//					for (int Y = b.getY() + 1; Y < 10; Y++)
+//						if (board.hasChess(b.getX(), Y))
+//							if (board.getChess(b.getX(), Y).getClass().getName().equals(RedGeneral))
+//								isLookingEachOther = true;
+//		
+//		
+//		if(player == GameState.PLAYERONE)
+//			rivalGeneral = BlackGeneral;
+//		else
+//			rivalGeneral = RedGeneral;
+//		
+//		for (ChessMan b : board)
+//			if (b != null)
+//				if (b.getClass().getName().equals(rivalGeneral))
+//						isAnotherDie = true;
+//		
+//		if(isLookingEachOther || isAnotherDie) {
+//			if(isLookingEachOther) {
+//				if(player == GameState.PLAYERONE)
+//					return GameState.PLAYERTWO;
+//				else
+//					return GameState.PLAYERONE;
+//			}
+//			else
+//				return player;
+//		}
+//			
+//		return GAMECONTINUE;
+//	}
 
 	@Override
 	protected boolean eat(int x, int y) {
