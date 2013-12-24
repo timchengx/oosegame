@@ -20,15 +20,15 @@
     <string name="takepicture">立即拍攝</string>
     <string name="choosepicture">選擇照片</string>
     <string name="chinesechessgame">ChineseChessGame</string>
-    <string name="fallback">悔棋</string>
     <string name="save">存檔</string>
     <string name="pause">暫停</string>
     <string name="giveup">投降</string>
-    <string name="moremenu">更多選項</string>
     <string name="fallbackok">悔棋成功 剩餘次數: </string>
     <string name="fallbackfail">悔棋失敗</string>
     <string name="saveok">存檔成功</string>
     <string name="darkchessgame">DarkChessGame</string>
     <string name="gameover">遊戲結束</string>
+    <string name="fallback">悔棋</string>
+    <string name="moremenu">更多選項</string>
 
 </resources>

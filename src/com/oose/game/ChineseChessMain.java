@@ -29,7 +29,7 @@ import com.oose.prototype.Observable;
 import com.oose.prototype.Observer;
 
 public class ChineseChessMain extends Activity implements OnClickListener, Observer {
-	
+	public static final String SAVEGAME_KEY = "CCMSGK";
 	Button buttonFallback;
 	Button buttonMore;
 	ChineseChessView mainView;
@@ -167,7 +167,7 @@ public class ChineseChessMain extends Activity implements OnClickListener, Obser
 		ObjectOutputStream os;
 
 		try {
-			fos = openFileOutput("output", Context.MODE_PRIVATE);
+			fos = openFileOutput(SAVEGAME_KEY, Context.MODE_PRIVATE);
 			os = new ObjectOutputStream(fos);
 			os.writeObject(chineseChess);
 			os.close();

@@ -160,7 +160,7 @@ public class DarkChessGame extends ChessGame {
 
 	@Override
 	protected int isEnd() {
-		return 0;
+		return ChessGame.GAMECONTINUE;
 	}
 
 }

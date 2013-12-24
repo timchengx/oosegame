@@ -74,4 +74,8 @@ public class TimeSetup extends Activity {
 		finish();
 		return true;
 	}
+	@Override
+	public void onBackPressed() {
+		onOptionsItemSelected(null);
+	}
 }

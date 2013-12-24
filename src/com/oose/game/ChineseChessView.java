@@ -12,14 +12,15 @@ import android.view.SurfaceView;
 import com.oose.chinesechess.ChineseChessGame;
 import com.oose.prototype.ChessGame;
 import com.oose.prototype.Observable;
+import com.oose.prototype.Observer;
 
 public class ChineseChessView extends SurfaceView implements SurfaceHolder.Callback, Observable {//, Runnable {
 	SurfaceHolder holder;
 	ChineseChessGame chineseChess;
 	Paint namePaint;
-	ChineseChessMain mainActivity;
+	Observer mainActivity;
 
-	public ChineseChessView(Context context, Intent intent, ChineseChessGame ch, ChineseChessMain recall) {
+	public ChineseChessView(Context context, Intent intent, ChineseChessGame ch, Observer recall) {
 		super(context);
 		mainActivity = recall;
 		namePaint = new Paint();

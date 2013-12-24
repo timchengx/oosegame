@@ -10,14 +10,17 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.oose.darkchess.DarkChessGame;
+import com.oose.prototype.ChessGame;
+import com.oose.prototype.Observable;
+import com.oose.prototype.Observer;
 
-public class DarkChessView extends SurfaceView implements
-		SurfaceHolder.Callback {// , Runnable {
+public class DarkChessView extends SurfaceView implements SurfaceHolder.Callback, Observable {// , Runnable {
 	SurfaceHolder holder;
 	DarkChessGame darkChess;
 	Paint namePaint;
+	Observer mainActivity;
 
-	public DarkChessView(Context context, Intent intent, DarkChessGame ch) {
+	public DarkChessView(Context context, Intent intent, DarkChessGame ch, DarkChessMain mA) {
 		super(context);
 
 		namePaint = new Paint();
@@ -25,7 +28,7 @@ public class DarkChessView extends SurfaceView implements
 		namePaint.setTextSize(18);
 
 		darkChess = ch;
-
+		mainActivity = mA;
 		holder = getHolder();
 		holder.addCallback(this);
 	}
@@ -49,14 +52,13 @@ public class DarkChessView extends SurfaceView implements
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-
+		int gameResult = ChessGame.GAMECONTINUE;
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			// if((int)event.getY() < 720) {
-			darkChess.select((int) event.getX(), (int) event.getY());
+			gameResult = darkChess.select((int) event.getX(), (int) event.getY());
 			refreshScreen();
-			// }
 		}
-
+		if(gameResult != ChessGame.GAMECONTINUE)
+			notifyObservers(Integer.valueOf(gameResult));
 		return true;
 	}
 
@@ -70,4 +72,9 @@ public class DarkChessView extends SurfaceView implements
 	/*
 	 * @Override public void run() { //for time count down(thread) }
 	 */
+
+	@Override
+	public void notifyObservers(Object carry) {
+		mainActivity.update(this, carry);
+	}
 }

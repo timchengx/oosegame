@@ -56,6 +56,11 @@ public class ProfileSetup extends Activity {
 		}
 	}
 	
+	@Override
+	public void onBackPressed() {
+		onOptionsItemSelected(null);
+	}
+	
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent = new Intent();
 		

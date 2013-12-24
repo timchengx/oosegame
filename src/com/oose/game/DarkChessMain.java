@@ -6,7 +6,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -22,9 +24,12 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Toast;
 
 import com.oose.darkchess.DarkChessGame;
+import com.oose.prototype.GameState;
+import com.oose.prototype.Observable;
+import com.oose.prototype.Observer;
 
-public class DarkChessMain extends Activity implements OnClickListener {
-
+public class DarkChessMain extends Activity implements OnClickListener, Observer {
+	public static final String SAVEGAME_KEY = "DCMSGK";
 	Button buttonFallback;
 	Button buttonMore;
 	DarkChessView mainView;
@@ -38,11 +43,11 @@ public class DarkChessMain extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		Intent intent = getIntent();
 		super.onCreate(savedInstanceState);
-		if (intent.getBooleanExtra("load file", false)) {
+		if (intent.getBooleanExtra(ChessMainMenu.LOADSAVEFILE, false)) {
 			FileInputStream ios;
 			ObjectInputStream is;
 			try {
-				ios = openFileInput("output");
+				ios = openFileInput(SAVEGAME_KEY);
 				is = new ObjectInputStream(ios);
 				DarkChessGame ch = (DarkChessGame) is.readObject();
 				Log.d("timcheng", "freeze");
@@ -70,7 +75,7 @@ public class DarkChessMain extends Activity implements OnClickListener {
 					playerTwoPic, fallbackValue, timeLimitValue);
 		}
 
-		mainView = new DarkChessView(this, intent, darkChess);
+		mainView = new DarkChessView(this, intent, darkChess, this);
 
 		frame = new FrameLayout(this);
 		relative = new RelativeLayout(this);
@@ -166,7 +171,7 @@ public class DarkChessMain extends Activity implements OnClickListener {
 		ObjectOutputStream os;
 
 		try {
-			fos = openFileOutput("output", Context.MODE_PRIVATE);
+			fos = openFileOutput(SAVEGAME_KEY, Context.MODE_PRIVATE);
 			os = new ObjectOutputStream(fos);
 			os.writeObject(darkChess);
 			os.close();
@@ -177,20 +182,23 @@ public class DarkChessMain extends Activity implements OnClickListener {
 			Log.d("timchenc", e.toString());
 		}
 	}
-	// FileInputStream ios;
-	// ObjectInputStream is;
-	// try {
-	// ios = openFileInput("output");
-	// is = new ObjectInputStream(ios);
-	// ChineseChessGame ch = (ChineseChessGame) is.readObject();
-	// Log.d("timcheng", "freeze");
-	// Log.d("timcheng",ch.getStatus().getPlayerOneName());
-	//
-	// is.close();
-	// chineseChess = ch;
-	// mainView.refreshScreen();
-	// } catch(Exception e) {
-	// Log.d("timchenc", e.toString());
-	// }
+
+	@Override
+	public void update(Observable from, Object carry) {
+		String message;
+		if((Integer)carry == GameState.PLAYERONE)
+			message = darkChess.getStatus().getPlayerOneName();
+		else
+			message = darkChess.getStatus().getPlayerTwoName();
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.gameover);
+		builder.setMessage(message + "贏了！");
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
+		builder.create().show();
+	}
 
 }
