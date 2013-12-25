@@ -72,8 +72,7 @@ public class ChineseChessGame extends ChessGame {
 			boolean moveResult = false;
 			try {
 				board.copy();
-			} catch (CloneNotSupportedException e) {
-			}
+			} catch (CloneNotSupportedException e) {}
 			if (board.hasChess(coord.getX(), coord.getY())) {
 				if (board.getChess(coord.getX(), coord.getY()) == selectedChess) // Log.d("timcheng","same chess.");
 					cleanSelected();
@@ -136,7 +135,7 @@ public class ChineseChessGame extends ChessGame {
 				if (player == GameState.PLAYERONE)
 					return GameState.PLAYERTWO;
 				else
-					return player;
+					return GameState.PLAYERONE;
 			} else
 				return player;
 		}

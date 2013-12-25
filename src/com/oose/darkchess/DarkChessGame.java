@@ -4,11 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.Log;
 
-import com.oose.darkchess.DarkChessBoard;
-import com.oose.darkchess.DarkChessCoordinate;
-import com.oose.darkchess.DarkChessGameState;
 import com.oose.prototype.ChessGame;
 import com.oose.prototype.ChessMan;
+import com.oose.prototype.GameState;
 
 public class DarkChessGame extends ChessGame {
 
@@ -55,6 +53,7 @@ public class DarkChessGame extends ChessGame {
 
 	@Override
 	public int select(int x, int y) {
+		int gameOver = GAMECONTINUE;
 		coord.convertToBoard(x, y);
 
 		Log.d("timcheng",
@@ -66,12 +65,7 @@ public class DarkChessGame extends ChessGame {
 
 				selectedChess = board.getChess(coord.getX(), coord.getY());
 
-				// if (selectedChess.getBelong() == status.whosTurn()) //
-				// Log.d("timcheng",
-				// "hasSelectChess!");
 				isSelected = true;
-				// else
-				// selectedChess = null;
 			}
 		} else {
 			boolean moveResult = false;
@@ -82,7 +76,8 @@ public class DarkChessGame extends ChessGame {
 			if (board.hasChess(coord.getX(), coord.getY())) {
 				if (board.getChess(coord.getX(), coord.getY()) == selectedChess) { // Log.d("timcheng","same chess.");
 					if (!(((DarkChessMan) selectedChess).isVisible())) {
-						((DarkChessMan) board.getChess(coord.getX(), coord.getY())).open();
+						((DarkChessMan) board.getChess(coord.getX(),
+								coord.getY())).open();
 						moveResult = true;
 					} else {
 						cleanSelected();
@@ -100,18 +95,18 @@ public class DarkChessGame extends ChessGame {
 				if (selectedChess.getBelong() == status.whosTurn()) {
 					status.changeTurn();
 				}
-				
+
 				board.savePreviousBoard();
 			} else if (moveResult) {// Log.d("timcheng", "change to "
 									// +status.whosTurn());
 				isSelected = false;
-				
+				gameOver = isEnd();
 				status.changeTurn();
 				board.savePreviousBoard();
 			}
 			cleanSelected();
 		}
-		return 0;
+		return gameOver;
 	}
 
 	@Override
@@ -160,7 +155,25 @@ public class DarkChessGame extends ChessGame {
 
 	@Override
 	protected int isEnd() {
-		return ChessGame.GAMECONTINUE;
-	}
+		int player = status.whosTurn();
+		int chessColor = 0;
 
+		switch(player){
+		case GameState.PLAYERONE:
+			chessColor = ChessMan.BLACK;
+			break;
+		case GameState.PLAYERTWO:
+			chessColor = ChessMan.RED;
+			break;
+		default:
+			break;
+		}
+		
+		for (ChessMan b : board)
+			if (b != null)
+				if (b.getBelong() == chessColor)
+					return GAMECONTINUE;
+		
+		return player;
+	}
 }
