@@ -121,6 +121,7 @@ public class DarkChessMain extends Activity implements OnClickListener,
 							saveGame();
 							break;
 						case R.id.menu_pause:
+							pause();
 							break;
 						case R.id.menu_giveup:
 							giveUP();
@@ -143,7 +144,15 @@ public class DarkChessMain extends Activity implements OnClickListener,
 
 		setContentView(frame);
 	}
-
+	
+	private void pause() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.pause);
+		builder.setMessage(getString(R.string.pause));
+		builder.setPositiveButton(R.string.resume, null);
+		builder.create().show();
+	}
+	
 	private void peace() {
 		String message;
 		if (darkChess.getStatus().whosTurn() == GameState.PLAYERONE)

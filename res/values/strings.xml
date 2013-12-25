@@ -31,8 +31,10 @@
     <string name="fallback">悔棋</string>
     <string name="moremenu">更多選項</string>
     <string name="peace">和局</string>
+    <string name="resume">回到遊戲</string>
     <string name="peacedescription">你要和局嗎？</string>
     <string name="yes">是</string>
     <string name="no">否</string>
+
 
 </resources>
