@@ -1,12 +1,5 @@
-oosegame
-========
-Currently, This Game will run at 800x480 resolution ONLY.
-Some design concept are written in report.pdf
-
-License
-========
 The MIT License (MIT)
-```
+
 Copyright (c) 2013  Tim Cheng <tim@grommit.com>
                     Wei Chen Lu <verzeni000000000000@yahoo.com.tw>
                     Ying Ru Chen
@@ -30,4 +23,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-```

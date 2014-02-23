@@ -1,3 +1,7 @@
+/*******************************************************************************
+ * Copyright (c) 2013 AUTHORS.txt
+ * All rights reserved. Distributed under the terms of the MIT License.
+ ******************************************************************************/
 package com.oose.game;
 
 import android.content.Context;
@@ -17,76 +21,73 @@ import com.oose.prototype.GameState;
 import com.oose.prototype.Observable;
 import com.oose.prototype.Observer;
 
-public class DarkChessView extends SurfaceView implements
-		SurfaceHolder.Callback, Observable {// , Runnable {
-	public static final String FRAME = "FRAME";
-	SurfaceHolder holder;
-	DarkChessGame darkChess;
-	Paint namePaint;
-	Observer mainActivity;
+public class DarkChessView extends SurfaceView implements SurfaceHolder.Callback, Observable {// ,
+                                                                                              // Runnable
+                                                                                              // {
+  public static final String FRAME = "FRAME";
+  SurfaceHolder holder;
+  DarkChessGame darkChess;
+  Paint namePaint;
+  Observer mainActivity;
 
-	public DarkChessView(Context context, Intent intent, DarkChessGame ch,
-			DarkChessMain mA) {
-		super(context);
+  public DarkChessView(Context context, Intent intent, DarkChessGame ch, DarkChessMain mA) {
+    super(context);
 
-		namePaint = new Paint();
-		namePaint.setColor(Color.WHITE);
-		namePaint.setTextSize(18);
+    namePaint = new Paint();
+    namePaint.setColor(Color.WHITE);
+    namePaint.setTextSize(18);
 
-		darkChess = ch;
-		mainActivity = mA;
-		holder = getHolder();
-		holder.addCallback(this);
-	}
+    darkChess = ch;
+    mainActivity = mA;
+    holder = getHolder();
+    holder.addCallback(this);
+  }
 
-	public void refreshScreen() {
-		Bitmap frame = DarkChessPictureList.getIcon(FRAME);
-		Canvas c = holder.lockCanvas();
-		c.drawColor(Color.BLACK);
-		darkChess.refreshBoard(c);
-		c.drawText(darkChess.getStatus().getPlayerOneName(), 20, 47, namePaint);
-		c.drawText(darkChess.getStatus().getPlayerTwoName(), 20, 547, namePaint);
-		c.drawBitmap(darkChess.getStatus().getPlayerOnePic(), 20, 105, null);
-		c.drawBitmap(darkChess.getStatus().getPlayerTwoPic(), 20, 605, null);
-		if (darkChess.getStatus().whosTurn() == GameState.PLAYERONE)
-			c.drawBitmap(frame, 20, 105, null);
-		else
-			c.drawBitmap(frame, 20, 605, null);
-		holder.unlockCanvasAndPost(c);
-	}
+  public void refreshScreen() {
+    Bitmap frame = DarkChessPictureList.getIcon(FRAME);
+    Canvas c = holder.lockCanvas();
+    c.drawColor(Color.BLACK);
+    darkChess.refreshBoard(c);
+    c.drawText(darkChess.getStatus().getPlayerOneName(), 20, 47, namePaint);
+    c.drawText(darkChess.getStatus().getPlayerTwoName(), 20, 547, namePaint);
+    c.drawBitmap(darkChess.getStatus().getPlayerOnePic(), 20, 105, null);
+    c.drawBitmap(darkChess.getStatus().getPlayerTwoPic(), 20, 605, null);
+    if (darkChess.getStatus().whosTurn() == GameState.PLAYERONE)
+      c.drawBitmap(frame, 20, 105, null);
+    else
+      c.drawBitmap(frame, 20, 605, null);
+    holder.unlockCanvasAndPost(c);
+  }
 
-	@Override
-	public void surfaceCreated(SurfaceHolder sh) {
-		refreshScreen();
-	}
+  @Override
+  public void surfaceCreated(SurfaceHolder sh) {
+    refreshScreen();
+  }
 
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		int gameResult = ChessGame.GAMECONTINUE;
-		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			gameResult = darkChess.select((int) event.getX(),
-					(int) event.getY());
-			refreshScreen();
-		}
-		if (gameResult != ChessGame.GAMECONTINUE)
-			notifyObservers(Integer.valueOf(gameResult));
-		return true;
-	}
+  @Override
+  public boolean onTouchEvent(MotionEvent event) {
+    int gameResult = ChessGame.GAMECONTINUE;
+    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+      gameResult = darkChess.select((int) event.getX(), (int) event.getY());
+      refreshScreen();
+    }
+    if (gameResult != ChessGame.GAMECONTINUE)
+      notifyObservers(Integer.valueOf(gameResult));
+    return true;
+  }
 
-	@Override
-	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
-	}
+  @Override
+  public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {}
 
-	@Override
-	public void surfaceDestroyed(SurfaceHolder arg0) {
-	}
+  @Override
+  public void surfaceDestroyed(SurfaceHolder arg0) {}
 
-	/*
-	 * @Override public void run() { //for time count down(thread) }
-	 */
+  /*
+   * @Override public void run() { //for time count down(thread) }
+   */
 
-	@Override
-	public void notifyObservers(Object carry) {
-		mainActivity.update(this, carry);
-	}
+  @Override
+  public void notifyObservers(Object carry) {
+    mainActivity.update(this, carry);
+  }
 }
